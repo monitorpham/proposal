@@ -1,0 +1,90 @@
+<!-- <div class="wrapper fadeInDown " style="padding-top: 20%; position: relative;">
+    <div class="card formContent" style="width: 50%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, 0%);">
+        <h4 class="card-header">Login</h4>
+        <div class="card-body">
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" formControlName="username" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+                    <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                        <div *ngIf="f.username.errors.required">Username is required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" formControlName="password" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                        <div *ngIf="f.password.errors.required">Password is required</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <button [disabled]="loading" class="btn btn-primary">
+                        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                        Login
+                    </button>
+                    <a routerLink="../register" class="btn btn-link">Register</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div> -->
+
+
+
+<div class="wrapper fadeInDown " style="padding-top: 5%">
+    <div id="formContent">
+      <!-- Tabs Titles -->
+  
+      <!-- Icon -->
+      <!-- <div class="fadeIn first">
+          <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" />
+        </div> -->
+  
+      <div id="formHeader">
+        <p style="font-weight: bold; color: white;">LOGIN</p>
+      </div>
+  
+      <!-- Login Form -->
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" style="padding: 25px 30px;margin-bottom: 2%;">
+        <div class="form-group">
+          <input type="text" formControlName="username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }"
+            class="fadeIn second form-control" placeholder="Account" style="height: 0%;" />
+          <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+            <div *ngIf="f.username.errors.required" class="text-danger">Username is required</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <input type="password" formControlName="password" [ngClass]="{'is-invalid': submitted && f.password.errors}"
+            class="fadeIn third form-control" placeholder="Password" style="height: 0%;" />
+          <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+            <div *ngIf="f.password.errors.required" class="text-danger">Password is required</div>
+          </div>
+        </div>
+
+        <div class="form-group" ></div>
+        <button [disabled]="loading" class="btn btn-info" style="width: 40%;">
+          <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+          Login
+        </button>
+        <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+      </form>
+
+      <!-- Register -->
+      <div class="col-md-8 " style="margin: auto;">
+      <div class="alert alert-warning">
+        <span>You don't have an account yet?</span>
+        <a class="alert-link font-weight-bold" routerLink="/register" >Verify your account</a>
+      </div>
+    </div>
+  
+      <!-- Remind Passowrd -->
+      <!-- <div id="formFooter">
+          <a class="underlineHover" href="#">Forgot Password?</a>
+        </div>
+     -->
+    </div>
+  </div>

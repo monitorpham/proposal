@@ -1,0 +1,251 @@
+<div class="modal-header">
+    <h4 class="modal-title pull-left">Create User</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="onCancel()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    
+    <div class="modal-wrapper">
+
+        <form name="createUserForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="createUserForm">
+            <div class="form-group">
+                <label class="form-control-label">Login</label>
+                <input type="text" class="form-control" name="login" formControlName="login">
+                <div
+                    *ngIf="createUserForm.get('login')!.invalid && (createUserForm.get('login')!.dirty || createUserForm.get('login')!.touched)">
+                    <small class="form-text text-danger" *ngIf="createUserForm.get('login')?.errors?.required">
+                        This field is required.
+                    </small>
+
+                    <small class="form-text text-danger" *ngIf="createUserForm.get('login')?.errors?.maxlength">
+                        This field cannot be longer than 50 characters.
+                    </small>
+
+                    <small class="form-text text-danger" *ngIf="createUserForm.get('login')?.errors?.pattern">
+                        This field can only contain letters, digits and e-mail addresses.
+                    </small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-control-label">First Name</label>
+                <input type="text" class="form-control" name="firstName" formControlName="firstName">
+                <div
+                    *ngIf="createUserForm.get('firstName')!.invalid && (createUserForm.get('firstName')!.dirty || createUserForm.get('firstName')!.touched)">
+                    <small class="form-text text-danger" *ngIf="createUserForm.get('login')?.errors?.required">
+                        This field is required.
+                    </small>
+                    <small class="form-text text-danger" *ngIf="createUserForm.get('firstName')?.errors?.maxlength">
+                        This field cannot be longer than 50 characters.
+                    </small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-control-label">Last Name</label>
+                <input type="text" class="form-control" name="lastName" formControlName="lastName">
+                <div
+                    *ngIf="createUserForm.get('lastName')!.invalid && (createUserForm.get('lastName')!.dirty || createUserForm.get('lastName')!.touched)">
+                    <small class="form-text text-danger" *ngIf="createUserForm.get('login')?.errors?.required">
+                        This field is required.
+                    </small>
+                    <small class="form-text text-danger" *ngIf="createUserForm.get('lastName')?.errors?.maxlength">
+                        This field cannot be longer than 50 characters.
+                    </small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-control-label">Phone</label>
+                <input type="text" class="form-control" name="phone" formControlName="phone">
+                <div
+                    *ngIf="createUserForm.get('phone')!.invalid && (createUserForm.get('phone')!.dirty || createUserForm.get('phone')!.touched)">
+                    <small class="form-text text-danger" *ngIf="createUserForm.get('phone')?.errors?.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-control-label">Email</label>
+                <input type="email" class="form-control" name="email" formControlName="email">
+                <div
+                    *ngIf="createUserForm.get('email')!.invalid && (createUserForm.get('email')!.dirty || createUserForm.get('email')!.touched)">
+                    <small class="form-text text-danger" *ngIf="createUserForm.get('email')?.errors?.required">
+                        This field is required.
+                    </small>
+
+                    <small class="form-text text-danger" *ngIf="createUserForm.get('email')?.errors?.maxlength">
+                        This field cannot be longer than 100 characters.
+                    </small>
+
+                    <small class="form-text text-danger" *ngIf="createUserForm.get('email')?.errors?.minlength">
+                        This field is required to be at least 5 characters.
+                    </small>
+
+                    <small class="form-text text-danger" *ngIf="createUserForm.get('email')?.errors?.email">
+                        Your email is invalid.
+                    </small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Group</label>
+                <ng-select class="ng-slect" [items]="groups" bindLabel="nameGroup" placeholder="Select group"
+                    appendTo="body" formControlName="selectedGroup">
+                </ng-select>
+                <div
+                    *ngIf="createUserForm.get('selectedGroup')!.invalid && (createUserForm.get('selectedGroup')!.dirty || createUserForm.get('selectedGroup')!.touched)">
+                    <small class="form-text text-danger" *ngIf="createUserForm.get('selectedGroup')?.errors?.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Profiles</label>
+                <select class="form-control" multiple name="authority" formControlName="authorities">
+                    <option *ngFor="let authority of authorities" [value]="authority">{{ authority }}</option>
+                </select>
+                <div
+                    *ngIf="createUserForm.get('authorities')!.invalid && (createUserForm.get('authorities')!.dirty || createUserForm.get('authorities')!.touched)">
+                    <small class="form-text text-danger" *ngIf="createUserForm.get('authorities')?.errors?.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+
+            <!-- <div class="form-group">
+                <label class="form-control-label" for="password">New password</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="New password"
+                        formControlName="password">
+
+                <div *ngIf="createUserForm.get('password')!.invalid && (createUserForm.get('password')!.dirty || createUserForm.get('password')!.touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="createUserForm.get('password')?.errors?.required">
+                        Your password is required.
+                    </small>
+
+                    <small class="form-text text-danger"
+                           *ngIf="createUserForm.get('password')?.errors?.minlength">
+                        Your password is required to be at least 4 characters.
+                    </small>
+
+                    <small class="form-text text-danger"
+                           *ngIf="createUserForm.get('password')?.errors?.maxlength">
+                        Your password cannot be longer than 50 characters.
+                    </small>
+                </div>
+
+                <app-password-strength-bar [passwordToCheck]="createUserForm.get('password')!.value"></app-password-strength-bar>
+            </div>
+
+            <div class="form-group">
+                <label class="form-control-label" for="confirmPassword">New password confirmation</label>
+                <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm the new password"
+                        formControlName="confirmPassword">
+
+                <div *ngIf="createUserForm.get('confirmPassword')!.invalid && (createUserForm.get('confirmPassword')!.dirty || createUserForm.get('confirmPassword')!.touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="createUserForm.get('confirmPassword')?.errors?.required">
+                        Your confirmation password is required.
+                    </small>
+
+                    <small class="form-text text-danger"
+                           *ngIf="createUserForm.get('confirmPassword')?.errors?.minlength">
+                        Your confirmation password is required to be at least 4 characters.
+                    </small>
+
+                    <small class="form-text text-danger"
+                           *ngIf="createUserForm.get('confirmPassword')?.errors?.maxlength">
+                        Your confirmation password cannot be longer than 50 characters.
+                    </small>
+                </div>
+            </div> -->
+
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    
+                    <div class="alert alert-success" *ngIf="success">
+                        <strong>Registration saved!</strong> Please check your email for confirmation.
+                    </div>
+        
+                    <div class="alert alert-danger" *ngIf="error">
+                        <strong>Registration failed!</strong> Please try again later.
+                    </div>
+        
+                    <div class="alert alert-danger" *ngIf="errorUserExists">
+                        <strong>Login name already registered!</strong> Please choose another one.
+                    </div>
+        
+                    <div class="alert alert-danger" *ngIf="errorEmailExists">
+                        <strong>Email is already in use!</strong> Please choose another one.
+                    </div>
+        
+                    <!-- <div class="alert alert-danger" *ngIf="doNotMatch">
+                        The password and its confirmation do not match!
+                    </div> -->
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-sm" (click)="onCancel()">Cancel</button>
+                <button type="submit" class="btn btn-primary btn-sm">Save</button>
+            </div>   
+
+        </form>
+
+</div>
+</div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- <div class="modal-body">
+        <div class="row modal-wrapper">
+
+            <label>Login</label>
+            <input [(ngModel)]="login" class="form-control" name="login" required>
+
+            <label>First Name</label>
+            <input [(ngModel)]="firstName" name="firstName" class="form-control">
+
+            <label>Last Name</label>
+            <input [(ngModel)]="lastName" name="lastName" class="form-control">
+
+            <label>Phone</label>
+            <input [(ngModel)]="phone" name="lastName" class="form-control">
+
+            <label>Email</label>
+            <input [(ngModel)]="email" name="email" class="form-control">
+
+            <label>Group</label>
+            <ng-select class="ng-slect" [items]="groups" bindLabel="nameGroup" placeholder="Select group"
+                appendTo="body" [(ngModel)]="selectedGroup">
+            </ng-select>
+
+            <label>Profiles</label>
+            <select [(ngModel)]="authority" class="form-control" multiple name="authority">
+                <option *ngFor="let authority of authorities" [value]="authority">{{ authority }}</option>
+            </select>
+            <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+        </div>
+        <br>
+        <div class="modal-footer">
+            <button type="button" (click)="onSave()" class="btn btn-primary btn-sm">Save</button>
+            <button type="button" class="btn btn-danger btn-sm" (click)="onCancel()">Cancel</button>
+        </div> -->

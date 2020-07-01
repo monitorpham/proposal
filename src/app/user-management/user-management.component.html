@@ -1,0 +1,57 @@
+<div class="contains">
+    <div class="row control-block">
+        <span>
+            Users
+        </span>
+
+        <button class="btn btn-outline-primary btn-sm" (click)="OpenCreateUserModal()">Create</button>
+    </div>
+    <div class="row content-block table-responsive text-nowrap">
+        <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover table ">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Login</th>
+                    <th>Email</th>
+                    <!-- <th>Group</th> -->
+                    <th>Profiles</th>
+                    <th>Created Date</th>
+                    <th>Last Modified By</th>
+                    <th>Last Modified Date</th>
+                    <th style="text-align: center;">Action</th>
+                    <!-- <th></th> -->
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of users, index as i">
+                    <td>{{user.id}}</td>
+                    <td>{{user.login}}</td>
+                    <td>{{user.email}}</td>
+                    <!-- <td *ngFor="let group of groups">{{group.equiqmentGroupId}}</td> -->
+                    <td>
+                        <div *ngFor="let authorities of user.authorities">
+                            <span class="badge badge-info" style="font-size: 83%">{{ authorities }}</span>
+                        </div>
+                    </td>
+                    <td>{{user.createdDate | date:'dd/MM/yy HH:mm'}}</td>
+                    <td>{{user.lastModifiedBy}}</td>
+                    <td>{{user.lastModifiedDate | date:'dd/MM/yy HH:mm'}}</td>
+                    <td>
+                        <div class="table-actions">
+                            <button class="btn btn-primary btn-sm" (click)="OpenEditUserModal(user)">Edit</button>
+
+                            <button class="btn btn-danger btn-sm" (click)="setActive(user, true)"
+                                *ngIf="!user.activated">Deactivated</button>
+                            <button class="btn btn-success btn-sm" (click)="setActive(user, false)"
+                                *ngIf="user.activated" [disabled]="!currentAccount || currentAccount.login === user.login"
+                               >Activated</button>
+                        </div>
+                    </td>
+                    <!-- <td>
+                        
+                    </td> -->
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

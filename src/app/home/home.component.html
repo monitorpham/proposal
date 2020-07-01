@@ -1,0 +1,48 @@
+<div class="contains">
+    <div class="row control-block">
+        <span>
+            All Proposals
+        </span>
+
+        <button class="btn btn-outline-primary btn-sm" (click)="OpenCreateProposalModal()">Create</button>
+    </div>
+    <div class="row content-block table-responsive text-nowrap">
+        <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover table ">
+            <thead>
+                <tr>
+                    <!-- <th>#</th> -->
+                    <th>Registerd By</th>
+                    <th>Proponent</th>
+                    <th>Content</th>
+                    <th>Group</th>
+                    <th>Team</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Current Stage</th>
+                    <th style="text-align: center;">Action</th>
+                </tr>
+                
+            </thead>
+            <tbody>
+                <tr *ngFor="let proposal of proposals, index as i">
+                    <!-- <td>{{i+1}}</td> -->
+                    <td>{{proposal.registerBy}}</td>
+                    <td>{{proposal.note}}</td>
+                    <td>{{proposal.contentProposal}}</td>
+                    <td>{{proposal.hospitalDepartment}}</td>
+                    <td>{{proposal.Group}}</td>
+                    <td>{{proposal.startDate}}</td>
+                    <td>{{proposal.endDate}}</td>
+                    <td>{{proposal.currentProgressName}}</td>
+                    <td>
+                        <div class="table-actions">
+                            <button class="btn btn-outline-primary btn-sm" (click)="OpenUpdateProgressModal(proposal)">Update</button>
+                            <button class="btn btn-outline-primary btn-sm" (click)="OpenViewProgressModal(proposal)">View</button>
+                            <button class="btn btn-outline-danger btn-sm" (click)="openDeleteProposalModal(proposal)" > Delete</button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

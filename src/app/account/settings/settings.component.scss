@@ -1,0 +1,45 @@
+.ng-invalid:not(form) {
+    border-left: 5px solid red;
+}
+.contains{
+    padding: 20px;
+}
+
+.control-block{
+    width: 100%;
+    display: flex;
+    // justify-content: space-between;
+    flex-direction: row;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 25px;
+    font-weight: 600;
+    color: #b30000;
+    margin: unset;
+}
+
+.content-block{
+    padding: 2.5% 15%;
+    width: 100%;
+    /* height: calc(100vh - 200px); */
+    // padding: 15px 25px;
+    border: 1px solid #C0C0C0;
+    border-radius: 7px;
+    background-color: #F8F8F8;
+    margin: 20px 0px;
+    box-shadow: 7px 7px #fcfcfc;
+    /* overflow: auto; */
+}
+
+.table-actions{
+    display: flex;
+    justify-content: space-around;
+}
+
+
+/* table css */
+
+.dataTables_wrapper {
+    width: 100% !important;
+
+}
+
