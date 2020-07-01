@@ -9,7 +9,7 @@ import { ModalUpdateProgressComponent } from './component/modal-update-progress/
 import { Subject } from 'rxjs';
 import { ModalDeleteProposalComponent } from './component/modal-delete-proposal/modal-delete-proposal.component';
 import { ModalViewProgressComponent } from './component/modal-view-progress/modal-view-progress.component';
-import { Router } from '@angular/router';;
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
