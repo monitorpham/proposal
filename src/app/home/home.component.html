@@ -10,7 +10,6 @@
         <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover table ">
             <thead>
                 <tr>
-                    <!-- <th>#</th> -->
                     <th>Registerd By</th>
                     <th>Proponent</th>
                     <th>Content</th>
@@ -25,7 +24,6 @@
             </thead>
             <tbody>
                 <tr *ngFor="let proposal of proposals, index as i">
-                    <!-- <td>{{i+1}}</td> -->
                     <td>{{proposal.registerBy}}</td>
                     <td>{{proposal.note}}</td>
                     <td>{{proposal.contentProposal}}</td>
