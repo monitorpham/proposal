@@ -22,14 +22,14 @@ export class NavComponent implements OnInit {
   ngOnInit(): void {
     this.accountService.fetch().subscribe(res =>{
       this.currentUser = res
-      console.log(this.currentUser)
+      // console.log(this.currentUser)
       if(this.currentUser.authorities.includes("ROLE_USER")){
         this.isUser = true
       }
       if(this.currentUser.authorities.includes("ROLE_ADMIN")){
         this.isAdmin = true
       }
-      console.log(this.isAdmin)
+      // console.log(this.isAdmin)
     })
   }
 
