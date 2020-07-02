@@ -34,13 +34,19 @@ export class ModalCreateProposalComponent implements OnInit {
     private commonService: SCommonService,
     private toastr : ToastrService,
     private router: Router,
-    private formBuilder: FormBuilder){ }
+    private formBuilder: FormBuilder){ 
+      
+    }
 
 
   ngOnInit(): void {
     // let currentDate = new Date()
       this.proposalForm.startDate =  moment().format("DD-MM-YYYY");
       // console.log(currentDate.toISOString())
+
+    let currentDate = new Date()
+      this.proposalForm.startDate = currentDate.toISOString().toString().split('T')[0]
+      console.log(this.proposalForm)
 
     this.hospitalDepartmentService.getAllDepartment().subscribe(res=>{
       this.departments = res.map(item =>{
