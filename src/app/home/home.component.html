@@ -4,7 +4,7 @@
             All Proposals
         </span>
 
-        <button class="btn btn-outline-primary btn-sm" (click)="OpenCreateProposalModal()">Create</button>
+        <button *ngIf="isAdmin" class="btn btn-outline-primary btn-sm" (click)="OpenCreateProposalModal()">Create</button>
     </div>
     <div class="row content-block table-responsive text-nowrap">
         <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover table ">
@@ -12,12 +12,17 @@
                 <tr>
                     <!-- <th>#</th> -->
                     <th>Registerd By</th>
-                    <th>Proponent</th>
+                    <th>Note</th>
                     <th>Content</th>
                     <th>Group</th>
                     <th>Team</th>
+                    <th>Asignee</th>
                     <th>Start Date</th>
                     <th>End Date</th>
+                    <th>Remaining Date</th>
+                    <th>Dateline</th>
+                    <th>Status</th>
+
                     <th>Current Stage</th>
                     <th style="text-align: center;">Action</th>
                 </tr>
@@ -31,14 +36,18 @@
                     <td>{{proposal.contentProposal}}</td>
                     <td>{{proposal.hospitalDepartment}}</td>
                     <td>{{proposal.Group}}</td>
+                    <td>Asignee</td>
                     <td>{{proposal.startDate}}</td>
                     <td>{{proposal.endDate}}</td>
+                    <td>remaining date</td>
+                    <td>dateline</td>
+                    <td>status</td>
                     <td>{{proposal.currentProgressName}}</td>
                     <td>
                         <div class="table-actions">
-                            <button class="btn btn-outline-primary btn-sm" (click)="OpenUpdateProgressModal(proposal)">Update</button>
+                            <button *ngIf="isUser" class="btn btn-outline-primary btn-sm" (click)="OpenUpdateProgressModal(proposal)">Update</button>
                             <button class="btn btn-outline-primary btn-sm" (click)="OpenViewProgressModal(proposal)">View</button>
-                            <button class="btn btn-outline-danger btn-sm" (click)="openDeleteProposalModal(proposal)" > Delete</button>
+                            <button *ngIf="isAdmin" class="btn btn-outline-danger btn-sm" (click)="openDeleteProposalModal(proposal)" > Delete</button>
                         </div>
                     </td>
                 </tr>

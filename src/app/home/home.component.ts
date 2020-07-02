@@ -9,7 +9,8 @@ import { ModalUpdateProgressComponent } from './component/modal-update-progress/
 import { Subject } from 'rxjs';
 import { ModalDeleteProposalComponent } from './component/modal-delete-proposal/modal-delete-proposal.component';
 import { ModalViewProgressComponent } from './component/modal-view-progress/modal-view-progress.component';
-import { Router } from '@angular/router';;
+import { Router } from '@angular/router';
+import { User } from '../_models/user';
 
 @Component({
   selector: 'app-home',
@@ -19,6 +20,9 @@ import { Router } from '@angular/router';;
 export class HomeComponent implements OnInit {
 
   proposals: Proposal[] = [];
+  currentUser: User;
+  isUser:Boolean =  false;
+  isAdmin:Boolean =  false;
   dtOptions: DataTables.Settings = {};
   dtTrigger = new Subject();
 
@@ -44,6 +48,17 @@ export class HomeComponent implements OnInit {
   }
 
   loadData() {
+    this.accountService.fetch().subscribe(res =>{
+      this.currentUser = res
+      console.log(this.currentUser)
+      if(this.currentUser.authorities.includes("ROLE_USER")){
+        this.isUser = true
+      }
+      if(this.currentUser.authorities.includes("ROLE_ADMIN")){
+        this.isAdmin = true
+      }
+      console.log(this.isAdmin)
+    })
     this.proposalService.getAllProposals().subscribe(res => {
       this.proposals = res.map(item => {
         let proposal = new Proposal()

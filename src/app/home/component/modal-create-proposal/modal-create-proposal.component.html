@@ -8,24 +8,31 @@
   <div class="row modal-wrapper">
     <div class="row row-item">
       <div class="col-md-6">
-        <label class="item-label" for="propoent">Proponent <span class="text-danger">*</span></label>
+        <label class="item-label" for="propoent">Note <span class="text-danger">*</span></label>
         <input class="form-control" type="text" name="" id="proponent" [(ngModel)]="proposalForm.note">
       </div>
       <div class="col-md-6">
         <label class="item-label" for="register-date">Register date <span class="text-danger">*</span></label>
-        <input class="form-control" id="register-date" bsDatepicker [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY'}" [(ngModel)]="startDate">
+        <input class="form-control" id="register-date" bsDatepicker [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY'}" [(ngModel)]="proposalForm.startDate">
+      </div>
+    </div>
+    
+    <div class="row row-item" >
+      <div class="col-md-6">
+        <label class="item-label">Part <span class="text-danger">*</span></label>
+        <ng-select class="ng-slect" [items]="departments" bindLabel="hospitalDepartmentName" placeholder="Select department"
+          appendTo="body" [(ngModel)]="selectedDepartment">
+        </ng-select>
+      </div>
+      <div class="col-md-6">
+        <label class="item-label" for="propoent">Asignee <span class="text-danger">*</span></label>
+        <input class="form-control" type="text" name="" id="proponent" [(ngModel)]="proposalForm.asignee">
       </div>
     </div>
 
     <div class="row row-item" style="padding-left: 15px; padding-right: 15px;">
       <label class="item-label">Content <span class="text-danger">*</span></label>
       <textarea class="form-control" [(ngModel)]="proposalForm.contentProposal"></textarea>
-    </div>
-    <div class="row row-item" style="padding-left: 15px; padding-right: 15px; padding-bottom: 25px;">
-      <label class="item-label">Part <span class="text-danger">*</span></label>
-      <ng-select class="ng-slect" [items]="departments" bindLabel="hospitalDepartmentName" placeholder="Select department"
-        appendTo="body" [(ngModel)]="selectedDepartment">
-      </ng-select>
     </div>
   </div>
 </div>
