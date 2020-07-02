@@ -8,6 +8,7 @@ import { FormBuilder, Validators} from '@angular/forms';
 import { SCommonService } from 'src/app/_services/s-common.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-modal-create-proposal',
@@ -24,7 +25,6 @@ export class ModalCreateProposalComponent implements OnInit {
     "note": "",
     "startDate": "",
     "asignee": ""
-    // 2020-06-24T16:30:34.649Z
   }
 
   constructor(
@@ -40,6 +40,9 @@ export class ModalCreateProposalComponent implements OnInit {
 
 
   ngOnInit(): void {
+    // let currentDate = new Date()
+      this.proposalForm.startDate =  moment().format("DD-MM-YYYY");
+      // console.log(currentDate.toISOString())
 
     let currentDate = new Date()
       this.proposalForm.startDate = currentDate.toISOString().toString().split('T')[0]
@@ -50,7 +53,6 @@ export class ModalCreateProposalComponent implements OnInit {
         let hospitalDepartment = item as HospitalDepartment;
         return hospitalDepartment
       })
-      // console.log(this.departments)
     }, err =>{
       console.log(err)
     })
