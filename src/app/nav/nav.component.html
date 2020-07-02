@@ -12,7 +12,7 @@
           Home <span class="sr-only">(current)</span>
         </button>
         &nbsp;
-        <button type="button" class="btn btn-dark" routerLink="/user-management"
+        <button *ngIf="isAdmin" type="button" class="btn btn-dark" routerLink="/user-management"
           style="text-align: left; width: fit-content;">
           <i class="fa fa-user-plus"></i>
           Administration
