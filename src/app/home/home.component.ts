@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Proposal } from '../_models/proposal';
 import { AccountService } from '../_services/account.service';
 import { ProposalService } from '../_services/proposal.service';
-// import { UserService, AuthenticationService } from '../_services';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { ModalCreateProposalComponent } from './component/modal-create-proposal/modal-create-proposal.component';
 import { ModalUpdateProgressComponent } from './component/modal-update-progress/modal-update-progress.component';
@@ -11,6 +10,7 @@ import { ModalDeleteProposalComponent } from './component/modal-delete-proposal/
 import { ModalViewProgressComponent } from './component/modal-view-progress/modal-view-progress.component';
 import { Router } from '@angular/router';
 import { User } from '../_models/user';
+import { ModalExtendComponent } from './component/modal-extend/modal-extend.component';
 
 @Component({
   selector: 'app-home',
@@ -27,7 +27,6 @@ export class HomeComponent implements OnInit {
   dtTrigger = new Subject();
 
   constructor(
-    // private userService: UserService,
     private accountService: AccountService,
     private modalService: BsModalService,
     private bsModalRef: BsModalRef,
@@ -42,9 +41,6 @@ export class HomeComponent implements OnInit {
       pageLength: 10
     };
     this.loadData()
-    // console.log(this.proposals)
-
-
   }
 
   loadData() {
@@ -132,6 +128,13 @@ export class HomeComponent implements OnInit {
       proposal: proposal,
     };
     this.bsModalRef = this.modalService.show(ModalViewProgressComponent, { initialState, class: "modal-lg" });
+  }
+
+  openExtendProposalModal(proposal){
+    const initialState = {
+      proposal: proposal,
+    };
+    this.bsModalRef = this.modalService.show(ModalExtendComponent, { initialState, class: "modal-lg" });
   }
 
   refresh() {

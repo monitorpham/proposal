@@ -7,6 +7,7 @@ export class Proposal {
     startDate: String;
     endDate: String;
     hospitalDepartment: String;
+    hospitalDepartmentId: number;
     currentProgressName: String;
     registerBy: String;
     note: String;

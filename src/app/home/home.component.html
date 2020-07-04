@@ -19,9 +19,9 @@
                     <th>Start Date</th>
                     <th>End Date</th>
                     <th>Remaining Date</th>
+                    <th>Extra Day</th>
                     <th>Dateline</th>
                     <th>Status</th>
-
                     <th>Current Stage</th>
                     <th style="text-align: center;">Action</th>
                 </tr>
@@ -38,14 +38,16 @@
                     <td>{{proposal.startDate}}</td>
                     <td>{{proposal.endDate}}</td>
                     <td>remaining date</td>
+                    <td>extra day</td>
                     <td>dateline</td>
                     <td>status</td>
                     <td>{{proposal.currentProgressName}}</td>
                     <td>
                         <div class="table-actions">
-                            <button *ngIf="isUser" class="btn btn-outline-primary btn-sm" (click)="OpenUpdateProgressModal(proposal)">Update</button>
-                            <button class="btn btn-outline-primary btn-sm" (click)="OpenViewProgressModal(proposal)">View</button>
-                            <button *ngIf="isAdmin" class="btn btn-outline-danger btn-sm" (click)="openDeleteProposalModal(proposal)" > Delete</button>
+                            <button *ngIf="isUser" class="btn btn-outline-primary btn-sm" (click)="OpenUpdateProgressModal(proposal)">Update</button> &nbsp;
+                            <button class="btn btn-outline-primary btn-sm" (click)="OpenViewProgressModal(proposal)">View</button> &nbsp;
+                            <button *ngIf="isAdmin" class="btn btn-outline-primary btn-sm" (click)="openExtendProposalModal(proposal)" > Edit</button> &nbsp;
+                            <button *ngIf="isAdmin" class="btn btn-outline-danger btn-sm" (click)="openDeleteProposalModal(proposal)" > Delete</button> &nbsp;
                         </div>
                     </td>
                 </tr>
