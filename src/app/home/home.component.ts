@@ -11,6 +11,7 @@ import { ModalViewProgressComponent } from './component/modal-view-progress/moda
 import { Router } from '@angular/router';
 import { User } from '../_models/user';
 import { ModalExtendComponent } from './component/modal-extend/modal-extend.component';
+import { ProgressService } from '../_services/progress.service';
 
 @Component({
   selector: 'app-home',
@@ -25,17 +26,23 @@ export class HomeComponent implements OnInit {
   isAdmin:Boolean =  false;
   dtOptions: DataTables.Settings = {};
   dtTrigger = new Subject();
+  progresses: any
 
   constructor(
     private accountService: AccountService,
     private modalService: BsModalService,
     private bsModalRef: BsModalRef,
     private proposalService: ProposalService,
+    private progressService: ProgressService,
     private router: Router,
   ) {
   }
 
   ngOnInit() {
+    this.progressService.getAllProgresses().subscribe(res =>{
+      this.progresses = res
+    })
+
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 10
@@ -141,6 +148,16 @@ export class HomeComponent implements OnInit {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
     this.router.navigate(['/home']);
+  }
+
+  getProgressBarWidth(stage){
+    let result = 0
+    for(let i=0; i< this.progresses.length;i++){
+      if (this.progresses[i].contentTask == stage){
+        result = i*100/this.progresses.length
+      }
+    }
+    return result
   }
 
 }

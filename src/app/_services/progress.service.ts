@@ -15,4 +15,10 @@ export class ProgressService {
     const url = `${environment.apiUrl}/progess-detaill-stage?idProgressDetail=${progess.id}`
     return this.httpClient.put<any>(url, {note: progess.note})
   }
+
+  getAllProgresses(){
+    const url = `${environment.apiUrl}/progresses`
+    return this.httpClient.get<any>(url)
+  }
+  
 }

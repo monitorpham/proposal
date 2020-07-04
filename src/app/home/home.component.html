@@ -41,7 +41,12 @@
                     <td>extra day</td>
                     <td>dateline</td>
                     <td>status</td>
-                    <td>{{proposal.currentProgressName}}</td>
+                    <td>
+                        <span class="stage-title">{{proposal.currentProgressName}}</span>
+                        <div class="progress-bar">
+                            <div class="progress-bar-inner" [style.width] = "getProgressBarWidth(proposal.currentProgressName)"></div>
+                        </div>
+                    </td>
                     <td>
                         <div class="table-actions">
                             <button *ngIf="isUser" class="btn btn-outline-primary btn-sm" (click)="OpenUpdateProgressModal(proposal)">Update</button> &nbsp;
