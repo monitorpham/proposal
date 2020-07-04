@@ -22,7 +22,6 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { ModalDeleteProposalComponent } from './home/component/modal-delete-proposal/modal-delete-proposal.component';
 import { ModalCompleteProgressComponent } from './home/component/modal-complete-progress/modal-complete-progress.component';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
-// import { ComponentComponent } from './user-management/component/component.component';
 import { ModalCreateUserComponent } from './user-management/component/modal-create-user/modal-create-user.component';
 import { ModalEditUserComponent } from './user-management/component/modal-edit-user/modal-edit-user.component';
 import { AccountComponent } from './account/account.component';
@@ -33,6 +32,7 @@ import { RegisterComponent } from './account/register/register.component';
 import { ToastrModule } from 'ngx-toastr';
 import { ModalViewProgressComponent } from './home/component/modal-view-progress/modal-view-progress.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { ModalExtendComponent } from './home/component/modal-extend/modal-extend.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +46,6 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     ModalDeleteProposalComponent,
     ModalCompleteProgressComponent,
     ModalViewProgressComponent,
-    // ComponentComponent,
     ModalCreateUserComponent,
     ModalEditUserComponent,
     AccountComponent,
@@ -54,6 +53,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     PasswordComponent,
     PasswordStrengthBarComponent,
     RegisterComponent,
+    ModalExtendComponent,
   ],
   imports: [
     BrowserModule,
@@ -81,7 +81,9 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     ModalUpdateProgressComponent,
     ModalDeleteProposalComponent,
     ModalCompleteProgressComponent,
-    ModalViewProgressComponent],
+    ModalViewProgressComponent,
+    ModalExtendComponent],
+    
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Proposal } from '../_models/proposal';
 import { AccountService } from '../_services/account.service';
 import { ProposalService } from '../_services/proposal.service';
-// import { UserService, AuthenticationService } from '../_services';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { ModalCreateProposalComponent } from './component/modal-create-proposal/modal-create-proposal.component';
 import { ModalUpdateProgressComponent } from './component/modal-update-progress/modal-update-progress.component';
@@ -11,6 +10,8 @@ import { ModalDeleteProposalComponent } from './component/modal-delete-proposal/
 import { ModalViewProgressComponent } from './component/modal-view-progress/modal-view-progress.component';
 import { Router } from '@angular/router';
 import { User } from '../_models/user';
+import { ModalExtendComponent } from './component/modal-extend/modal-extend.component';
+import { ProgressService } from '../_services/progress.service';
 
 @Component({
   selector: 'app-home',
@@ -25,26 +26,28 @@ export class HomeComponent implements OnInit {
   isAdmin:Boolean =  false;
   dtOptions: DataTables.Settings = {};
   dtTrigger = new Subject();
+  progresses: any
 
   constructor(
-    // private userService: UserService,
     private accountService: AccountService,
     private modalService: BsModalService,
     private bsModalRef: BsModalRef,
     private proposalService: ProposalService,
+    private progressService: ProgressService,
     private router: Router,
   ) {
   }
 
   ngOnInit() {
+    this.progressService.getAllProgresses().subscribe(res =>{
+      this.progresses = res
+    })
+
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 10
     };
     this.loadData()
-    // console.log(this.proposals)
-
-
   }
 
   loadData() {
@@ -134,10 +137,27 @@ export class HomeComponent implements OnInit {
     this.bsModalRef = this.modalService.show(ModalViewProgressComponent, { initialState, class: "modal-lg" });
   }
 
+  openExtendProposalModal(proposal){
+    const initialState = {
+      proposal: proposal,
+    };
+    this.bsModalRef = this.modalService.show(ModalExtendComponent, { initialState, class: "modal-lg" });
+  }
+
   refresh() {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
     this.router.navigate(['/home']);
+  }
+
+  getProgressBarWidth(stage){
+    let result = 0
+    for(let i=0; i< this.progresses.length;i++){
+      if (this.progresses[i].contentTask == stage){
+        result = i*100/this.progresses.length
+      }
+    }
+    return result
   }
 
 }
