@@ -34,13 +34,12 @@ export class ModalUpdateProgressComponent implements OnInit {
     ){ }
 
   ngOnInit(): void {
-    // console.log("id:" + this.proposal.id)
+    this.initData()
+  }
+
+  initData(){
     this.proposalService.getProgressesByProposalId(this.proposal.id).subscribe(res => {
-      // console.log("res:" + res)
-      // debugger;
       this.entries = res.map(item =>{
-        // console.log("item: " + item)
-        // debugger;
         let progress = new Progress(item.id, item.progress.contentTask, item.timeStart ,item.timeEnd, item.performBy, item.note)
         return progress
       })

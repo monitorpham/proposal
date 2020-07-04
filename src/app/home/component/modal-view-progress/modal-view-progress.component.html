@@ -8,16 +8,11 @@
     <div class="timeline-wrapper">
         <mgl-timeline [toggle]="toggle" [alternate]="alternate">
             <mgl-timeline-entry *ngFor="let entry of entries; let i = index;" (expand)="onExpandEntry($event, i)">
-                <mgl-timeline-entry-header style="background-color: #2196f3;" (click)="onHeaderClick($event)">
-                    <div>{{entry.progress}}</div>
+                <mgl-timeline-entry-header style="background-color: #2196f3; padding-bottom: 0px;" (click)="onHeaderClick($event)">
+                    <div style="padding-bottom: 10px;">{{entry.progress}}</div>
                     <div class="row entrie-wrapper">
-                        <div class="col-md-12 info-item" style="padding-left:unset">
-                            <label class="item-label">Start date: {{entry.startDate}}</label>
-                            <!-- <input class="form-control inp" bsDatepicker [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY'}" [value]="entry.startDate"> -->
-                            <!-- <span>{{entry.startDate}}</span> -->
-                        </div>
                         <div class="col-md-12 info-item" style="padding-right:unset">
-                            <label class="item-label">End date: {{entry.endDate}}</label>
+                            <label class="item-label">Approval Date: {{entry.endDate}}</label>
                             <!-- <input class="form-control inp"  bsDatepicker [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY'}"> -->
                             <!-- <span>{{entry.endDate}}</span> -->
                         </div>
