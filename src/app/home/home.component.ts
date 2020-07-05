@@ -74,6 +74,10 @@ export class HomeComponent implements OnInit {
         proposal.hospitalDepartment = item.proposal.hospitalDepartment.hospitalDepartmentName
         proposal.registerBy = item.proposal.userExtra.user.firstName
         proposal.Group = item.proposal.userExtra.equiqmentGroup.nameGroup
+        proposal.remainingDate = item.proposal.remainingDate
+        proposal.additionalDate = item.proposal.additionalDate
+        proposal.deadLine = proposal.convertDate(item.deadLine)
+        proposal.status = item.proposal.status
         return proposal
       }, err => {
         console.log(err)

@@ -11,6 +11,10 @@ export class Proposal {
     currentProgressName: String;
     registerBy: String;
     note: String;
+    remainingDate: String
+    additionalDate: number
+    deadLine: String
+    status: any
 
     public convertDate(dateString: String) {
         if (dateString) {
