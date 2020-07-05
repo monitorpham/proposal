@@ -9,8 +9,13 @@ export class Proposal {
     hospitalDepartment: String;
     hospitalDepartmentId: number;
     currentProgressName: String;
-    registerBy: String;
+    registerBy: "Admin";
     note: String;
+    remainingDate: String
+    additionalDate: number
+    deadLine: String
+    status: any
+    asignee: String
 
     public convertDate(dateString: String) {
         if (dateString) {
