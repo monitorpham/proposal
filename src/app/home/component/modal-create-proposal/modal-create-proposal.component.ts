@@ -20,12 +20,12 @@ export class ModalCreateProposalComponent implements OnInit {
   selectedDepartment: HospitalDepartment;
   startDate: string = ''
   proposalForm: any = {
-    "contentProposal": "",
-    "hospitalDepartmentId": 0,
-    "note": "",
-    "startDate": "",
-    "asignee": "",
-    "extraDate": 0
+    "contentProposal": null,
+    "hospitalDepartmentId": null,
+    "note": null,
+    "startDate": null,
+    "userExtraId": null,
+    "additionalDate": null
   }
 
   constructor(
@@ -42,12 +42,12 @@ export class ModalCreateProposalComponent implements OnInit {
 
   ngOnInit(): void {
     // let currentDate = new Date()
-      this.proposalForm.startDate =  moment().format("DD-MM-YYYY");
+      this.startDate =  moment().format("DD-MM-YYYY");
       // console.log(currentDate.toISOString())
 
-    let currentDate = new Date()
-      this.proposalForm.startDate = currentDate.toISOString().toString().split('T')[0]
-      console.log(this.proposalForm)
+    // let currentDate = new Date()
+    //   this.proposalForm.startDate = currentDate.toISOString().toString().split('T')[0]
+    //   console.log(this.proposalForm)
 
     this.hospitalDepartmentService.getAllDepartment().subscribe(res=>{
       this.departments = res.map(item =>{
@@ -65,7 +65,13 @@ export class ModalCreateProposalComponent implements OnInit {
     this.proposalForm.startDate = dateString
     this.proposalForm.hospitalDepartmentId = dId
     console.log(this.proposalForm)
-    // debugger;
+    debugger;
+
+    if(!this.validateForm){
+      this.toastr.error("please fill all required field!")
+      return 
+    }
+    
 
     this.proposalService.createProposal(this.proposalForm).subscribe(res =>{
       console.log(res)
@@ -82,6 +88,15 @@ export class ModalCreateProposalComponent implements OnInit {
 
   onCancel(){
     this.bsModalRef.hide()
+  }
+
+  validateForm(){
+    if(this.proposalForm.contentProposal == null || this.proposalForm.hospitalDepartmentId == null ||
+      this.proposalForm.note == null || this.proposalForm.startDate == null || 
+      this.proposalForm.additionalDate == null|| this.proposalForm.userExtraId == null){
+        return false
+      }
+      return true
   }
 
   refresh(){

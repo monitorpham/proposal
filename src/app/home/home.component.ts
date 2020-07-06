@@ -72,8 +72,12 @@ export class HomeComponent implements OnInit {
         proposal.endDate = proposal.convertDate(item.proposal.startDate)
         proposal.currentProgressName = item.currentProgressName
         proposal.hospitalDepartment = item.proposal.hospitalDepartment.hospitalDepartmentName
-        proposal.registerBy = item.proposal.userExtra.user.firstName
         proposal.Group = item.proposal.userExtra.equiqmentGroup.nameGroup
+        proposal.remainingDate = item.proposal.remainingDate
+        proposal.additionalDate = item.proposal.additionalDate
+        proposal.deadLine = proposal.convertDate(item.deadLine)
+        proposal.status = item.proposal.status
+        proposal.asignee = item.proposal.userExtra.user.firstName
         return proposal
       }, err => {
         console.log(err)
