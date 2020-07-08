@@ -60,12 +60,12 @@ export class ModalCreateProposalComponent implements OnInit {
   }
 
   onSave(){
-    let dateString = this.commonService.dateStringToISOString(this.startDate)
+    let dateString = this.commonService.DDMMYYYYtoIsoString(this.startDate)
     let dId = this.selectedDepartment.id
     this.proposalForm.startDate = dateString
     this.proposalForm.hospitalDepartmentId = dId
     console.log(this.proposalForm)
-    debugger;
+    // debugger;
 
     if(!this.validateForm){
       this.toastr.error("please fill all required field!")

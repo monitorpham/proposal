@@ -22,7 +22,7 @@ export class ProgressService {
   }
 
   updateProgress(formData, proposalId){
-    const url = `${environment.apiUrl}/api/update-All-ProgressDetail-By-ProposalId?proposalId=${proposalId}`
+    const url = `${environment.apiUrl}/update-All-ProgressDetail-By-ProposalId?proposalId=${proposalId}`
     return this.httpClient.put(url, formData)
   }
   

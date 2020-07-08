@@ -20,8 +20,11 @@ export class Proposal {
     public convertDate(dateString: String) {
         if (dateString) {
             let arr = dateString.split('T')
-            return arr[0]
+            let temp = arr[0].toString()
+            let arr2 = temp.split('-')
+            // debugger;
+            return arr2[2] + '-' + arr2[1] + '-' + arr2[0]
         }
-        return ' '
+        return ''
     }
 }

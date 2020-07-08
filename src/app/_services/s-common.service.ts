@@ -7,27 +7,53 @@ export class SCommonService {
 
   constructor() { }
 
-  dateStringToISOString(date: string ){
+  dateStringToISOString(date: string) {
     let arrDate = date.split("-")
-    
+
     let dateString = arrDate[2] + '-' + arrDate[1] + '-' + arrDate[0]
     // debugger;
     let d = new Date(dateString)
     return d.toISOString()
   }
-  
-  dateStringToTime(date: string){
-    let arrDate = date.split("-")
-    let dateString = arrDate[2] + '-' + arrDate[1] + '-' + arrDate[0]
-    let d = new Date(dateString)
+
+  dateStringToTime(date: string) {
+    let arrDate = date.split("T")
+    let d = new Date(arrDate[0])
+    debugger;
     return d.getTime()
   }
 
-  public convertDate(dateString: String) {
-    if (dateString) {
-        let arr = dateString.split('T')
-        return arr[0]
+  public DDMMYYYYtoIsoString(dateString: any){
+    // debugger;
+    if(dateString){
+      console.log(dateString)
+      console.log(typeof dateString)
+      if(typeof dateString == 'string'){
+        // debugger;
+        let arr = dateString.split('-')
+        let dString = arr[2] + '-' + arr[1] + '-' + arr[0]
+        let date = new Date(dString)
+        // debugger;
+        return date.toISOString()
+      }else{
+        
+        let date: Date = dateString
+        console.log(date.toISOString())
+        debugger;
+        return date.toISOString()
+        
+      }
     }
-    return ' '
-}
+    return ''
+  }
+
+  public toDDMMYYYY(dateString: String) {
+    if (dateString) {
+      let arr = dateString.split('T')
+      let temp = arr[0].toString()
+      let arr2 = temp.split('-')
+      return arr2[2] + '-' + arr2[1] + '-' + arr2[0]
+  }
+  return ''
+  }
 }
