@@ -44,6 +44,8 @@ export class ModalExtendComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm()
+    console.log('edit proposal: ')
+    console.log(this.proposal)
 
     this.hospitalDepartmentService.getAllDepartment().subscribe(res=>{
       this.departments = res.map(item =>{

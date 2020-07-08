@@ -28,7 +28,7 @@ export class ModalUpdateProgressComponent implements OnInit {
   contentAnimation: boolean = true;
   dotAnimation: boolean = true;
   side = 'left';
-  entries : Progress[] = []
+  entries: Progress[] = []
   constructor(
     private bsModalRef: BsModalRef,
     private bsModalRef2: BsModalRef,
@@ -39,28 +39,27 @@ export class ModalUpdateProgressComponent implements OnInit {
     private toastr: ToastrService,
     private progressService: ProgressService
 
-    ){ }
+  ) { }
 
   ngOnInit(): void {
     this.initData()
   }
 
-  initData(){
+  initData() {
     this.proposalService.getProgressesByProposalId(this.proposal.id).subscribe(res => {
-      this.entries = res.map(item =>{
+      this.entries = res.map(item => {
         let output = item
-        let d = new Date()
-        let dString =  this.commonService.convertDate(d.toISOString())
-        output.timeEnd = output.timeEnd? this.commonService.convertDate(output.timeEnd): output.timeEnd
+        output.timeEnd = this.commonService.toDDMMYYYY(output.timeEnd)
         return output
       })
       console.log("entries: ")
-    console.log(this.entries)
+      console.log(this.entries)
+      // debugger;
     })
   }
 
   onExpandEntry(expanded, index) {
-    if(index!='0'){
+    if (index != '0') {
       console.log(`Expand status of entry #${index} changed to ${expanded}`)
     }
   }
@@ -82,57 +81,62 @@ export class ModalUpdateProgressComponent implements OnInit {
   }
 
   // onSave(){
-    
+
   //   this.bsModalRef.hide()
   // }
 
-  onCancel(){
+  onCancel() {
     this.bsModalRef.hide()
   }
 
   // openCompleteProgressModal(progress){
-    // const initialState = {
-    //   progress: progress,
-      
-    // };
-    // this.bsModalRef2 = this.modalService.show(ModalCompleteProgressComponent, {initialState})
-    // this.bsModalRef2.content.progress = progress
+  // const initialState = {
+  //   progress: progress,
+
+  // };
+  // this.bsModalRef2 = this.modalService.show(ModalCompleteProgressComponent, {initialState})
+  // this.bsModalRef2.content.progress = progress
   // }
 
-  saveProgress(i){
-    debugger;
+  saveProgress(index) {
+    // debugger;
     let formData: any = this.entries
-    // if(!this.validateForm(formData, i)){
-    //   debugger;
-    //   this.toastr.warning("Invalid date input. Please check again?")
-    // }else{
-      for(let i=0; i< formData.length; i++){
-        formData.endDate = formData.endDate? this.commonService.dateStringToISOString(formData.endDate): formData.endDate
-      }
-      console.log(formData)
+    console.log(this.entries)
+    console.log(formData)
+
+    for (let i = 0; i < formData.length; i++) {
+      // debugger;
+      formData[i].timeEnd = this.commonService.DDMMYYYYtoIsoString(formData[i].timeEnd)
+    }
+    console.log(formData)
+
+    // debugger;
+    if (!this.validateForm(formData, index)) {
       debugger;
+      this.toastr.warning("Invalid date input. Please check again?")
+    } else {
       this.progressService.updateProgress(formData, this.proposal.id).subscribe(res => {
         this.toastr.success("Update progress successfully!")
         this.bsModalRef.hide()
-      }, err =>{
+      }, err => {
         this.toastr.error("Update progress failed!")
       })
-      
-    // }
-    
+
+      // }
+
+    }
   }
 
-  validateForm(formData, i){
+  validateForm(formData, index) {
     let result = true;
-    for(i=0; i <= formData.length; i++){
-      for(let j=0; j<i; j++){
-       if(this.commonService.dateStringToTime(formData[i].endDate) < this.commonService.dateStringToTime(formData[j].endDate)){
-         result = false;
-         break;
-       }
+    for (let i = 0; i < index; i++) {
+      if(formData[i].endDate){
+        if (this.commonService.dateStringToTime(formData[i].endDate) > this.commonService.dateStringToTime(formData[index].endDate)) {
+          result = false;
+        }
       }
-     }
-     return result;
+    }
+    return result;
   }
 
   // isCurrentProgress(i){
