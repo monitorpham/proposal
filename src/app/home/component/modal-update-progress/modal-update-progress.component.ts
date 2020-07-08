@@ -110,33 +110,38 @@ export class ModalUpdateProgressComponent implements OnInit {
     }
     console.log(formData)
 
-    // debugger;
     if (!this.validateForm(formData, index)) {
-      debugger;
-      this.toastr.warning("Invalid date input. Please check again?")
+      // debugger;
+      this.toastr.warning("Invalid date input. Make sure the approval date of a stage is not sooner than the previous stage.")
     } else {
       this.progressService.updateProgress(formData, this.proposal.id).subscribe(res => {
         this.toastr.success("Update progress successfully!")
+        this.refresh();
         this.bsModalRef.hide()
       }, err => {
         this.toastr.error("Update progress failed!")
       })
-
-      // }
-
     }
   }
 
   validateForm(formData, index) {
+
     let result = true;
     for (let i = 0; i < index; i++) {
-      if(formData[i].endDate){
-        if (this.commonService.dateStringToTime(formData[i].endDate) > this.commonService.dateStringToTime(formData[index].endDate)) {
+      if(formData[i].timeEnd){
+        if (this.commonService.dateStringToTime(formData[i].timeEnd) > this.commonService.dateStringToTime(formData[index].timeEnd)) {
           result = false;
+          break;
+          // debugger;
         }
       }
     }
     return result;
+  }
+  refresh(){
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate(['/home']);
   }
 
   // isCurrentProgress(i){

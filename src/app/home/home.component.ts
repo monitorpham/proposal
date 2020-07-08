@@ -64,6 +64,8 @@ export class HomeComponent implements OnInit {
     })
     this.proposalService.getAllProposals().subscribe(res => {
       this.proposals = res.map(item => {
+        console.log(item)
+        // debugger;
         let proposal = new Proposal()
         proposal.id = item.proposal.id
         proposal.note = item.proposal.note
@@ -71,13 +73,15 @@ export class HomeComponent implements OnInit {
         proposal.startDate = proposal.convertDate(item.proposal.startDate)
         proposal.endDate = proposal.convertDate(item.proposal.startDate)
         proposal.currentProgressName = item.currentProgressName
+        proposal.hospitalDepartmentId = item.proposal.hospitalDepartment.id
         proposal.hospitalDepartment = item.proposal.hospitalDepartment.hospitalDepartmentName
         proposal.Group = item.proposal.userExtra.equiqmentGroup.nameGroup
-        proposal.remainingDate = item.proposal.remainingDate
+        proposal.remainingDate = item.remainingDate
         proposal.additionalDate = item.proposal.additionalDate
         proposal.deadLine = proposal.convertDate(item.deadLine)
         proposal.status = item.proposal.status
         proposal.asignee = item.proposal.userExtra.user.firstName
+        proposal.asigneeId =  item.proposal.userExtra.user.id
         return proposal
       }, err => {
         console.log(err)
@@ -161,7 +165,8 @@ export class HomeComponent implements OnInit {
         result = i*100/this.progresses.length
       }
     }
-    return result
+    // debugger;
+    return Math.floor(result)
   }
 
 }

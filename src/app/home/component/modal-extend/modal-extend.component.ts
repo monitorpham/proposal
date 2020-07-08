@@ -22,12 +22,13 @@ export class ModalExtendComponent implements OnInit {
   selectedDepartment: HospitalDepartment;
   startDate: string = ''
   proposalForm: any = {
-    "contentProposal": "",
-    "hospitalDepartmentId": 0,
-    "note": "",
-    "startDate": "",
-    "asignee": "",
-    "extraDate": 0
+    "additionalDate": null,
+    "contentProposal": null,
+    "hospitalDepartmentId": null,
+    "id": null,
+    "note": null,
+    "startDate": null,
+    "userExtraId": null
   }
 
   constructor(
@@ -62,29 +63,24 @@ export class ModalExtendComponent implements OnInit {
     this.proposalForm.hospitalDepartmentId = this.selectedDepartment.id
     this.proposalForm.contentProposal = this.proposal.contentProposal
     this.proposalForm.note = this.proposal.note
-    this.proposalForm.startDate =  this.proposal.endDate
-    this.proposalForm.extraDate = 0
-    this.proposalForm.asignee = '...'
+    this.proposalForm.id = this.proposal.id
+    this.proposalForm.startDate =  this.proposal.startDate
+    this.proposalForm.additionalDate = this.proposal.additionalDate
+    this.proposalForm.userExtraId = this.proposal.asigneeId
   }
 
   onSave(){
-    // let dateString = this.commonService.dateStringToISOString(this.startDate)
-    // let dId = this.selectedDepartment.id
-    // this.proposalForm.startDate = dateString
-    // this.proposalForm.hospitalDepartmentId = dId
-    // console.log(this.proposalForm)
-    // // debugger;
-
-    // this.proposalService.createProposal(this.proposalForm).subscribe(res =>{
-    //   console.log(res)
-    //   this.toastr.success("Create proposal successfully!");
-    //   this.refresh();
-    // }, err=>{
-    //   console.log(err)
-    //   this.toastr.error(err.message? err.message:  "Create proposal failed!")
-    // })
-
-    
+    let data = this.proposalForm
+    data.hospitalDepartmentId = this.selectedDepartment.id
+    data.startDate = this.commonService.DDMMYYYYtoIsoString(data.startDate)
+    this.proposalService.updateProposal(data).subscribe(res =>{
+      console.log(res)
+      this.toastr.success("Update proposal successfully!");
+      this.refresh();
+    }, err=>{
+      console.log(err)
+      this.toastr.error(err.message? err.message:  "Update proposal failed!")
+    })
     this.bsModalRef.hide()
   }
 

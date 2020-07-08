@@ -21,6 +21,11 @@ export class ProposalService {
     return this.httpClient.post<any>(url, data);
   }
 
+  updateProposal(data){
+    const url =`${environment.apiUrl}/proposals`
+    return this.httpClient.put<any>(url, data);
+  }
+
   deleteProposal(id){
     const url =`${environment.apiUrl}/proposals/${id}`
     return this.httpClient.delete<any>(url);
