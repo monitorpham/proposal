@@ -19,27 +19,23 @@ export class SCommonService {
   dateStringToTime(date: string) {
     let arrDate = date.split("T")
     let d = new Date(arrDate[0])
-    debugger;
+    // debugger;
     return d.getTime()
   }
 
   public DDMMYYYYtoIsoString(dateString: any){
-    // debugger;
     if(dateString){
       console.log(dateString)
       console.log(typeof dateString)
       if(typeof dateString == 'string'){
-        // debugger;
         let arr = dateString.split('-')
         let dString = arr[2] + '-' + arr[1] + '-' + arr[0]
         let date = new Date(dString)
-        // debugger;
         return date.toISOString()
       }else{
         
         let date: Date = dateString
         console.log(date.toISOString())
-        debugger;
         return date.toISOString()
         
       }

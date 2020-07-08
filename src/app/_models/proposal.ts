@@ -16,6 +16,7 @@ export class Proposal {
     deadLine: String
     status: any
     asignee: String
+    asigneeId: number;
 
     public convertDate(dateString: String) {
         if (dateString) {
