@@ -32,13 +32,14 @@ export class ModalViewProgressComponent implements OnInit {
 
   ngOnInit(): void {
     this.proposalService.getProgressesByProposalId(this.proposal.id).subscribe(res => {
-      this.entries = res.map(item =>{
-        let progress = new Progress(item.id, item.progress.contentTask, item.timeStart ,item.timeEnd, item.performBy, item.note)
-        return progress
-      })
-      for(let i=0; i < this.entries.length; i++){
-        if(!this.entries[i]['timeEnd']){
-          this.entries.slice(i,1)
+      // this.entries = res.map(item =>{
+      //   let progress = new Progress(item.id, item.progress.contentTask, item.timeStart ,item.timeEnd, item.performBy, item.note)
+      //   return progress
+      // })
+      for(let i=0; i < res.length; i++){
+        if(res[i]['timeEnd']){
+          let progress = new Progress( res[i].id, res[i].progress.contentTask, res[i].timeStart ,res[i].timeEnd, res[i].performBy, res[i].note)
+          this.entries.push(progress)
         }
       }
       console.log("entries: ")
