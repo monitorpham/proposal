@@ -127,18 +127,26 @@ export class ModalUpdateProgressComponent implements OnInit {
   validateForm(formData, index) {
 
     let result = true;
-    for (let i = 0; i < index; i++) {
-      if(formData[i].timeEnd){
-        if (this.commonService.dateStringToTime(formData[i].timeEnd) > this.commonService.dateStringToTime(formData[index].timeEnd)) {
-          result = false;
-          break;
-          // debugger;
+    for (let i = 1; i < formData.length; i++) {
+      for (let j = 0; j < i; j++) {
+        if (formData[i].timeEnd && formData[j].timeEnd) {
+          if (this.commonService.dateStringToTime(formData[i].timeEnd) < this.commonService.dateStringToTime(formData[j].timeEnd)) {
+            result = false;
+            break;
+          }
         }
       }
+      // if(formData[i].timeEnd){
+      //   if (this.commonService.dateStringToTime(formData[i].timeEnd) > this.commonService.dateStringToTime(formData[index].timeEnd)) {
+      //     result = false;
+      //     break;
+      //     // debugger;
+      //   }
+      // }
     }
     return result;
   }
-  refresh(){
+  refresh() {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
     this.router.navigate(['/home']);
