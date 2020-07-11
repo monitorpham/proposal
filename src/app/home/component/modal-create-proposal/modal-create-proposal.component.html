@@ -26,7 +26,10 @@
       </div>
       <div class="col-md-6">
         <label class="item-label" for="propoent">Asignee <span class="text-danger">*</span></label>
-        <input class="form-control" type="text" name="" id="proponent" [(ngModel)]="proposalForm.userExtraId">
+        <!-- <input class="form-control" type="text" name="" id="proponent" [(ngModel)]="proposalForm.userExtraId"> -->
+        <ng-select class="ng-slect" [items]="users" bindLabel="name" placeholder="Select user"
+          appendTo="body" [(ngModel)]="selectedUser">
+        </ng-select>
       </div>
     </div>
     <div class="row row-item" style="padding-left: 15px; padding-right: 15px;">
