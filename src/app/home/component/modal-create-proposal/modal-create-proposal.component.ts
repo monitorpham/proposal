@@ -9,6 +9,8 @@ import { SCommonService } from 'src/app/_services/s-common.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
+import { UserService } from 'src/app/_services/user.service';
+import { Subscriber } from 'rxjs';
 
 @Component({
   selector: 'app-modal-create-proposal',
@@ -17,6 +19,8 @@ import * as moment from 'moment';
 })
 export class ModalCreateProposalComponent implements OnInit {
   departments: HospitalDepartment[] = []
+  users: any[] = [];
+  selectedUser: any;
   selectedDepartment: HospitalDepartment;
   startDate: string = ''
   proposalForm: any = {
@@ -25,7 +29,7 @@ export class ModalCreateProposalComponent implements OnInit {
     "note": null,
     "startDate": null,
     "userExtraId": null,
-    "additionalDate": null
+    "additionalDate": 0
   }
 
   constructor(
@@ -35,6 +39,7 @@ export class ModalCreateProposalComponent implements OnInit {
     private commonService: SCommonService,
     private toastr : ToastrService,
     private router: Router,
+    private userService: UserService,
     private formBuilder: FormBuilder){ 
       
     }
@@ -48,6 +53,14 @@ export class ModalCreateProposalComponent implements OnInit {
     // let currentDate = new Date()
     //   this.proposalForm.startDate = currentDate.toISOString().toString().split('T')[0]
     //   console.log(this.proposalForm)
+    this.userService.getAllUsers().subscribe(res =>{
+      this.users = res.map(item =>{
+        return {
+          id : item.id,
+          name: item.id + ' - ' + item.firstName
+        }
+      })
+    })
 
     this.hospitalDepartmentService.getAllDepartment().subscribe(res=>{
       this.departments = res.map(item =>{
@@ -62,8 +75,10 @@ export class ModalCreateProposalComponent implements OnInit {
   onSave(){
     let dateString = this.commonService.DDMMYYYYtoIsoString(this.startDate)
     let dId = this.selectedDepartment.id
+    let uId = this.selectedUser.id
     this.proposalForm.startDate = dateString
     this.proposalForm.hospitalDepartmentId = dId
+    this.proposalForm.userExtraId = uId
     console.log(this.proposalForm)
     // debugger;
 

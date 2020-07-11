@@ -71,7 +71,7 @@ export class HomeComponent implements OnInit {
         proposal.note = item.proposal.note
         proposal.contentProposal = item.proposal.contentProposal
         proposal.startDate = proposal.convertDate(item.proposal.startDate)
-        proposal.endDate = proposal.convertDate(item.proposal.startDate)
+        proposal.endDate = proposal.convertDate(item.proposal.endDate)
         proposal.currentProgressName = item.currentProgressName
         proposal.hospitalDepartmentId = item.proposal.hospitalDepartment.id
         proposal.hospitalDepartment = item.proposal.hospitalDepartment.hospitalDepartmentName
