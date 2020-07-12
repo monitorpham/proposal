@@ -54,7 +54,6 @@ export class ModalUpdateProgressComponent implements OnInit {
       })
       console.log("entries: ")
       console.log(this.entries)
-      // debugger;
     })
   }
 
@@ -99,19 +98,16 @@ export class ModalUpdateProgressComponent implements OnInit {
   // }
 
   saveProgress(index) {
-    // debugger;
     let formData: any = this.entries
     console.log(this.entries)
     console.log(formData)
 
     for (let i = 0; i < formData.length; i++) {
-      // debugger;
       formData[i].timeEnd = this.commonService.DDMMYYYYtoIsoString(formData[i].timeEnd)
     }
     console.log(formData)
 
     if (!this.validateForm(formData, index)) {
-      // debugger;
       this.toastr.warning("Invalid date input. Make sure the approval date of a stage is not sooner than the previous stage.")
     } else {
       this.progressService.updateProgress(formData, this.proposal.id).subscribe(res => {
@@ -130,19 +126,13 @@ export class ModalUpdateProgressComponent implements OnInit {
     for (let i = 1; i < formData.length; i++) {
       for (let j = 0; j < i; j++) {
         if (formData[i].timeEnd && formData[j].timeEnd) {
+          // debugger;
           if (this.commonService.dateStringToTime(formData[i].timeEnd) < this.commonService.dateStringToTime(formData[j].timeEnd)) {
             result = false;
             break;
           }
         }
       }
-      // if(formData[i].timeEnd){
-      //   if (this.commonService.dateStringToTime(formData[i].timeEnd) > this.commonService.dateStringToTime(formData[index].timeEnd)) {
-      //     result = false;
-      //     break;
-      //     // debugger;
-      //   }
-      // }
     }
     return result;
   }
@@ -152,16 +142,5 @@ export class ModalUpdateProgressComponent implements OnInit {
     this.router.navigate(['/home']);
   }
 
-  // isCurrentProgress(i){
-  //   if(i==0 && this.entries[i].time == null){
-  //     return true;
-  //   }
-  //   if(i>0){
-  //     if(this.entries[i].time == null && this.entries[i-1].time !=null){
-  //       return true;
-  //     }
-  //   }
-  //   return false
-  // }
 
 }

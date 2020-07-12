@@ -24,10 +24,14 @@ export class SCommonService {
   }
 
   public DDMMYYYYtoIsoString(dateString: any){
+    // debugger
     if(dateString){
       console.log(dateString)
       console.log(typeof dateString)
       if(typeof dateString == 'string'){
+        if(dateString.toString().includes('Z')){
+          return dateString
+        }
         let arr = dateString.split('-')
         let dString = arr[2] + '-' + arr[1] + '-' + arr[0]
         let date = new Date(dString)
