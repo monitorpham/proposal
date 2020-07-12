@@ -79,26 +79,34 @@ export class ModalCreateProposalComponent implements OnInit {
     this.proposalForm.startDate = dateString
     this.proposalForm.hospitalDepartmentId = dId
     this.proposalForm.userExtraId = uId
-    console.log(this.proposalForm)
+    // console.log(this.proposalForm)
     // debugger;
 
-    if(!this.validateForm){
-      this.toastr.error("please fill all required field!")
+    if(!this.validateForm()){
+      this.toastr.warning("please fill all required field!")
       return 
+    }else{
+      this.proposalService.createProposal(this.proposalForm).subscribe(res =>{
+        console.log(res)
+        this.toastr.success("Create proposal successfully!");
+        this.refresh();
+      }, err=>{
+        console.log(err)
+        this.toastr.error(err.message? err.message:  "Create proposal failed!")
+      })
+
+      this.bsModalRef.hide()
     }
+    // console.log(this.validateForm)
+
+    // console.log(this.proposalForm)
+    // debugger;
     
 
-    this.proposalService.createProposal(this.proposalForm).subscribe(res =>{
-      console.log(res)
-      this.toastr.success("Create proposal successfully!");
-      this.refresh();
-    }, err=>{
-      console.log(err)
-      this.toastr.error(err.message? err.message:  "Create proposal failed!")
-    })
+    
 
     
-    this.bsModalRef.hide()
+    
   }
 
   onCancel(){
