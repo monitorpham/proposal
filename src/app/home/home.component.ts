@@ -162,7 +162,7 @@ export class HomeComponent implements OnInit {
     let result = 0
     for(let i=0; i< this.progresses.length;i++){
       if (this.progresses[i].contentTask == stage){
-        result = i*100/this.progresses.length
+        result = (i+1)*100/this.progresses.length
       }
     }
     // debugger;

@@ -28,8 +28,13 @@
 
 .table-actions{
     display: flex;
-    justify-content: space-between;
+    justify-content: start;
+    // justify-content: space-between;
     
+}
+
+.btn-custom{
+    margin-right: 3px;
 }
 
 
