@@ -71,4 +71,18 @@ mgl-timeline.mobile {
 
 }
 
+.proposal-true{
+  background-color: #f2ffe6;
+}
+
+.proposal-false{
+  background-color: #ffffe6;
+}
+
+.proposal-new{
+  background-color: unset;
+}
+
+
+
 ng-select { .ng-dropdown-panel { width: auto !important; max-width: 550px; } }

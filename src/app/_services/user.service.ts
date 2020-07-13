@@ -16,7 +16,7 @@ export class UserService {
   ) { }
 
   getAllUsers() {
-    const url = `${environment.apiUrl}/users`
+    const url = `${environment.apiUrl}/users?size=22`
     return this.httpClient.get<any>(url);
   }
 
