@@ -1,5 +1,5 @@
 <div class="modal-header">
-  <h4 class="modal-title pull-left">Create Proposal</h4>
+  <h4 class="modal-title pull-left">Tạo đề nghị</h4>
   <button type="button" class="close pull-right" aria-label="Close" (click)="onCancel()">
     <span aria-hidden="true">&times;</span>
   </button>
@@ -8,24 +8,24 @@
   <div class="row modal-wrapper">
     <div class="row row-item">
       <div class="col-md-6">
-        <label class="item-label" for="propoent">Number of extra day <span class="text-danger">*</span></label>
+        <label class="item-label" for="propoent">Thêm ngày xử lý <span class="text-danger">*</span></label>
         <input class="form-control" type="number" name="" id="proponent" [(ngModel)]="proposalForm.additionalDate">
       </div>
       <div class="col-md-6">
-        <label class="item-label" for="register-date">Register date <span class="text-danger">*</span></label>
+        <label class="item-label" for="register-date">Ngày đề nghị <span class="text-danger">*</span></label>
         <input class="form-control" id="register-date" bsDatepicker [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY'}" [(ngModel)]="startDate">
       </div>
     </div>
     
     <div class="row row-item" >
       <div class="col-md-6">
-        <label class="item-label">Part <span class="text-danger">*</span></label>
+        <label class="item-label">Khoa đề nghị <span class="text-danger">*</span></label>
         <ng-select class="ng-slect" [items]="departments" bindLabel="hospitalDepartmentName" placeholder="Select department"
           appendTo="body" [(ngModel)]="selectedDepartment">
         </ng-select>
       </div>
       <div class="col-md-6">
-        <label class="item-label" for="propoent">Asignee <span class="text-danger">*</span></label>
+        <label class="item-label" for="propoent">Người nhận đề nghị <span class="text-danger">*</span></label>
         <!-- <input class="form-control" type="text" name="" id="proponent" [(ngModel)]="proposalForm.userExtraId"> -->
         <ng-select class="ng-slect" [items]="users" bindLabel="name" placeholder="Select user"
           appendTo="body" [(ngModel)]="selectedUser">
@@ -33,16 +33,16 @@
       </div>
     </div>
     <div class="row row-item" style="padding-left: 15px; padding-right: 15px;">
-      <label class="item-label">Note <span class="text-danger">*</span></label>
-      <input class="form-control" [(ngModel)]="proposalForm.note">
+      <label class="item-label">Nội dung đề nghị <span class="text-danger">*</span></label>
+      <input class="form-control" [(ngModel)]="proposalForm.contentProposal">
     </div>
     <div class="row row-item" style="padding-left: 15px; padding-right: 15px;">
-      <label class="item-label">Content <span class="text-danger">*</span></label>
-      <textarea class="form-control" [(ngModel)]="proposalForm.contentProposal"></textarea>
+      <label class="item-label">Note <span class="text-danger">*</span></label>
+      <textarea class="form-control" [(ngModel)]="proposalForm.note"></textarea>
     </div>
   </div>
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-outline-primary btn-sm" (click)="onSave()">Save</button>
-  <button type="button" class="btn btn-outline-danger btn-sm" (click)="onCancel()">Cancel</button>
+  <button type="button" class="btn btn-danger btn-sm" (click)="onCancel()">Cancel</button>
+  <button type="button" class="btn btn-primary btn-sm" (click)="onSave()">Save</button>
 </div>

@@ -45,7 +45,7 @@ export class HomeComponent implements OnInit {
 
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 10
+      pageLength: 25
     };
     this.loadData()
   }
@@ -160,7 +160,7 @@ export class HomeComponent implements OnInit {
 
   getProgressBarWidth(stage){
     let result = 0
-    for(let i=0; i< this.progresses.length;i++){
+    for(let i=1; i< this.progresses.length;i++){
       if (this.progresses[i].contentTask == stage){
         result = (i+1)*100/this.progresses.length
       }
