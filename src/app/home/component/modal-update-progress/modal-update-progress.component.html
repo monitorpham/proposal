@@ -15,27 +15,27 @@
                     [collapseAnimationTiming]="contentAnimation ? '100ms ease' : '0ms'">
                     <div  class="row entrie-wrapper">
                         <div class="row input-item">
-                            <div class="col-md-3">
-                                <label class="item-label">Approval date:</label>
+                            <div class="col-md-4">
+                                <label class="item-label">Ngày phê duyệt:</label>
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-md-8">
                                 <input class="form-control inp" type="text" id="endDate" bsDatepicker
                                     [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY'}" [(ngModel)]="entry.timeEnd">
                             </div>
                         </div>
                         <div class="row input-item">
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <label class="item-label">Perform by:</label>
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-md-8">
                                 <input class="form-control inp" type="text" [value]="entry.performBy" disabled>
                             </div>
                         </div>
                         <div class="row input-item">
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <label class="item-label">Note:</label>
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-md-8">
                                 <textarea class="form-control inp" [(ngModel)]="entry.note"></textarea>
                             </div>
                         </div>

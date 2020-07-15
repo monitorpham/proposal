@@ -8,34 +8,37 @@
     <div class="row modal-wrapper">
       <div class="row row-item">
         <div class="col-md-6">
-          <label class="item-label" for="propoent">Number of extra day <span class="text-danger">*</span></label>
+          <label class="item-label" for="propoent">Thêm ngày xử lý <span class="text-danger">*</span></label>
           <input class="form-control" type="number" name="" id="proponent" [(ngModel)]="proposalForm.additionalDate">
         </div>
         <div class="col-md-6">
-          <label class="item-label" for="register-date">Register date <span class="text-danger">*</span></label>
+          <label class="item-label" for="register-date">Ngày đề nghị <span class="text-danger">*</span></label>
           <input class="form-control" id="register-date" bsDatepicker [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY'}" [(ngModel)]="proposalForm.startDate">
         </div>
       </div>
       
       <div class="row row-item" >
         <div class="col-md-6">
-          <label class="item-label">Part <span class="text-danger">*</span></label>
+          <label class="item-label">Khoa đề nghị <span class="text-danger">*</span></label>
           <ng-select class="ng-slect" [items]="departments" bindLabel="hospitalDepartmentName" placeholder="Select department"
             appendTo="body" [(ngModel)]="selectedDepartment">
           </ng-select>
         </div>
         <div class="col-md-6">
-          <label class="item-label" for="propoent">Asignee <span class="text-danger">*</span></label>
-          <input class="form-control" type="text" name="" id="proponent" [(ngModel)]="proposalForm.userExtraId">
-        </div>
+          <label class="item-label" for="propoent">Người nhận đề nghị <span class="text-danger">*</span></label>
+          <!-- <input class="form-control" type="text" name="" id="proponent" [(ngModel)]="proposalForm.userExtraId"> -->
+          <ng-select class="ng-slect" [items]="users" bindLabel="name" placeholder="Select user"
+            appendTo="body" [(ngModel)]="selectedUser">
+          </ng-select>
+        </div>     
+      </div>
+      <div class="row row-item" style="padding-left: 15px; padding-right: 15px;">
+        <label class="item-label">Nội dung đề nghị <span class="text-danger">*</span></label>
+        <input class="form-control" [(ngModel)]="proposalForm.contentProposal">
       </div>
       <div class="row row-item" style="padding-left: 15px; padding-right: 15px;">
         <label class="item-label">Note <span class="text-danger">*</span></label>
-        <input class="form-control" [(ngModel)]="proposalForm.note">
-      </div>
-      <div class="row row-item" style="padding-left: 15px; padding-right: 15px;">
-        <label class="item-label">Content <span class="text-danger">*</span></label>
-        <textarea class="form-control" [(ngModel)]="proposalForm.contentProposal"></textarea>
+        <textarea class="form-control" [(ngModel)]="proposalForm.note"></textarea>
       </div>
     </div>
   </div>

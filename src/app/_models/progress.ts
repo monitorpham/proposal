@@ -7,6 +7,7 @@ export class Progress {
         this.endDate = endDate
         this.performBy = performBy
         this.progress = progress
+        this.note = note
     }
 
     "id": string;
@@ -14,5 +15,6 @@ export class Progress {
     "endDate": null;
     "performBy": string;
     "progress": string;
+    "note": string
     
 }

@@ -19,39 +19,43 @@
 
 export interface IUser {
   id?: any;
-  login?: string;
-  firstName?: string;
-  lastName?: string;
-  email?: string;
+  login?: String;
+  firstName?: String;
+  lastName?: String;
+  email?: String;
   activated?: boolean;
-  langKey?: string;
-  authorities?: string[];
-  createdBy?: string;
+  langKey?: String;
+  authorities?: String[];
+  createdBy?: String;
   createdDate?: Date;
-  lastModifiedBy?: string;
+  lastModifiedBy?: String;
   lastModifiedDate?: Date;
-  password?: string;
+  password?: String;
   group?: any;
-  key?: any
+  key?: any;
+  assign?: String;
+  assignId?: any
 }
 
 export class User implements IUser {
   constructor(
     public id?: any,
-    public login?: string,
-    public firstName?: string,
-    public lastName?: string,
-    public email?: string,
+    public login?: String,
+    public firstName?: String,
+    public lastName?: String,
+    public email?: String,
     public activated?: boolean,
-    public langKey?: string,
-    public authorities?: string[],
-    public createdBy?: string,
+    public langKey?: String,
+    public authorities?: String[],
+    public createdBy?: String,
     public createdDate?: Date,
-    public lastModifiedBy?: string,
+    public lastModifiedBy?: String,
     public lastModifiedDate?: Date,
-    public password?: string,
+    public password?: String,
     public group?: any,
-    public key?: any
+    public key?: any,
+    public assign?: String,
+    public assignId?: any
   ) { }
 
   // public convertDate(dateString: String) {

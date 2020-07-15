@@ -1,58 +1,60 @@
 <div class="contains">
     <div class="row control-block">
-        <span>
-            All Proposals
+        <span  class="col-md-7 offset-md-4">
+            THEO DÕI ĐỀ NGHỊ CÁC KHOA
         </span>
 
-        <button *ngIf="isAdmin" class="btn btn-outline-primary btn-sm" (click)="OpenCreateProposalModal()">Create</button>
+        <button *ngIf="isAdmin" class="btn btn-primary btn-sm" (click)="OpenCreateProposalModal()">Tạo đề nghị</button>
     </div>
     <div class="row content-block table-responsive text-nowrap">
         <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover table ">
             <thead>
                 <tr>
-                    <th>Registerd By</th>
+                    <!-- <th>Registerd By</th> -->
+                    <th>#</th>
+                    <th>Khoa</th>
+                    <th>Ngày đề nghị</th>
+                    <th>Ngày kết thúc</th>
+                    <th>Deadline</th>
+                    <th>Người thực hiện</th>
+                    <th>Tổ</th>
+                    <th style="width:10%">Nội dung đề nghị</th>
                     <th>Note</th>
-                    <th>Content</th>
-                    <th>Group</th>
-                    <th>Team</th>
-                    <th>Asignee</th>
-                    <th>Start Date</th>
-                    <th>End Date</th>
-                    <th>Remaining Date</th>
-                    <th>Extra Day</th>
-                    <th>Dateline</th>
-                    <th>Status</th>
-                    <th>Current Stage</th>
+                    <th>Tiến trình hiện tại</th>
+                    <th>Ngày tồn</th>
+                    <th>Ngày thêm</th>
+                    <!-- <th>Status</th> -->
                     <th style="text-align: center;">Action</th>
                 </tr>
                 
             </thead>
             <tbody>
                 <tr  *ngFor="let proposal of proposals, index as i">
-                    <td [ngClass]="{'proposal-false': proposal.status !== true, 'proposal-true' : proposal.status == true, 'proposal-new': proposal.currentProgressName == 'Tạo mới' }"> Admin</td>
-                    <td  [ngClass]="{'proposal-false': proposal.status !== true, 'proposal-true' : proposal.status == true, 'proposal-new': proposal.currentProgressName == 'Tạo mới' }" >{{proposal.note}}</td>
-                    <td  [ngClass]="{'proposal-false': proposal.status !== true, 'proposal-true' : proposal.status == true, 'proposal-new': proposal.currentProgressName == 'Tạo mới' }">{{proposal.contentProposal}}</td>
+                    <!-- <td [ngClass]="{'proposal-false': proposal.status !== true, 'proposal-true' : proposal.status == true, 'proposal-new': proposal.currentProgressName == 'Tạo mới' }"> Admin</td> -->
+                    <td  [ngClass]="{'proposal-false': proposal.status !== true, 'proposal-true' : proposal.status == true, 'proposal-new': proposal.currentProgressName == 'Tạo mới' }">{{proposal.id}}</td>
                     <td  [ngClass]="{'proposal-false': proposal.status !== true, 'proposal-true' : proposal.status == true, 'proposal-new': proposal.currentProgressName == 'Tạo mới' }">{{proposal.hospitalDepartment}}</td>
-                    <td  [ngClass]="{'proposal-false': proposal.status !== true, 'proposal-true' : proposal.status == true, 'proposal-new': proposal.currentProgressName == 'Tạo mới' }">{{proposal.Group}}</td>
-                    <td  [ngClass]="{'proposal-false': proposal.status !== true, 'proposal-true' : proposal.status == true, 'proposal-new': proposal.currentProgressName == 'Tạo mới' }">{{proposal.asignee}}</td>
                     <td  [ngClass]="{'proposal-false': proposal.status !== true, 'proposal-true' : proposal.status == true, 'proposal-new': proposal.currentProgressName == 'Tạo mới' }">{{proposal.startDate}}</td>
                     <td  [ngClass]="{'proposal-false': proposal.status !== true, 'proposal-true' : proposal.status == true, 'proposal-new': proposal.currentProgressName == 'Tạo mới' }">{{proposal.endDate}}</td>
-                    <td  [ngClass]="{'proposal-false': proposal.status !== true, 'proposal-true' : proposal.status == true, 'proposal-new': proposal.currentProgressName == 'Tạo mới' }"> {{proposal.remainingDate}}</td>
-                    <td  [ngClass]="{'proposal-false': proposal.status !== true, 'proposal-true' : proposal.status == true, 'proposal-new': proposal.currentProgressName == 'Tạo mới' }">{{proposal.additionalDate}}</td>
                     <td  [ngClass]="{'proposal-false': proposal.status !== true, 'proposal-true' : proposal.status == true, 'proposal-new': proposal.currentProgressName == 'Tạo mới' }">{{proposal.deadLine}}</td>
-                    <td  [ngClass]="{'proposal-false': proposal.status !== true, 'proposal-true' : proposal.status == true, 'proposal-new': proposal.currentProgressName == 'Tạo mới' }" >{{proposal.status}}</td>
+                    <td  [ngClass]="{'proposal-false': proposal.status !== true, 'proposal-true' : proposal.status == true, 'proposal-new': proposal.currentProgressName == 'Tạo mới' }">{{proposal.asignee}}</td>
+                    <td  [ngClass]="{'proposal-false': proposal.status !== true, 'proposal-true' : proposal.status == true, 'proposal-new': proposal.currentProgressName == 'Tạo mới' }">{{proposal.Group}}</td>
+                    <td  [ngClass]="{'proposal-false': proposal.status !== true, 'proposal-true' : proposal.status == true, 'proposal-new': proposal.currentProgressName == 'Tạo mới' }">{{proposal.contentProposal}}</td>
+                    <td  [ngClass]="{'proposal-false': proposal.status !== true, 'proposal-true' : proposal.status == true, 'proposal-new': proposal.currentProgressName == 'Tạo mới' }" >{{proposal.note}}</td>
                     <td  [ngClass]="{'proposal-false': proposal.status !== true, 'proposal-true' : proposal.status == true, 'proposal-new': proposal.currentProgressName == 'Tạo mới' }">
                         <span class="stage-title">{{proposal.currentProgressName}}</span>
-                        <div class="progress-bar">
-                            <div class="progress-bar-inner" [style.width] = "getProgressBarWidth(proposal.currentProgressName) + 'px'"></div>
+                        <div [ngClass]="{'progress-bar-false': proposal.status !== true, 'progress-bar-true' : proposal.status == true }">
+                            <div [ngClass]="{'progress-bar-inner-false': proposal.status !== true, 'progress-bar-inner-true' : proposal.status == true }" [style.width] = "getProgressBarWidth(proposal.currentProgressName) + '%'"></div>
                         </div>
-                    </td>
+                    </td>                                
+                    <td  [ngClass]="{'proposal-false': proposal.status !== true, 'proposal-true' : proposal.status == true, 'proposal-new': proposal.currentProgressName == 'Tạo mới' }"> {{proposal.remainingDate}}</td>
+                    <td  [ngClass]="{'proposal-false': proposal.status !== true, 'proposal-true' : proposal.status == true, 'proposal-new': proposal.currentProgressName == 'Tạo mới' }">{{proposal.additionalDate}}</td>              
+                    <!-- <td  [ngClass]="{'proposal-false': proposal.status !== true, 'proposal-true' : proposal.status == true, 'proposal-new': proposal.currentProgressName == 'Tạo mới' }" >{{proposal.status}}</td> -->                   
                     <td  [ngClass]="{'proposal-false': proposal.status !== true, 'proposal-true' : proposal.status == true, 'proposal-new': proposal.currentProgressName == 'Tạo mới' }">
                         <div class="table-actions">
-                            <button *ngIf="(!isAdmin || proposal.asigneeId == 3)" class="btn btn-outline-primary btn-sm btn-custom" (click)="OpenUpdateProgressModal(proposal)">Update  </button>
-                            <button class="btn btn-outline-primary btn-sm btn-custom" (click)="OpenViewProgressModal(proposal)">View </button>
-                            <button *ngIf="isAdmin" class="btn btn-outline-primary btn-sm btn-custom" (click)="openExtendProposalModal(proposal)" > Edit </button> 
-                            <button *ngIf="isAdmin" class="btn btn-outline-danger btn-sm btn-custom" (click)="openDeleteProposalModal(proposal)" > Delete</button> 
+                            <button *ngIf="(!isAdmin || proposal.asigneeId == 3)" class="btn btn-primary btn-sm btn-custom" (click)="OpenUpdateProgressModal(proposal)">Update  </button>
+                            <button class="btn btn-primary btn-sm btn-custom" (click)="OpenViewProgressModal(proposal)">View </button>
+                            <button *ngIf="isAdmin" class="btn btn-primary btn-sm btn-custom" (click)="openExtendProposalModal(proposal)" > Edit </button> 
+                            <button *ngIf="isAdmin" class="btn btn-danger btn-sm btn-custom" (click)="openDeleteProposalModal(proposal)" > Delete</button> 
                         </div>
                     </td>
                 </tr>
