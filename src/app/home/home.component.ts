@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Proposal } from '../_models/proposal';
 import { AccountService } from '../_services/account.service';
 import { ProposalService } from '../_services/proposal.service';
@@ -12,21 +12,23 @@ import { Router } from '@angular/router';
 import { User } from '../_models/user';
 import { ModalExtendComponent } from './component/modal-extend/modal-extend.component';
 import { ProgressService } from '../_services/progress.service';
+declare var $: JQueryStatic;
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, AfterViewInit {
 
   proposals: Proposal[] = [];
   currentUser: User;
-  isUser:Boolean =  false;
-  isAdmin:Boolean =  false;
+  isUser: Boolean = false;
+  isAdmin: Boolean = false;
   dtOptions: DataTables.Settings = {};
   dtTrigger = new Subject();
   progresses: any
+  scrollHeight: string;
 
   constructor(
     private accountService: AccountService,
@@ -37,27 +39,59 @@ export class HomeComponent implements OnInit {
     private router: Router,
   ) {
   }
+  ngAfterViewInit(): void {
+    // throw new Error("Method not implemented.");
+    //   $(document).ready(function() {
+    //     var table = $('#example').removeAttr('width').DataTable( {
+    //         scrollY:        "300px",
+    //         scrollX:        true,
+    //         scrollCollapse: true,
+    //         paging:         false,
+    //         columnDefs: [
+    //             null,
+    //             null,
+    //             null,
+    //             null,
+    //             null,
+    //             null,
+    //             null,
+    //             { width: "200", targets: 0 },
+    //             { width: "200", targets: 0 },
+    //             null,
+    //             null,
+    //             null,
+    //             null
+    //         ]
+    //     } );
+    // } );
+  }
 
   ngOnInit() {
-    this.progressService.getAllProgresses().subscribe(res =>{
+    this.progressService.getAllProgresses().subscribe(res => {
       this.progresses = res
     })
 
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 25
+      pageLength: 25,
+      columnDefs: [
+        { width: "25%", targets: 7 },
+        { width: "25%", targets: 8 },
+      ]
     };
     this.loadData()
+    // document.getElementById("notee").style.height = document.getElementById("notee").scrollHeight.toString() + 'px'
   }
 
+
   loadData() {
-    this.accountService.fetch().subscribe(res =>{
+    this.accountService.fetch().subscribe(res => {
       this.currentUser = res
       console.log(this.currentUser)
-      if(this.currentUser.authorities.includes("ROLE_USER")){
+      if (this.currentUser.authorities.includes("ROLE_USER")) {
         this.isUser = true
       }
-      if(this.currentUser.authorities.includes("ROLE_ADMIN")){
+      if (this.currentUser.authorities.includes("ROLE_ADMIN")) {
         this.isAdmin = true
       }
       console.log(this.isAdmin)
@@ -81,7 +115,7 @@ export class HomeComponent implements OnInit {
         proposal.deadLine = proposal.convertDate(item.deadLine)
         proposal.status = item.proposal.status
         proposal.asignee = item.proposal.userExtra.user.firstName
-        proposal.asigneeId =  item.proposal.userExtra.user.id
+        proposal.asigneeId = item.proposal.userExtra.user.id
         return proposal
       }, err => {
         console.log(err)
@@ -145,7 +179,7 @@ export class HomeComponent implements OnInit {
     this.bsModalRef = this.modalService.show(ModalViewProgressComponent, { initialState, class: "modal-lg" });
   }
 
-  openExtendProposalModal(proposal){
+  openExtendProposalModal(proposal) {
     const initialState = {
       proposal: proposal,
     };
@@ -158,15 +192,19 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/home']);
   }
 
-  getProgressBarWidth(stage){
+  getProgressBarWidth(stage) {
     let result = 0
-    for(let i=1; i< this.progresses.length;i++){
-      if (this.progresses[i].contentTask == stage){
-        result = (i+1)*100/this.progresses.length
+    for (let i = 1; i < this.progresses.length; i++) {
+      if (this.progresses[i].contentTask == stage) {
+        result = (i + 1) * 100 / this.progresses.length
       }
     }
     // debugger;
     return Math.floor(result)
   }
+
+  // getHeight(){
+  //   return  document.getElementById("notee").scrollHeight.toString() + 'px'
+  // }
 
 }

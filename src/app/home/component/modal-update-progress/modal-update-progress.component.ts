@@ -29,6 +29,7 @@ export class ModalUpdateProgressComponent implements OnInit {
   dotAnimation: boolean = true;
   side = 'left';
   entries: Progress[] = []
+  tempEntries : Progress[] = [];
   constructor(
     private bsModalRef: BsModalRef,
     private bsModalRef2: BsModalRef,
@@ -52,6 +53,8 @@ export class ModalUpdateProgressComponent implements OnInit {
         output.timeEnd = this.commonService.toDDMMYYYY(output.timeEnd)
         return output
       })
+      this.tempEntries = this.entries
+      this.entries.splice(0,1)
       console.log("entries: ")
       console.log(this.entries)
     })
@@ -79,26 +82,14 @@ export class ModalUpdateProgressComponent implements OnInit {
     this.side = this.side === 'left' ? 'right' : 'left';
   }
 
-  // onSave(){
-
-  //   this.bsModalRef.hide()
-  // }
 
   onCancel() {
     this.bsModalRef.hide()
   }
 
-  // openCompleteProgressModal(progress){
-  // const initialState = {
-  //   progress: progress,
-
-  // };
-  // this.bsModalRef2 = this.modalService.show(ModalCompleteProgressComponent, {initialState})
-  // this.bsModalRef2.content.progress = progress
-  // }
 
   saveProgress(index) {
-    let formData: any = this.entries
+    let formData: any = this.tempEntries
     console.log(this.entries)
     console.log(formData)
 
@@ -121,12 +112,10 @@ export class ModalUpdateProgressComponent implements OnInit {
   }
 
   validateForm(formData, index) {
-
     let result = true;
     for (let i = 1; i < formData.length; i++) {
       for (let j = 0; j < i; j++) {
         if (formData[i].timeEnd && formData[j].timeEnd) {
-          // debugger;
           if (this.commonService.dateStringToTime(formData[i].timeEnd) < this.commonService.dateStringToTime(formData[j].timeEnd)) {
             result = false;
             break;

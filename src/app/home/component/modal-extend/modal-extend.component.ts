@@ -20,7 +20,7 @@ import { UserService } from 'src/app/_services/user.service';
 })
 export class ModalExtendComponent implements OnInit {
   users: User[] = [];
-  selectedUser: User;
+  selectedUser: any;
   proposal: Proposal
   departments: HospitalDepartment[] = []
   selectedDepartment: HospitalDepartment;
@@ -33,8 +33,6 @@ export class ModalExtendComponent implements OnInit {
     "note": null,
     "startDate": null,
     "userExtraId": null,
-    "status": null,
-    "endDate":null
   }
 
   constructor(
@@ -45,8 +43,7 @@ export class ModalExtendComponent implements OnInit {
     private toastr : ToastrService,
     private router: Router,
     private userService: UserService,
-    private formBuilder: FormBuilder){ 
-      
+    private formBuilder: FormBuilder){
     }
 
 
@@ -76,14 +73,14 @@ export class ModalExtendComponent implements OnInit {
 
   initForm(){
     this.selectedDepartment = new HospitalDepartment(this.proposal.hospitalDepartmentId, this.proposal.hospitalDepartment)
-    this.selectedUser = new User(this.proposal.asigneeId, this.proposal.asignee)
-    this.proposalForm.hospitalDepartmentId = this.selectedDepartment.id
-    this.proposalForm.contentProposal = this.proposal.contentProposal
-    this.proposalForm.note = this.proposal.note
-    this.proposalForm.id = this.proposal.id
-    this.proposalForm.startDate =  this.proposal.startDate
-    this.proposalForm.additionalDate = this.proposal.additionalDate
-    this.proposalForm.userExtraId = this.selectedUser.id
+    this.selectedUser = {id : this.proposal.asigneeId, name: this.proposal.asigneeId + '-' + this.proposal.asignee}
+    this.proposalForm.hospitalDepartmentId = this.selectedDepartment.id //
+    this.proposalForm.contentProposal = this.proposal.contentProposal //
+    this.proposalForm.note = this.proposal.note //
+    this.proposalForm.id = this.proposal.id //
+    this.proposalForm.startDate =  this.proposal.startDate //
+    this.proposalForm.additionalDate = this.proposal.additionalDate //
+    this.proposalForm.userExtraId = this.selectedUser.id //
     this.proposalForm.status = this.proposal.status
     this.proposalForm.endDate = this.proposal.endDate
   }
