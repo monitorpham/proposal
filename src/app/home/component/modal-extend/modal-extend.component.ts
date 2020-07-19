@@ -33,7 +33,8 @@ export class ModalExtendComponent implements OnInit {
     "note": null,
     "startDate": null,
     "userExtraId": null,
-    "status": null
+    "status": null,
+    "endDate":null
   }
 
   constructor(
@@ -84,6 +85,7 @@ export class ModalExtendComponent implements OnInit {
     this.proposalForm.additionalDate = this.proposal.additionalDate
     this.proposalForm.userExtraId = this.selectedUser.id
     this.proposalForm.status = this.proposal.status
+    this.proposalForm.endDate = this.proposal.endDate
   }
 
   onSave(){
