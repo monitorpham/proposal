@@ -26,6 +26,18 @@
     /* overflow: auto; */
 }
 
+.custom-cell{
+    word-break: break-all;
+    white-space: normal;
+
+}
+
+
+.proposal-content-cell{
+    width: 200px !important;
+    word-break: break-all;
+}
+
 .table-actions{
     display: flex;
     justify-content: start;

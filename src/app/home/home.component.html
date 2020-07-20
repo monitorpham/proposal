@@ -7,7 +7,7 @@
         <button *ngIf="isAdmin" class="btn btn-primary btn-sm" (click)="OpenCreateProposalModal()">Tạo đề nghị</button>
     </div>
     <div class="row content-block table-responsive text-nowrap">
-        <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover table ">
+        <table id="example" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border cell-border hover table ">
             <thead>
                 <tr>
                     <!-- <th>Registerd By</th> -->
@@ -18,7 +18,7 @@
                     <th>Deadline</th>
                     <th>Người thực hiện</th>
                     <th>Tổ</th>
-                    <th style="width:10%">Nội dung đề nghị</th>
+                    <th class="proposal-content-th">Nội dung đề nghị</th>
                     <th>Note</th>
                     <th>Tiến trình hiện tại</th>
                     <th>Ngày tồn</th>
@@ -38,9 +38,9 @@
                     <td  [ngClass]="{'proposal-false': proposal.status !== true, 'proposal-true' : proposal.status == true, 'proposal-new': proposal.currentProgressName == 'Tạo mới' }">{{proposal.deadLine}}</td>
                     <td  [ngClass]="{'proposal-false': proposal.status !== true, 'proposal-true' : proposal.status == true, 'proposal-new': proposal.currentProgressName == 'Tạo mới' }">{{proposal.asignee}}</td>
                     <td  [ngClass]="{'proposal-false': proposal.status !== true, 'proposal-true' : proposal.status == true, 'proposal-new': proposal.currentProgressName == 'Tạo mới' }">{{proposal.Group}}</td>
-                    <td  [ngClass]="{'proposal-false': proposal.status !== true, 'proposal-true' : proposal.status == true, 'proposal-new': proposal.currentProgressName == 'Tạo mới' }">{{proposal.contentProposal}}</td>
-                    <td  [ngClass]="{'proposal-false': proposal.status !== true, 'proposal-true' : proposal.status == true, 'proposal-new': proposal.currentProgressName == 'Tạo mới' }" >{{proposal.note}}</td>
-                    <td  [ngClass]="{'proposal-false': proposal.status !== true, 'proposal-true' : proposal.status == true, 'proposal-new': proposal.currentProgressName == 'Tạo mới' }">
+                    <td class="custom-cell" [ngClass]="{'proposal-false': proposal.status !== true, 'proposal-true' : proposal.status == true, 'proposal-new': proposal.currentProgressName == 'Tạo mới' }">{{proposal.contentProposal}}</td>
+                    <td class="custom-cell"  [ngClass]="{'proposal-false': proposal.status !== true, 'proposal-true' : proposal.status == true, 'proposal-new': proposal.currentProgressName == 'Tạo mới' }" >{{proposal.note}}</td>
+                    <td id = "notee" [ngClass]="{'proposal-false': proposal.status !== true, 'proposal-true' : proposal.status == true, 'proposal-new': proposal.currentProgressName == 'Tạo mới' }">
                         <span class="stage-title">{{proposal.currentProgressName}}</span>
                         <div [ngClass]="{'progress-bar-false': proposal.status !== true, 'progress-bar-true' : proposal.status == true }">
                             <div [ngClass]="{'progress-bar-inner-false': proposal.status !== true, 'progress-bar-inner-true' : proposal.status == true }" [style.width] = "getProgressBarWidth(proposal.currentProgressName) + '%'"></div>
