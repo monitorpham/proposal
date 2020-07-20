@@ -29,7 +29,7 @@ export class ModalUpdateProgressComponent implements OnInit {
   dotAnimation: boolean = true;
   side = 'left';
   entries: Progress[] = []
-  tempEntries : Progress[] = [];
+  tempEntries: Progress[] = [];
   constructor(
     private bsModalRef: BsModalRef,
     private bsModalRef2: BsModalRef,
@@ -48,15 +48,15 @@ export class ModalUpdateProgressComponent implements OnInit {
 
   initData() {
     this.proposalService.getProgressesByProposalId(this.proposal.id).subscribe(res => {
-      this.entries = res.map(item => {
+      this.tempEntries = res.map(item => {
         let output = item
         output.timeEnd = this.commonService.toDDMMYYYY(output.timeEnd)
         return output
       })
-      this.tempEntries = this.entries
-      this.entries.splice(0,1)
-      console.log("entries: ")
-      console.log(this.entries)
+      for (let i = 1; i < this.tempEntries.length; i++) {
+        this.entries.push(this.tempEntries[i])
+      }
+      // debugger;
     })
   }
 
@@ -89,17 +89,24 @@ export class ModalUpdateProgressComponent implements OnInit {
 
 
   saveProgress(index) {
-    let formData: any = this.tempEntries
-    console.log(this.entries)
-    console.log(formData)
+    let formData: any[] = []
+    formData.push(this.tempEntries[0])
+    for (let temp = 0; temp < this.entries.length; temp++) {
+      formData.push(this.entries[temp])
+    }
+
+    // console.log(formData)
+    // debugger;
 
     for (let i = 0; i < formData.length; i++) {
       formData[i].timeEnd = this.commonService.DDMMYYYYtoIsoString(formData[i].timeEnd)
     }
-    console.log(formData)
+    // console.log(formData)
 
     if (!this.validateForm(formData, index)) {
       this.toastr.warning("Invalid date input. Make sure the approval date of a stage is not sooner than the previous stage.")
+      // this.initData()
+      window.location.reload() 
     } else {
       this.progressService.updateProgress(formData, this.proposal.id).subscribe(res => {
         this.toastr.success("Update progress successfully!")

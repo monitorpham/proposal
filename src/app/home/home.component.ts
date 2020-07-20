@@ -19,7 +19,7 @@ declare var $: JQueryStatic;
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit, AfterViewInit {
+export class HomeComponent implements OnInit{
 
   proposals: Proposal[] = [];
   currentUser: User;
@@ -38,32 +38,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
     private progressService: ProgressService,
     private router: Router,
   ) {
-  }
-  ngAfterViewInit(): void {
-    // throw new Error("Method not implemented.");
-    //   $(document).ready(function() {
-    //     var table = $('#example').removeAttr('width').DataTable( {
-    //         scrollY:        "300px",
-    //         scrollX:        true,
-    //         scrollCollapse: true,
-    //         paging:         false,
-    //         columnDefs: [
-    //             null,
-    //             null,
-    //             null,
-    //             null,
-    //             null,
-    //             null,
-    //             null,
-    //             { width: "200", targets: 0 },
-    //             { width: "200", targets: 0 },
-    //             null,
-    //             null,
-    //             null,
-    //             null
-    //         ]
-    //     } );
-    // } );
   }
 
   ngOnInit() {
