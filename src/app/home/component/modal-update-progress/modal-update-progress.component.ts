@@ -105,8 +105,10 @@ export class ModalUpdateProgressComponent implements OnInit {
 
     if (!this.validateForm(formData, index)) {
       this.toastr.warning("Invalid date input. Make sure the approval date of a stage is not sooner than the previous stage.")
-      // this.initData()
-      window.location.reload() 
+      this.initData()
+      this.refresh();
+      this.bsModalRef.hide()
+      // window.location.reload() 
     } else {
       this.progressService.updateProgress(formData, this.proposal.id).subscribe(res => {
         this.toastr.success("Update progress successfully!")
