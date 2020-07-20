@@ -115,8 +115,7 @@ export class ModalCreateProposalComponent implements OnInit {
 
   validateForm(){
     if(this.proposalForm.contentProposal == null || this.proposalForm.hospitalDepartmentId == null ||
-      this.proposalForm.note == null || this.proposalForm.startDate == null || 
-      this.proposalForm.additionalDate == null|| this.proposalForm.userExtraId == null){
+      this.proposalForm.startDate == null || this.proposalForm.additionalDate == null|| this.proposalForm.userExtraId == null){
         return false
       }
       return true
