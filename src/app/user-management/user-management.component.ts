@@ -96,8 +96,13 @@ refresh(){
 }
 
   setActive(user: User, isActivated: boolean): void{
-    this.userService.update({...user, activated: isActivated }).subscribe(() => this.users);
-    this.refresh();
+    this.userService.update({...user, activated: isActivated }).subscribe(
+      () => {
+        this.users
+        this.refresh();
+      }   
+    );
+    
   }
   
   OpenCreateUserModal() {
