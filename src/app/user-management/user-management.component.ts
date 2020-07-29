@@ -58,7 +58,7 @@ export class UserManagementComponent implements OnDestroy,OnInit {
     });
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 10
+      pageLength: 25
     };
     this.loadData();
     // console.log(this.loadData())

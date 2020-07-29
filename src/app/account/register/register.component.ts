@@ -2,6 +2,7 @@ import { Component, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 import { RegisterService } from '../../_services/register.service'
 
@@ -19,6 +20,7 @@ export class RegisterComponent implements AfterViewInit {
   errorEmailExists = false;
   errorUserExists = false;
   success = false;
+  
 
   registerForm = this.fb.group({
     key: ['',[Validators.required]],
@@ -26,7 +28,11 @@ export class RegisterComponent implements AfterViewInit {
     confirmPassword: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(50)]],
   });
 
-  constructor( private registerService: RegisterService, private fb: FormBuilder,private router: Router) { }
+  constructor( private registerService: RegisterService, 
+                private fb: FormBuilder,
+                private router: Router,
+                private toastr : ToastrService,
+                ) { }
 
   ngAfterViewInit(): void {
     if (this.login) {
@@ -44,6 +50,7 @@ export class RegisterComponent implements AfterViewInit {
     if (password !== this.registerForm.get(['confirmPassword'])!.value) {
       this.doNotMatch = true;
     } else {
+      this.success = true;
       const key = this.registerForm.get(['key'])!.value;
       this.registerService.saveRegister( key, password).subscribe(
         () => (this.onSaveSuccess),
@@ -54,6 +61,7 @@ export class RegisterComponent implements AfterViewInit {
 
   private onSaveSuccess(): void {
     this.success = true;
+    // this.toastr.success("Create proposal successfully!");
     this.router.navigate(['/login']);
   }
 
