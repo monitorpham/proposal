@@ -32,8 +32,18 @@
     width: 300px;
 }
 
+.custom-cell-note{
+    // word-break: break-all;
+    white-space: normal;
+    width: 182px;
+}
+
 .proposal-content-th{
     width: 300px;
+}
+
+.proposal-note-th{
+    width: 182px;
 }
 
 .proposal-content-cell{
