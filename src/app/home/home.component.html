@@ -14,13 +14,15 @@
                     <th>#</th>
                     <th>Khoa</th>
                     <th>Ngày đề nghị</th>
-                    <th>Ngày kết thúc</th>
-                    <th>Deadline</th>
-                    <th>Người thực hiện</th>
+                    <th class="proposal-content-th">Nội dung đề nghị</th>
+                    <!-- <th>Ngày kết thúc</th>
+                    <th>Deadline</th> -->
                     <th>Tổ</th>
-                    <th class="proposal-content-th">&nbsp;&nbsp;&nbsp;&nbsp;Nội dung đề nghị&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                    <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Note&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                    <th>Người thực hiện</th>
+                    <!-- <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Note&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th> -->
                     <th>Tiến trình hiện tại</th>
+                    <th>Ngày cập nhật</th>
+                    <th>Ghi chú</th>
                     <th>Ngày tồn</th>
                     <th>Ngày thêm</th>
                     <!-- <th>Status</th> -->
@@ -34,18 +36,20 @@
                     <td  [ngClass]="{'proposal-false': proposal.status !== true, 'proposal-true' : proposal.status == true, 'proposal-new': proposal.currentProgressName == 'Tạo mới' }">{{proposal.id}}</td>
                     <td  [ngClass]="{'proposal-false': proposal.status !== true, 'proposal-true' : proposal.status == true, 'proposal-new': proposal.currentProgressName == 'Tạo mới' }">{{proposal.hospitalDepartment}}</td>
                     <td  [ngClass]="{'proposal-false': proposal.status !== true, 'proposal-true' : proposal.status == true, 'proposal-new': proposal.currentProgressName == 'Tạo mới' }">{{proposal.startDate}}</td>
-                    <td  [ngClass]="{'proposal-false': proposal.status !== true, 'proposal-true' : proposal.status == true, 'proposal-new': proposal.currentProgressName == 'Tạo mới' }">{{proposal.endDate}}</td>
-                    <td  [ngClass]="{'proposal-false': proposal.status !== true, 'proposal-true' : proposal.status == true, 'proposal-new': proposal.currentProgressName == 'Tạo mới' }">{{proposal.deadLine}}</td>
-                    <td  [ngClass]="{'proposal-false': proposal.status !== true, 'proposal-true' : proposal.status == true, 'proposal-new': proposal.currentProgressName == 'Tạo mới' }">{{proposal.asignee}}</td>
-                    <td  [ngClass]="{'proposal-false': proposal.status !== true, 'proposal-true' : proposal.status == true, 'proposal-new': proposal.currentProgressName == 'Tạo mới' }">{{proposal.Group}}</td>
                     <td class="custom-cell" [ngClass]="{'proposal-false': proposal.status !== true, 'proposal-true' : proposal.status == true, 'proposal-new': proposal.currentProgressName == 'Tạo mới' }">{{proposal.contentProposal}}</td>
-                    <td class="custom-cell"  [ngClass]="{'proposal-false': proposal.status !== true, 'proposal-true' : proposal.status == true, 'proposal-new': proposal.currentProgressName == 'Tạo mới' }" >{{proposal.note}}</td>
+                    <!-- <td  [ngClass]="{'proposal-false': proposal.status !== true, 'proposal-true' : proposal.status == true, 'proposal-new': proposal.currentProgressName == 'Tạo mới' }">{{proposal.endDate}}</td>
+                    <td  [ngClass]="{'proposal-false': proposal.status !== true, 'proposal-true' : proposal.status == true, 'proposal-new': proposal.currentProgressName == 'Tạo mới' }">{{proposal.deadLine}}</td> -->
+                    <td  [ngClass]="{'proposal-false': proposal.status !== true, 'proposal-true' : proposal.status == true, 'proposal-new': proposal.currentProgressName == 'Tạo mới' }">{{proposal.Group}}</td>
+                    <td  [ngClass]="{'proposal-false': proposal.status !== true, 'proposal-true' : proposal.status == true, 'proposal-new': proposal.currentProgressName == 'Tạo mới' }">{{proposal.asignee}}</td>                  
+                    <!-- <td class="custom-cell"  [ngClass]="{'proposal-false': proposal.status !== true, 'proposal-true' : proposal.status == true, 'proposal-new': proposal.currentProgressName == 'Tạo mới' }" >{{proposal.note}}</td> -->
                     <td id = "notee" [ngClass]="{'proposal-false': proposal.status !== true, 'proposal-true' : proposal.status == true, 'proposal-new': proposal.currentProgressName == 'Tạo mới' }">
                         <span class="stage-title">{{proposal.currentProgressName}}</span>
                         <div [ngClass]="{'progress-bar-false': proposal.status !== true, 'progress-bar-true' : proposal.status == true }">
                             <div [ngClass]="{'progress-bar-inner-false': proposal.status !== true, 'progress-bar-inner-true' : proposal.status == true }" [style.width] = "getProgressBarWidth(proposal.currentProgressName) + '%'"></div>
                         </div>
-                    </td>                                
+                    </td>   
+                    <td  [ngClass]="{'proposal-false': proposal.status !== true, 'proposal-true' : proposal.status == true, 'proposal-new': proposal.currentProgressName == 'Tạo mới' }">{{proposal.endDate}}</td>    
+                    <td  [ngClass]="{'proposal-false': proposal.status !== true, 'proposal-true' : proposal.status == true, 'proposal-new': proposal.currentProgressName == 'Tạo mới' }" >{{proposal.note}}</td>                 
                     <td  [ngClass]="{'proposal-false': proposal.status !== true, 'proposal-true' : proposal.status == true, 'proposal-new': proposal.currentProgressName == 'Tạo mới' }"> {{proposal.remainingDate}}</td>
                     <td  [ngClass]="{'proposal-false': proposal.status !== true, 'proposal-true' : proposal.status == true, 'proposal-new': proposal.currentProgressName == 'Tạo mới' }">{{proposal.additionalDate}}</td>              
                     <!-- <td  [ngClass]="{'proposal-false': proposal.status !== true, 'proposal-true' : proposal.status == true, 'proposal-new': proposal.currentProgressName == 'Tạo mới' }" >{{proposal.status}}</td> -->                   
