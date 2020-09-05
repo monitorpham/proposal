@@ -4,7 +4,7 @@
 
 .control-block{
     width: 100%;
-    display: flex;
+    // display: flex;
     justify-content: space-between;
     flex-direction: row;
     font-family: Arial, Helvetica, sans-serif;
@@ -65,8 +65,13 @@
 .lableHome{
     padding-right: 0;
     padding-left: 0;
+    text-align: center;
 }
 
+.buttonCreate{
+    margin: 1% 0;
+    float: right;
+}
 
 /* table css */
 

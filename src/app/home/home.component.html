@@ -1,11 +1,13 @@
 <div class="contains">
-    <div class="row control-block">
-        <span  class="col-md-7 offset-md-4 lableHome">
+    <!-- <div class="row control-block"> -->
+    <div class=" control-block">
+        <!-- <span  class="col-md-7 offset-md-4 lableHome"> -->
+        <div  class="lableHome">
             THEO DÕI ĐỀ NGHỊ CÁC KHOA
-        </span>
-
-        <button *ngIf="isAdmin" class="btn btn-primary btn-sm" (click)="OpenCreateProposalModal()">Tạo đề nghị</button>
+        </div>
     </div>
+        <button *ngIf="isAdmin" class="btn btn-primary btn-sm buttonCreate" (click)="OpenCreateProposalModal()">Tạo đề nghị</button>
+    
     <div class="row content-block table-responsive text-nowrap">
         <table id="example" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border cell-border hover table ">
             <thead>
