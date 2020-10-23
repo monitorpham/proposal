@@ -120,10 +120,17 @@
     width: 30%;
     height: 100%;
     background-color: #14E300;
+    // background-color: #28a745;
 }
 
 .progress-bar-inner-false{
     width: 30%;
     height: 100%;
     background-color: #004C99;
+}
+#example tbody tr:hover td {
+    // background: #FCF54C;
+    // background: rgba(156, 39, 176, 0);
+    // position:absolute;
+    background: rgba(255, 215, 0,0.3);
 }

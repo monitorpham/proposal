@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, ReplaySubject,Observable, of } from 'rxjs';
+import { BehaviorSubject, ReplaySubject, Observable, of } from 'rxjs';
 import { User } from '../_models/user';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
-import { shareReplay,tap, catchError } from 'rxjs/operators';
-import { Account} from '../_models/account'
+import { shareReplay, tap, catchError } from 'rxjs/operators';
+import { Account } from '../_models/account'
 
 @Injectable({
   providedIn: 'root'
@@ -50,12 +50,12 @@ export class AccountService {
   }
 
   fetch(): Observable<Account> {
-    const url =`${environment.apiUrl}/account`
+    const url = `${environment.apiUrl}/account`
     return this.http.get<Account>(url);
   }
 
   saveAcc(account: Account): Observable<{}> {
-    const url =`${environment.apiUrl}/account`
+    const url = `${environment.apiUrl}/account`
     return this.http.post(url, account);
   }
 
