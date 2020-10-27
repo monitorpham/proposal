@@ -38,3 +38,14 @@
     width: 100% !important;
 
 }
+
+footer {
+    display: block; 
+    position:fixed;
+    bottom:0;
+    width:100%;
+    text-align: center;
+    opacity: 0.5;
+  /* Height of the footer */
+    // background:#DDDDDD;
+  }
