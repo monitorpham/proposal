@@ -47,7 +47,7 @@ export class HomeComponent implements OnInit{
 
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 100,
+      pageLength: 500,
       columnDefs: [
         { width: "25%", targets: 7 },
         { width: "25%", targets: 8 },
