@@ -61,18 +61,18 @@ export class HomeComponent implements OnInit{
   loadData() {
     this.accountService.fetch().subscribe(res => {
       this.currentUser = res
-      console.log(this.currentUser)
+      // console.log(this.currentUser)
       if (this.currentUser.authorities.includes("ROLE_USER")) {
         this.isUser = true
       }
       if (this.currentUser.authorities.includes("ROLE_ADMIN")) {
         this.isAdmin = true
       }
-      console.log(this.isAdmin)
+      // console.log(this.isAdmin)
     })
     this.proposalService.getAllProposals().subscribe(res => {
       this.proposals = res.map(item => {
-        console.log(item)
+        // console.log(item)
         // debugger;
         let proposal = new Proposal()
         proposal.id = item.proposal.id
@@ -90,6 +90,15 @@ export class HomeComponent implements OnInit{
         proposal.status = item.proposal.status
         proposal.asignee = item.proposal.userExtra.user.firstName
         proposal.asigneeId = item.proposal.userExtra.user.id
+
+        console.log(proposal.status)
+        if(proposal.status == true){
+          proposal.status = "Hoàn thành"
+        }
+        else if(proposal.status == false) (
+          proposal.status = "Đang xử lý"
+        )
+        console.log(proposal.status)
         return proposal
       }, err => {
         console.log(err)
