@@ -6,21 +6,21 @@
 
 @import "../node_modules/ag-grid-community/src/styles/ag-grid.scss";
 @import "../node_modules/ag-grid-community/src/styles/ag-theme-alpine/sass/ag-theme-alpine-mixin.scss";
-@import '~@angular/material/theming';
-@import '~angular-mgl-timeline/theme';
+@import "~@angular/material/theming";
+@import "~angular-mgl-timeline/theme";
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
 // Be sure that you only ever include this mixin once!
 @include mat-core();
- 
+
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue.
 $candy-app-primary: mat-palette($mat-blue);
-$candy-app-accent:  mat-palette($mat-pink, A200, A100, A400);
+$candy-app-accent: mat-palette($mat-pink, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
-$candy-app-warn:    mat-palette($mat-red);
+$candy-app-warn: mat-palette($mat-red);
 
 // Create the theme object (a Sass map containing all of the palettes).
 $candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-app-warn);
@@ -31,7 +31,8 @@ $candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-
 @include angular-material-theme($candy-app-theme);
 @include mgl-timeline-theme($candy-app-theme);
 
-body, html {
+body,
+html {
   margin: 0;
 }
 
@@ -40,16 +41,15 @@ md-toolbar {
 
   &:not(.mat-primary) {
     & .mat-toolbar-row {
-    flex-wrap: wrap;
-    height: auto;
-    padding: 5px 0;
-  }
+      flex-wrap: wrap;
+      height: auto;
+      padding: 5px 0;
+    }
 
-  & button {
-    margin: 5px !important;
+    & button {
+      margin: 5px !important;
+    }
   }
-}
-  
 }
 
 mgl-timeline:not(.mobile) {
@@ -61,28 +61,46 @@ mgl-timeline.mobile {
 }
 
 .ag-theme-alpine {
-    @include ag-theme-alpine();
+  @include ag-theme-alpine();
 }
-
 
 .dataTables_wrapper {
-    width: 100% !important;
-    font-size: 13px !important;
-
+  width: 100% !important;
+  font-size: 13px !important;
 }
 
-.proposal-true{
-  background-color: #AFFFB0;
+.proposal-true {
+  background-color: #afffb0;
 }
 
-.proposal-false{
-  background-color: #88CFFF;
+.proposal-false {
+  background-color: #88cfff;
 }
 
-.proposal-new{
+.proposal-new {
   background-color: white;
 }
 
+// .modal {
+//   text-align: center;
+// }
 
+// .modal:before {
+//   display: inline-block;
+//   vertical-align: middle;
+//   content: " ";
+//   height: 100%;
+// }
 
-ng-select { .ng-dropdown-panel { width: auto !important; max-width: 550px; } }
+// .modal-dialog {
+//   display: inline-block;
+//   text-align: left;
+//   vertical-align: middle;
+// }
+
+ng-select {
+  .ng-dropdown-panel {
+    width: auto !important;
+    max-width: 550px;
+  }
+}

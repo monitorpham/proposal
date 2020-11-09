@@ -91,14 +91,13 @@ export class HomeComponent implements OnInit{
         proposal.asignee = item.proposal.userExtra.user.firstName
         proposal.asigneeId = item.proposal.userExtra.user.id
 
-        console.log(proposal.status)
         if(proposal.status == true){
           proposal.status = "Hoàn thành"
         }
         else if(proposal.status == false) (
           proposal.status = "Đang xử lý"
         )
-        console.log(proposal.status)
+
         return proposal
       }, err => {
         console.log(err)
