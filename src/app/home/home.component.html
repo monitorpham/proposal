@@ -86,7 +86,7 @@
                         [ngClass]="{'proposal-false': proposal.status !== 'Hoàn thành', 'proposal-true' : proposal.status == 'Hoàn thành', 'proposal-new': proposal.currentProgressName == 'Tạo mới' }">
                         <div class="table-actions">
                             <button
-                                *ngIf="(!isAdmin || proposal.asigneeId == 3|| proposal.asigneeId == 1001|| proposal.asigneeId == 1151|| proposal.asigneeId == 1152)"
+                                *ngIf="(!isAdmin || proposal.asigneeId == 3|| proposal.asigneeId == 151|| proposal.asigneeId == 152|| proposal.asigneeId == 153)"
                                 class="btn btn-primary btn-sm btn-custom"
                                 (click)="OpenUpdateProgressModal(proposal)">Cập nhật </button>
                             <button class="btn btn-primary btn-sm btn-custom"
