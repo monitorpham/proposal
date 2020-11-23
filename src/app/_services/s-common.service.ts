@@ -26,8 +26,8 @@ export class SCommonService {
   public DDMMYYYYtoIsoString(dateString: any){
     // debugger
     if(dateString){
-      console.log(dateString)
-      console.log(typeof dateString)
+      // console.log(dateString)
+      // console.log(typeof dateString)
       if(typeof dateString == 'string'){
         if(dateString.toString().includes('Z')){
           return dateString
