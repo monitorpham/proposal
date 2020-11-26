@@ -8,7 +8,7 @@
     </div>
     <button *ngIf="isAdmin" class="btn btn-primary btn-sm buttonCreate" (click)="OpenCreateProposalModal()">Tạo đề nghị</button>
 
-    <div class="row content-block table-responsive text-nowrap">
+    <div class="row content-block table-responsive">
         <table id="example" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"
             class="row-border cell-border hover table ">
             <thead>
@@ -21,11 +21,11 @@
                     <!-- <th>Ngày kết thúc</th>
                     <th>Deadline</th> -->
                     <th>Tổ</th>
-                    <th>Người thực hiện</th>
+                    <th class="proposal-person-th">Người thực hiện</th>
                     <!-- <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Note&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th> -->
-                    <th>Tiến trình hiện tại</th>
+                    <th class="proposal-progress-th">Tiến trình hiện tại</th>
                     <th class="proposal-update-th">Ngày cập nhật</th>
-                    <th class="proposal-note-th">Ghi chú</th>
+                    <th class="proposal-note-th">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ghi chú&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                     <th>Ngày tồn</th>
                     <th>Ngày thêm</th>
                     <th>Tình trạng</th>
