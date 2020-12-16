@@ -17,15 +17,16 @@ declare var $: JQueryStatic;
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit{
+export class HomeComponent implements OnInit {
 
   proposals: Proposal[] = [];
   currentUser: User;
   isUser: Boolean = false;
   isAdmin: Boolean = false;
-  dtOptions: DataTables.Settings = {};
+  // dtOptions: DataTables.Settings = {};
+  dtOptions: any = {};
   dtTrigger = new Subject();
   progresses: any
   scrollHeight: string;
@@ -39,7 +40,6 @@ export class HomeComponent implements OnInit{
     private router: Router,
   ) {
   }
-
   ngOnInit() {
     this.progressService.getAllProgresses().subscribe(res => {
       this.progresses = res
@@ -51,7 +51,13 @@ export class HomeComponent implements OnInit{
       columnDefs: [
         { width: "25%", targets: 7 },
         { width: "25%", targets: 8 },
-      ]
+      ],
+      processing: true,
+      // Configure the buttons
+      dom: 'Bfrtip',
+      buttons: [
+        'copy', 'excel'
+    ]
     };
     this.loadData()
     // document.getElementById("notee").style.height = document.getElementById("notee").scrollHeight.toString() + 'px'
@@ -91,10 +97,10 @@ export class HomeComponent implements OnInit{
         proposal.asignee = item.proposal.userExtra.user.firstName
         proposal.asigneeId = item.proposal.userExtra.user.id
 
-        if(proposal.status == true){
+        if (proposal.status == true) {
           proposal.status = "Hoàn thành"
         }
-        else if(proposal.status == false) (
+        else if (proposal.status == false) (
           proposal.status = "Đang xử lý"
         )
 
