@@ -1,17 +1,17 @@
 <div class="contains">
     <div class="row control-block">
         <span>
-            Users
+            Tài khoản
         </span>
 
-        <button class="btn btn-outline-primary btn-sm" (click)="OpenCreateUserModal()">Create</button>
+        <button class="btn btn-outline-primary btn-sm" (click)="OpenCreateUserModal()">Tạo mới</button>
     </div>
     <div class="row content-block table-responsive text-nowrap">
         <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border cell-border hover table table-hover ">
             <thead>
                 <tr>
-                    <th>#</th>
-                    <th>Login</th>
+                    <th>STT</th>
+                    <th>Tên đăng nhập</th>
                     <th>First Name</th>
                     <th>Last Name</th>
                     <!-- <th>Email</th> -->
@@ -20,7 +20,7 @@
                     <th>Created Date</th>
                     <th>Last Modified By</th>
                     <th>Last Modified Date</th>
-                    <th style="text-align: center;">Action</th>
+                    <th style="text-align: center;">Thao tác</th>
                     <!-- <th></th> -->
                 </tr>
             </thead>
@@ -42,13 +42,13 @@
                     <td>{{user.lastModifiedDate | date:'dd/MM/yy HH:mm'}}</td>
                     <td>
                         <div class="table-actions">
-                            <button class="btn btn-primary btn-sm" (click)="OpenEditUserModal(user)">Edit</button>
+                            <button class="btn btn-primary btn-sm" (click)="OpenEditUserModal(user)">Sửa</button>
 
                             <button class="btn btn-danger btn-sm" (click)="setActive(user, true)"
-                                *ngIf="!user.activated">Deactivated</button>
+                                *ngIf="!user.activated">Không hoạt động</button>
                             <button class="btn btn-success btn-sm" (click)="setActive(user, false)"
                                 *ngIf="user.activated" [disabled]="!currentAccount || currentAccount.login === user.login"
-                               >Activated</button>
+                               >Hoạt động</button>
                         </div>
                     </td>
                     <!-- <td>

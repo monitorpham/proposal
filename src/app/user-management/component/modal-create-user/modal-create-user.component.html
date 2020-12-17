@@ -10,7 +10,7 @@
 
         <form name="createUserForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="createUserForm">
             <div class="form-group">
-                <label class="form-control-label">Login</label>
+                <label class="form-control-label">Tên đăng nhập</label>
                 <input type="text" class="form-control" name="login" formControlName="login">
                 <div
                     *ngIf="createUserForm.get('login')!.invalid && (createUserForm.get('login')!.dirty || createUserForm.get('login')!.touched)">
@@ -190,8 +190,8 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary btn-sm" (click)="onCancel()">Cancel</button>
-                <button type="submit" class="btn btn-primary btn-sm">Save</button>
+                <button type="button" class="btn btn-secondary btn-sm" (click)="onCancel()">Hủy</button>
+                <button type="submit" class="btn btn-primary btn-sm">Lưu</button>
             </div>   
 
         </form>

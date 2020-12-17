@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand " style="font-weight : bold" routerLink="/home" >Proposal Management</a>
+    <a class="navbar-brand " style="font-weight : bold" routerLink="/home" >Khoa Trang bị - Bệnh viện TWQĐ 108</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -9,20 +9,20 @@
         &nbsp;
         <button type="button" class="btn btn-dark" routerLink="/home" style="text-align: left; width: fit-content;">
           <i class="fa fa-home"></i>
-          Home <span class="sr-only">(current)</span>
+          Trang chủ <span class="sr-only">(current)</span>
         </button>
         &nbsp;
         <button *ngIf="isAdmin" type="button" class="btn btn-dark" routerLink="/user-management"
           style="text-align: left; width: fit-content;">
           <i class="fa fa-user-plus"></i>
-          Administration
+          Quản lý tài khoản
         </button>
         &nbsp;
         <div class="btn-group" style="text-align: left; width: fit-content;">
           <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false">
             <i class="fa fa-user"></i>
-            Account
+            Tài khoản
           </button>
           <div class="dropdown-menu dropdown-menu-right">
             <button class="dropdown-item" type="button" routerLink="/settings">
@@ -31,12 +31,12 @@
             </button>
             <button class="dropdown-item" type="button" routerLink="/password">
               <i class="fa fa-lock"></i>
-              &nbsp;Password
+              &nbsp;Mật khẩu
             </button>
             <div class="dropdown-divider"></div>
             <button class="dropdown-item" type="button" (click)="logout()" >
               <i class="fa fa-sign-out"></i>
-              Sign out
+              Đăng xuất
             </button>
           </div>
         </div>

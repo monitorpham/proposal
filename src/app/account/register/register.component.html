@@ -1,7 +1,7 @@
 <div class="contains">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <h1 class="control-block">Registration</h1>
+            <h1 class="control-block">Xác thực tài khoản</h1>
             <br>
             <div class="alert alert-success" *ngIf="success">
                 <strong>Registration saved!</strong> Success.
@@ -20,7 +20,7 @@
             </div> -->
 
             <div class="alert alert-danger" *ngIf="doNotMatch">
-                The password and its confirmation do not match!
+                Mật khẩu không trùng khớp!
             </div>
         </div>
     </div>
@@ -87,24 +87,24 @@
                 </div> -->
 
                 <div class="form-group">
-                    <label class="form-control-label" for="newPassword">New password</label>
-                    <input type="password" class="form-control" id="newPassword" name="newPassword" placeholder="New password"
+                    <label class="form-control-label" for="newPassword">Mật khẩu mới</label>
+                    <input type="password" class="form-control" id="newPassword" name="newPassword" placeholder="Mật khẩu mới"
                             formControlName="newPassword">
 
                     <div *ngIf="registerForm.get('newPassword')!.invalid && (registerForm.get('newPassword')!.dirty || registerForm.get('newPassword')!.touched)">
                         <small class="form-text text-danger"
                                *ngIf="registerForm.get('newPassword')?.errors?.required">
-                            Your password is required.
+                            Mật khẩu của bạn không được để trống.
                         </small>
 
                         <small class="form-text text-danger"
                                *ngIf="registerForm.get('newPassword')?.errors?.minlength">
-                            Your password is required to be at least 4 characters.
+                            Mật khẩu của bạn phải nhiều hơn 4 ký tự.
                         </small>
 
                         <small class="form-text text-danger"
                                *ngIf="registerForm.get('newPassword')?.errors?.maxlength">
-                            Your password cannot be longer than 50 characters.
+                            Mật khẩu của bạn phải nhỏ hơn 50 ký tự.
                         </small>
                     </div>
 
@@ -112,8 +112,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" for="confirmPassword">New password confirmation</label>
-                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm the new password"
+                    <label class="form-control-label" for="confirmPassword">Nhập lại mật khẩu</label>
+                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Nhập lại mật khẩu"
                             formControlName="confirmPassword">
 
                     <div *ngIf="registerForm.get('confirmPassword')!.invalid && (registerForm.get('confirmPassword')!.dirty || registerForm.get('confirmPassword')!.touched)">
@@ -136,9 +136,9 @@
 
                 <br>
                 <!-- <div class="footer"> -->
-                <button type="button" class="btn btn-secondary" routerLink="/login">Cancel</button>
+                <button type="button" class="btn btn-secondary" routerLink="/login">Hủy</button>
                 &nbsp;
-                <button type="submit" [disabled]="registerForm.invalid" class="btn btn-primary">Register</button>
+                <button type="submit" [disabled]="registerForm.invalid" class="btn btn-primary">Đăng ký</button>
             <!-- </div> -->
             </form>
         </div>
