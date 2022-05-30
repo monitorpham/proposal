@@ -6,8 +6,10 @@
             THEO DÕI ĐỀ NGHỊ CÁC KHOA
         </div>
     </div>
-    <button *ngIf="isAdmin" class="btn btn-primary btn-sm buttonCreate" (click)="OpenCreateProposalModal()">Tạo đề
-        nghị</button>
+    <button *ngIf="isAdmin" class="btn btn-primary btn-sm buttonCreate" (click)="OpenCreateProposalModal()">
+        <i class="fa fa-plus" aria-hidden="true"></i>
+         Tạo đề nghị
+    </button>
 
     <div class="row content-block table-responsive">
         <!-- <input type="checkbox" (click)="toggleView($event)"> -->
@@ -90,14 +92,22 @@
                         <div class="table-actions">
                             <button
                                 *ngIf="(!isAdmin || proposal.asigneeId == 3|| proposal.asigneeId == 1001|| proposal.asigneeId == 1151|| proposal.asigneeId == 1152)"
-                                class="btn btn-primary btn-sm btn-custom"
-                                (click)="OpenUpdateProgressModal(proposal)">Cập nhật </button>
-                            <button class="btn btn-primary btn-sm btn-custom"
-                                (click)="OpenViewProgressModal(proposal)">Xem </button>
+                                class="btn btn-warning btn-sm btn-custom"  ngbTooltip="Cập nhật"
+                                (click)="OpenUpdateProgressModal(proposal)">
+                                <i class="fa fa-refresh" aria-hidden="true"></i>
+                            </button>
+                            <button class="btn btn-info btn-sm btn-custom"
+                                (click)="OpenViewProgressModal(proposal)" ngbTooltip="Xem"> 
+                                <i class="fa fa-eye" aria-hidden="true"></i> 
+                            </button>
                             <button *ngIf="isAdmin" class="btn btn-primary btn-sm btn-custom"
-                                (click)="openExtendProposalModal(proposal)"> Sửa </button>
+                                (click)="openExtendProposalModal(proposal)" ngbTooltip="Sửa">
+                                <i class="fa fa-wrench" aria-hidden="true"></i>
+                            </button>
                             <button *ngIf="isAdmin" class="btn btn-danger btn-sm btn-custom"
-                                (click)="openDeleteProposalModal(proposal)"> Xóa</button>
+                                (click)="openDeleteProposalModal(proposal)" ngbTooltip="Xóa">
+                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                            </button>
                         </div>
                     </td>
                 </tr>
