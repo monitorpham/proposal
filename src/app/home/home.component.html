@@ -6,9 +6,12 @@
             THEO DÕI ĐỀ NGHỊ CÁC KHOA
         </div>
     </div>
-    <button *ngIf="isAdmin" class="btn btn-primary btn-sm buttonCreate" (click)="OpenCreateProposalModal()">Tạo đề nghị</button>
+    <button *ngIf="isAdmin" class="btn btn-primary btn-sm buttonCreate" (click)="OpenCreateProposalModal()">Tạo đề
+        nghị</button>
 
     <div class="row content-block table-responsive">
+        <!-- <input type="checkbox" (click)="toggleView($event)"> -->
+            
         <table id="example" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"
             class="row-border cell-border hover table ">
             <thead>
@@ -34,7 +37,7 @@
 
             </thead>
             <tbody>
-                <tr *ngFor="let proposal of proposals, index as i">
+                <tr *ngFor="let proposal of proposals, index as i" > 
                     <!-- <td [ngClass]="{'proposal-false': proposal.status !== true, 'proposal-true' : proposal.status == true, 'proposal-new': proposal.currentProgressName == 'Tạo mới' }"> Admin</td> -->
                     <td
                         [ngClass]="{'proposal-false': proposal.status !== 'Hoàn thành', 'proposal-true' : proposal.status == 'Hoàn thành', 'proposal-new': proposal.currentProgressName == 'Tạo mới' }">

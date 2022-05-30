@@ -30,6 +30,7 @@ export class HomeComponent implements OnInit {
   dtTrigger = new Subject();
   progresses: any
   scrollHeight: string;
+  // onlyActive: boolean = false;
 
   constructor(
     private accountService: AccountService,
@@ -78,7 +79,7 @@ export class HomeComponent implements OnInit {
     })
     this.proposalService.getAllProposals().subscribe(res => {
       this.proposals = res.map(item => {
-        // console.log(item)
+         //console.log(res)
         // debugger;
         let proposal = new Proposal()
         proposal.id = item.proposal.id
@@ -103,6 +104,8 @@ export class HomeComponent implements OnInit {
         else if (proposal.status == false) (
           proposal.status = "Đang xử lý"
         )
+
+       
 
         return proposal
       }, err => {
@@ -130,6 +133,12 @@ export class HomeComponent implements OnInit {
   //       console.log(err)
   //     })
   //   })
+  // }
+
+  // toggleView(value) {
+  //   // this.onlyActive = value.currentTarget.checked;
+  //   this.proposals = JSON.parse(JSON.stringify(this.proposals.filter(f => f.status == value.currentTarget.checked)));
+  //   console.log()
   // }
 
   OpenCreateProposalModal() {
@@ -194,5 +203,6 @@ export class HomeComponent implements OnInit {
   // getHeight(){
   //   return  document.getElementById("notee").scrollHeight.toString() + 'px'
   // }
+
 
 }

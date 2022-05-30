@@ -49,8 +49,14 @@ export class ModalExtendComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm()
-    console.log('edit proposal: ')
-    console.log(this.proposal)
+    // console.log('edit proposal: ')
+    // console.log(this.proposal)
+    if (this.proposal.status == true) {
+      this.proposal.status = "Hoàn thành"
+    }
+    else if (this.proposal.status == false) (
+      this.proposal.status = "Đang xử lý"
+    )
 
     this.userService.getAllUsers().subscribe(res =>{
       this.users = res.map(item =>{
@@ -81,17 +87,27 @@ export class ModalExtendComponent implements OnInit {
     this.proposalForm.startDate =  this.proposal.startDate //
     this.proposalForm.additionalDate = this.proposal.additionalDate //
     this.proposalForm.userExtraId = this.selectedUser.id //
+
+    if (this.proposal.status == "Hoàn thành") {
+      this.proposal.status = true
+    }
+    else if (this.proposal.status == "Đang xử lý") (
+      this.proposal.status = false
+    )
+
     this.proposalForm.status = this.proposal.status
     this.proposalForm.endDate = this.proposal.endDate
   }
+  
 
   onSave(){
     let data = this.proposalForm
     data.userExtraId = this.selectedUser.id
     data.hospitalDepartmentId = this.selectedDepartment.id
     data.startDate = this.commonService.DDMMYYYYtoIsoString(data.startDate)
+    data.endDate = this.commonService.DDMMYYYYtoIsoString(data.endDate)
     this.proposalService.updateProposal(data).subscribe(res =>{
-      console.log(res)
+      // console.log(res)
       this.toastr.success("Update proposal successfully!");
       this.refresh();
     }, err=>{
