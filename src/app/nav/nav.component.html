@@ -12,6 +12,27 @@
           Trang chủ <span class="sr-only">(current)</span>
         </button>
         &nbsp;
+
+        <div class="btn-group" style="text-align: left; width: fit-content;">
+          <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
+            <i class="fa fa-list-alt"></i>
+            Đề nghị
+          </button>
+          <div class="dropdown-menu dropdown-menu-right">
+            <button class="dropdown-item" type="button" routerLink="/completed">
+              <i class="fa fa-check"></i>
+              &nbsp;Đã hoàn thành
+            </button>
+            <div class="dropdown-divider"></div>
+            <button class="dropdown-item" type="button" routerLink="/loading">
+              <i class="fa fa-exclamation"></i>
+              &nbsp;Chưa hoàn thành
+            </button>
+          </div>
+        </div>
+        &nbsp;
+
         <button *ngIf="isAdmin" type="button" class="btn btn-dark" routerLink="/user-management"
           style="text-align: left; width: fit-content;">
           <i class="fa fa-user-plus"></i>

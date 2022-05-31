@@ -16,6 +16,11 @@ export class ProposalService {
     return this.httpClient.get<any>(url);
   }
 
+  getAllProposalsStatus(status){
+    const url =`${environment.apiUrl}/get-All-Data-By-Status/{status}?status=${status}`
+    return this.httpClient.get<any>(url);
+  }
+
   createProposal(data){
     const url =`${environment.apiUrl}/proposals`
     return this.httpClient.post<any>(url, data);

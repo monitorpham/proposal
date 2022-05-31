@@ -6,6 +6,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
+import { CompletedComponent } from './home/proposal/completed/completed.component';
+import { LoadingComponent } from './home/proposal/loading/loading.component';
 import { UserManagementComponent } from './user-management/user-management.component';
 import { NavComponent } from './nav/nav.component';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
@@ -39,6 +41,8 @@ import { ModalExtendComponent } from './home/component/modal-extend/modal-extend
     AppComponent,
     LoginComponent,
     HomeComponent,
+    LoadingComponent,
+    CompletedComponent,
     UserManagementComponent,
     NavComponent,
     ModalCreateProposalComponent,

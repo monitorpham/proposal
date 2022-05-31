@@ -1,0 +1,162 @@
+.contains{
+    padding: 20px;
+}
+
+.control-block{
+    width: 100%;
+    // display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 25px;
+    font-weight: 600;
+    color: #b30000;
+    margin: unset;
+}
+
+.content-block{
+    width: 100%;
+    /* height: calc(100vh - 200px); */
+    padding: 15px 25px;
+    border: 1px solid #C0C0C0;
+    border-radius: 7px;
+    background-color: #F8F8F8;
+    margin: 20px 0px;
+    box-shadow: 7px 7px #fcfcfc;
+    /* overflow: auto; */
+}
+
+.contenttr{
+    vertical-align: top;
+    text-align: center;
+}
+
+.custom-cell{
+    // word-break: break-all;
+    white-space: normal;
+    width: 300px;
+}
+
+.custom-cell-note{
+    // word-break: break-all;
+    white-space: normal;
+    width: 182px;
+}
+
+.proposal-date-th{
+    width: 6% !important;
+}
+
+.proposal-content-th{
+    width: 40% !important;
+}
+.proposal-update-th{
+    white-space: nowrap;
+    width: 6% !important;
+}
+
+.proposal-person-th{
+    width: 10% !important;
+}
+
+.proposal-progress-th{
+    width: 15% !important;
+}
+
+.proposal-note-th{
+    width: 22% !important;
+}
+
+.proposal-content-cell{
+    width: 200px !important;
+    word-break: break-all;
+}
+
+.table-actions{
+    display: flex;
+    justify-content: start;
+    // justify-content: space-between;
+    
+}
+
+.btn-custom{
+    margin-right: 3px;
+}
+
+.lableHome{
+    padding-right: 0;
+    padding-left: 0;
+    text-align: center;
+}
+
+.buttonCreate{
+    margin: 1% 0;
+    float: right;
+}
+
+/* table css */
+
+.dataTables_wrapper {
+    width: 100% !important;
+
+}
+
+.stage-title{
+
+}
+
+.progress-bar{
+    width: 100%;
+    height: 5px;
+    background-color: pink;
+}
+
+.progress-bar-true{
+    width: 100%;
+    height: 5px;
+    background-color: pink;
+}
+
+.progress-bar-false{
+    width: 100%;
+    height: 5px;
+    background-color: #DFF5FF;
+}
+
+.progress-bar-inner{
+    width: 30%;
+    height: 100%;
+    background-color: rgb(243, 7, 46);
+}
+
+.progress-bar-inner-true{
+    width: 30%;
+    height: 100%;
+    background-color: #14E300;
+    // background-color: #28a745;
+}
+
+.progress-bar-inner-false{
+    width: 30%;
+    height: 100%;
+    background-color: #004C99;
+}
+#example tbody tr:hover td {
+    // background: #FCF54C;
+    // background: rgba(156, 39, 176, 0);
+    // position:absolute;
+    background: rgba(255, 215, 0,0.3);
+}
+footer {
+    display: block; 
+    position:fixed;
+    bottom:0;
+    width:100%;
+    text-align: center;
+    // opacity: 0.2;
+  /* Height of the footer */
+    // background:#DDDDDD;
+    border-top: 2px solid #065d06;
+    background: #f1f1f1;
+    padding: 1px 0;
+}
