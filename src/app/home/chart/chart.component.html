@@ -1,0 +1,70 @@
+<div class="contains">
+  <!-- <div class="row control-block"> -->
+  <div class=" control-block">
+    <!-- <span  class="col-md-7 offset-md-4 lableHome"> -->
+    <div class="lableHome">
+      THỐNG KÊ ĐỀ NGHỊ XỬ LÝ
+
+    </div>
+  </div>
+
+  <!-- <div class="chart-diplayh">
+        <div style="width: 60%; margin: auto">
+          <canvas id="bar"></canvas>
+          <select [(ngModel)]="lessThanOrGreaterThan" style="width: 150px;height: 30px;">
+            <option value='lessThan'>Less Than</option>
+            <option value='greaterThan'>Greater Than</option>
+          </select>&nbsp;&nbsp;
+          <input [(ngModel)]="filterLimit" placeholder="Filter Limit" style="width: 150px;height: 30px;"><br><br>
+          <button class="button" (click)="applyFilter(filterLimit)">Apply Filter</button>
+        
+      <div style="margin-left: auto">
+        <select [(ngModel)]="from" style="width: 150px;height: 30px;">
+          <option *ngFor="let m of months" [value]='m.value'>{{m.month}}</option>
+        </select>
+      &nbsp;&nbsp;
+      
+      <select [(ngModel)]="toMonth" style="width: 150px;height: 30px;">
+        <option *ngFor="let m1 of months" [value]='m1.value'>{{m1.month}}</option>
+      </select> 
+      </div>
+      
+      <button class="button" (click)="applyDateFilter()">Apply Date Filter</button>
+        
+          
+      </div>
+</div> -->
+
+
+<form name="dateForm" role="form" novalidate  [formGroup]="dateForm">
+  <div class="row" style="margin-top:10px;margin-bottom: 10px;">
+    <div class="col-sm-3 form-group"> </div>
+    <div class="col-sm-3 form-group">
+      <input class="form-control" placeholder="Từ ngày"  bsDatepicker  name="dateOne" formControlName="dateOne"
+        [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY'}">
+    </div>
+    <div class="col-sm-3 form-group">
+      <input class="form-control" placeholder="Đến ngày" bsDatepicker  name="dateTwo" formControlName="dateTwo"
+        [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY'}">
+
+    </div>
+    <div class="col-sm-3 form-group">
+      <button  type="button" class="btn btn-success"(click)="onSave()" >Search</button>
+    </div>
+  </div>
+</form>
+
+  <div class="chart-container">
+    <div class="chart">
+      <canvas baseChart height="100vh" [datasets]="chartData" [options]="options" [labels]="labels"
+        [type]="barChartType" [legend]="barChartLegend" [plugins]="barChartPlugins">
+      </canvas>
+    </div>
+
+    
+
+  </div>
+
+  <footer>
+    <small>Copyright ©2020. Phòng Khoa Học Quân Sự. Bệnh Viện Trung Ương Quân Đội 108</small>
+  </footer>

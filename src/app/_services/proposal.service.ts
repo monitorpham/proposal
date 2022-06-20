@@ -21,6 +21,11 @@ export class ProposalService {
     return this.httpClient.get<any>(url);
   }
 
+  getAllProposalsStatusBetweenDate(status,dateOne,dateTwo){
+    const url =`${environment.apiUrl}/proposals/{status}&${dateOne}/${dateTwo}?status=${status}`
+    return this.httpClient.get<any>(url);
+  }
+
   createProposal(data){
     const url =`${environment.apiUrl}/proposals`
     return this.httpClient.post<any>(url, data);

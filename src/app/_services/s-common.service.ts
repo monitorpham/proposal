@@ -39,7 +39,7 @@ export class SCommonService {
       }else{
         
         let date: Date = dateString
-        console.log(date.toISOString())
+        // console.log(date.toISOString())
         return date.toISOString()
         
       }

@@ -1,3 +1,4 @@
+import { NgChartsModule } from 'ng2-charts';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -6,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
+import { ChartComponent } from './home/chart/chart.component';
 import { CompletedComponent } from './home/proposal/completed/completed.component';
 import { LoadingComponent } from './home/proposal/loading/loading.component';
 import { UserManagementComponent } from './user-management/user-management.component';
@@ -41,6 +43,7 @@ import { ModalExtendComponent } from './home/component/modal-extend/modal-extend
     AppComponent,
     LoginComponent,
     HomeComponent,
+    ChartComponent,
     LoadingComponent,
     CompletedComponent,
     UserManagementComponent,
@@ -74,6 +77,7 @@ import { ModalExtendComponent } from './home/component/modal-extend/modal-extend
     HttpClientModule,
     AppRoutingModule, 
     TooltipModule.forRoot(),
+    NgChartsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

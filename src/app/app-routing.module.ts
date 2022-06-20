@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
+import { ChartComponent } from './home/chart/chart.component';
 import { CompletedComponent } from './home/proposal/completed/completed.component';
 import { LoadingComponent } from './home/proposal/loading/loading.component';
 // import { UserManagementComponent } from './user-management/user-management.component';
@@ -14,6 +15,7 @@ import { RegisterComponent } from './account/register/register.component'
 const routes: Routes = [
   { path: '',   redirectTo: '/home', pathMatch: 'full', canActivate: [AuthGuard]},
   { path: 'home', component: HomeComponent ,  canActivate: [AuthGuard]},
+  { path: 'chart', component: ChartComponent ,  canActivate: [AuthGuard]},
   { path: 'completed', component: CompletedComponent ,  canActivate: [AuthGuard]},
   { path: 'loading', component: LoadingComponent ,  canActivate: [AuthGuard]},
   { path: 'user-management', component: UserManagementComponent, canActivate: [AuthGuard] },
