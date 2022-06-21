@@ -128,7 +128,7 @@ export class ChartComponent implements OnInit {
     // console.log(date2)
 
     this.proposalService.getAllProposalsStatusBetweenDate(this.isStatus, date1, date2).subscribe((dataTrue: any) => {
-      console.log(dataTrue)
+      // console.log(dataTrue)
       this.userStatus = [];
       if (this.userStatus = null) {
         for (const row of dataTrue) {
@@ -142,7 +142,7 @@ export class ChartComponent implements OnInit {
       }
       else {
         this.userStatus = [];
-        console.log(this.userStatus)
+        // console.log(this.userStatus)
         for (const row of dataTrue) {
           const dataT = {
             iduser: row.userExtra.id,
