@@ -3,18 +3,74 @@ import { ProposalService } from '../../_services/proposal.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
-import { Chart, ChartType, ChartDataset, ChartOptions } from 'chart.js';
+import {
+  Chart,
+  ArcElement,
+  LineElement,
+  BarElement,
+  PointElement,
+  BarController,
+  BubbleController,
+  DoughnutController,
+  LineController,
+  PieController,
+  PolarAreaController,
+  RadarController,
+  ScatterController,
+  CategoryScale,
+  LinearScale,
+  LogarithmicScale,
+  RadialLinearScale,
+  TimeScale,
+  TimeSeriesScale,
+  Decimation,
+  Filler,
+  Legend,
+  Title,
+  Tooltip,
+  SubTitle,
+  ChartDataset,
+  ChartOptions
+} from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import pluginDataLabels from 'chartjs-plugin-datalabels';
 import { FormBuilder, Validators } from '@angular/forms';
 import * as moment from 'moment';
 import { SCommonService } from 'src/app/_services/s-common.service';
 
+Chart.register(
+  ArcElement,
+  LineElement,
+  BarElement,
+  PointElement,
+  BarController,
+  BubbleController,
+  DoughnutController,
+  LineController,
+  PieController,
+  PolarAreaController,
+  RadarController,
+  ScatterController,
+  CategoryScale,
+  LinearScale,
+  LogarithmicScale,
+  RadialLinearScale,
+  TimeScale,
+  TimeSeriesScale,
+  Decimation,
+  Filler,
+  Legend,
+  Title,
+  Tooltip,
+  SubTitle,
+);
 @Component({
   selector: 'app-home',
   templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.scss'],
+  
 })
+
 export class ChartComponent implements OnInit {
   isStatus: Boolean = true;
   public userData = [];
@@ -31,13 +87,14 @@ export class ChartComponent implements OnInit {
     responsive: true,
   }
   public barChartPlugins = [pluginDataLabels];
-  public barChartType: ChartType = 'bar';
+  // public barChartType: string;
   public barChartLegend = true;
 
   constructor(
     private proposalService: ProposalService,
     private fb: FormBuilder,
     private commonService: SCommonService,
+    
   ) {
   }
 
