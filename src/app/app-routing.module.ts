@@ -11,11 +11,13 @@ import { UserManagementComponent } from './user-management/user-management.compo
 import { SettingsComponent } from './account/settings/settings.component' 
 import { PasswordComponent } from './account/password/password.component' 
 import { RegisterComponent } from './account/register/register.component'
+import { AlertComponent } from './home/alert/alert.component';
 
 const routes: Routes = [
   { path: '',   redirectTo: '/home', pathMatch: 'full', canActivate: [AuthGuard]},
   { path: 'home', component: HomeComponent ,  canActivate: [AuthGuard]},
   { path: 'chart', component: ChartComponent ,  canActivate: [AuthGuard]},
+  { path: 'alert', component: AlertComponent ,  canActivate: [AuthGuard]},
   { path: 'completed', component: CompletedComponent ,  canActivate: [AuthGuard]},
   { path: 'loading', component: LoadingComponent ,  canActivate: [AuthGuard]},
   { path: 'user-management', component: UserManagementComponent, canActivate: [AuthGuard] },

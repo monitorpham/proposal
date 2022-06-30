@@ -42,13 +42,13 @@ export class ModalViewProgressComponent implements OnInit {
           this.entries.push(progress)
         }
       }
-      console.log("entries: ")
-    console.log(this.entries)
+    //   console.log("entries: ")
+    // console.log(this.entries)
     }, err => err)
   }
 
   onExpandEntry(expanded, index) {
-    console.log(`Expand status of entry #${index} changed to ${expanded}`)
+    // console.log(`Expand status of entry #${index} changed to ${expanded}`)
   }
 
   onHeaderClick(event) {

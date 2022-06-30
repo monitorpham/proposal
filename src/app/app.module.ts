@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { ChartComponent } from './home/chart/chart.component';
+import { AlertComponent } from './home/alert/alert.component';
 import { CompletedComponent } from './home/proposal/completed/completed.component';
 import { LoadingComponent } from './home/proposal/loading/loading.component';
 import { UserManagementComponent } from './user-management/user-management.component';
@@ -37,6 +38,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { ModalViewProgressComponent } from './home/component/modal-view-progress/modal-view-progress.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ModalExtendComponent } from './home/component/modal-extend/modal-extend.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -44,6 +46,7 @@ import { ModalExtendComponent } from './home/component/modal-extend/modal-extend
     LoginComponent,
     HomeComponent,
     ChartComponent,
+    AlertComponent,
     LoadingComponent,
     CompletedComponent,
     UserManagementComponent,
@@ -77,7 +80,8 @@ import { ModalExtendComponent } from './home/component/modal-extend/modal-extend
     HttpClientModule,
     AppRoutingModule, 
     TooltipModule.forRoot(),
-    NgChartsModule
+    NgChartsModule,
+    NgxPaginationModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

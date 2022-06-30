@@ -62,7 +62,7 @@ export class ModalUpdateProgressComponent implements OnInit {
 
   onExpandEntry(expanded, index) {
     if (index != '0') {
-      console.log(`Expand status of entry #${index} changed to ${expanded}`)
+      // console.log(`Expand status of entry #${index} changed to ${expanded}`)
     }
   }
 
@@ -114,8 +114,9 @@ export class ModalUpdateProgressComponent implements OnInit {
     } else {
       this.progressService.updateProgress(formData, this.proposal.id).subscribe(res => {
         this.toastr.success("Update progress successfully!")
-        this.refresh();
+
         this.bsModalRef.hide()
+        this.refresh();
       }, err => {
         this.toastr.error("Update progress failed!")
       })
@@ -139,7 +140,8 @@ export class ModalUpdateProgressComponent implements OnInit {
   refresh() {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
-    this.router.navigate(['/home']);
+    // this.router.navigate(['/home']);
+    window.location.reload();
   }
 
 

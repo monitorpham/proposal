@@ -1,0 +1,146 @@
+<div class="contains">
+    <!-- <div class="row control-block"> -->
+    <div class=" control-block">
+        <!-- <span  class="col-md-7 offset-md-4 lableHome"> -->
+        <div class="lableHome">
+            CÁC ĐỀ NGHỊ CHẬM TIẾN ĐỘ
+        </div>
+    </div>
+    <!-- <button *ngIf="isAdmin" class="btn btn-primary btn-sm buttonCreate" (click)="OpenCreateProposalModal()">
+        <i class="fa fa-plus" aria-hidden="true"></i>
+         Tạo đề nghị
+    </button> -->
+    <form name="numberForm" role="form" novalidate [formGroup]="numberForm">
+        <div class="row" style="margin-top:10px;">
+            <div class="col-sm-3 "> </div>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <div class="col-sm-5 ">
+                <input class="form-control" placeholder="Số ngày phải hoàn thành từ KHẢO SÁT đến ĐỀ XUẤT" name="number" step="1"
+                    type="number" formControlName="number">
+            </div>
+            <div class="col-sm-3 ">
+                <button type="button" class="btn btn-success" (click)="onSave()">Search</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3"> </div>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <div class="col-sm-5 "
+                *ngIf="numberForm.get('number')!.invalid && (numberForm.get('number')!.dirty || numberForm.get('number')!.touched)">
+                <small class="form-text text-danger" *ngIf="numberForm.get('number')?.errors?.required">
+                    Không được để trống
+                </small>
+            </div>
+            <div class="col-sm-3">
+            </div>
+        </div>
+    </form>
+
+    <div class="row content-block table-responsive">
+        <!-- <input type="checkbox" (click)="toggleView($event)"> -->
+
+        <table id="example" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"
+            class="row-border cell-border hover table ">
+            <thead>
+                <tr>
+                    <!-- <th>Registerd By</th> -->
+                    <th class="contenttr">TT</th>
+                    <th class="contenttr">Khoa</th>
+                    <th class="contenttr proposal-update-th">Ngày đề nghị</th>
+                    <th class="contenttr proposal-content-th">Nội dung đề nghị</th>
+                    <!-- <th>Ngày kết thúc</th>
+                    <th>Deadline</th> -->
+                    <th class="contenttr">Tổ</th>
+                    <th class="contenttr proposal-person-th">Người thực hiện</th>
+                    <!-- <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Note&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th> -->
+                    <th class="contenttr proposal-progress-th">Tiến trình hiện tại</th>
+                    <th class="contenttr proposal-update-th">Ngày cập nhật</th>
+                    <th class="contenttr proposal-note-th">Ghi chú</th>
+                    <th class="contenttr">Ngày tồn</th>
+                    <th class="contenttr">Ngày thêm</th>
+                    <th class="contenttr">Tình trạng</th>
+                    <th class="contenttr" style="text-align: center;">Thao tác</th>
+                </tr>
+
+            </thead>
+            <tbody>
+                <tr *ngFor="let proposal of proposals, index as i">
+                    <!-- <td [ngClass]="{'proposal-false': proposal.status !== true, 'proposal-true' : proposal.status == true, 'proposal-new': proposal.currentProgressName == 'Tạo mới' }"> Admin</td> -->
+                    <td
+                        [ngClass]="{'proposal-false': proposal.status !== 'Hoàn thành', 'proposal-true' : proposal.status == 'Hoàn thành', 'proposal-new': proposal.currentProgressName == 'Tạo mới' }">
+                        {{proposal.id}}</td>
+                    <td
+                        [ngClass]="{'proposal-false': proposal.status !== 'Hoàn thành', 'proposal-true' : proposal.status == 'Hoàn thành', 'proposal-new': proposal.currentProgressName == 'Tạo mới' }">
+                        {{proposal.hospitalDepartment}}</td>
+                    <td
+                        [ngClass]="{'proposal-false': proposal.status !== 'Hoàn thành', 'proposal-true' : proposal.status == 'Hoàn thành', 'proposal-new': proposal.currentProgressName == 'Tạo mới' }">
+                        {{proposal.startDate}}</td>
+                    <td class="custom-cell"
+                        [ngClass]="{'proposal-false': proposal.status !== 'Hoàn thành', 'proposal-true' : proposal.status == 'Hoàn thành', 'proposal-new': proposal.currentProgressName == 'Tạo mới' }">
+                        {{proposal.contentProposal}}</td>
+                    <!-- <td  [ngClass]="{'proposal-false': proposal.status !== true, 'proposal-true' : proposal.status == true, 'proposal-new': proposal.currentProgressName == 'Tạo mới' }">{{proposal.endDate}}</td>
+                    <td  [ngClass]="{'proposal-false': proposal.status !== true, 'proposal-true' : proposal.status == true, 'proposal-new': proposal.currentProgressName == 'Tạo mới' }">{{proposal.deadLine}}</td> -->
+                    <td
+                        [ngClass]="{'proposal-false': proposal.status !== 'Hoàn thành', 'proposal-true' : proposal.status == 'Hoàn thành', 'proposal-new': proposal.currentProgressName == 'Tạo mới' }">
+                        {{proposal.Group}}</td>
+                    <td
+                        [ngClass]="{'proposal-false': proposal.status !== 'Hoàn thành', 'proposal-true' : proposal.status == 'Hoàn thành', 'proposal-new': proposal.currentProgressName == 'Tạo mới' }">
+                        {{proposal.asignee}}</td>
+                    <!-- <td class="custom-cell"  [ngClass]="{'proposal-false': proposal.status !== true, 'proposal-true' : proposal.status == true, 'proposal-new': proposal.currentProgressName == 'Tạo mới' }" >{{proposal.note}}</td> -->
+                    <td id="notee"
+                        [ngClass]="{'proposal-false': proposal.status !== 'Hoàn thành', 'proposal-true' : proposal.status == 'Hoàn thành', 'proposal-new': proposal.currentProgressName == 'Tạo mới' }">
+                        <span class="stage-title">{{proposal.currentProgressName}}</span>
+                        <div
+                            [ngClass]="{'progress-bar-false': proposal.status !== 'Hoàn thành', 'progress-bar-true' : proposal.status == 'Hoàn thành' }">
+                            <div [ngClass]="{'progress-bar-inner-false': proposal.status !== 'Hoàn thành', 'progress-bar-inner-true' : proposal.status == 'Hoàn thành' }"
+                                [style.width]="getProgressBarWidth(proposal.currentProgressName) + '%'"></div>
+                        </div>
+                    </td>
+                    <td
+                        [ngClass]="{'proposal-false': proposal.status !== 'Hoàn thành', 'proposal-true' : proposal.status == 'Hoàn thành', 'proposal-new': proposal.currentProgressName == 'Tạo mới' }">
+                        {{proposal.endDate}}</td>
+                    <td class="custom-cell-note"
+                        [ngClass]="{'proposal-false': proposal.status !== 'Hoàn thành', 'proposal-true' : proposal.status == 'Hoàn thành', 'proposal-new': proposal.currentProgressName == 'Tạo mới' }">
+                        {{proposal.note}}</td>
+                    <td
+                        [ngClass]="{'proposal-false': proposal.status !== 'Hoàn thành', 'proposal-true' : proposal.status == 'Hoàn thành', 'proposal-new': proposal.currentProgressName == 'Tạo mới' }">
+                        {{proposal.remainingDate}}</td>
+                    <td
+                        [ngClass]="{'proposal-false': proposal.status !== 'Hoàn thành', 'proposal-true' : proposal.status == 'Hoàn thành', 'proposal-new': proposal.currentProgressName == 'Tạo mới' }">
+                        {{proposal.additionalDate}}</td>
+                    <!-- <td  [ngClass]="{'proposal-false': proposal.status !== true, 'proposal-true' : proposal.status == true, 'proposal-new': proposal.currentProgressName == 'Tạo mới' }" >{{proposal.status}}</td> -->
+                    <td
+                        [ngClass]="{'proposal-false': proposal.status !== 'Hoàn thành', 'proposal-true' : proposal.status == 'Hoàn thành', 'proposal-new': proposal.currentProgressName == 'Tạo mới' }">
+                        {{proposal.status}}</td>
+                    <td
+                        [ngClass]="{'proposal-false': proposal.status !== 'Hoàn thành', 'proposal-true' : proposal.status == 'Hoàn thành', 'proposal-new': proposal.currentProgressName == 'Tạo mới' }">
+                        <div class="table-actions">
+                            <button
+                                *ngIf="(!isAdmin || proposal.asigneeId == 3|| proposal.asigneeId == 1001|| proposal.asigneeId == 1151|| proposal.asigneeId == 1152)"
+                                class="btn btn-warning btn-sm btn-custom" ngbTooltip="Cập nhật"
+                                (click)="OpenUpdateProgressModal(proposal)">
+                                <i class="fa fa-refresh" aria-hidden="true"></i>
+                            </button>
+                            <button class="btn btn-info btn-sm btn-custom" (click)="OpenViewProgressModal(proposal)"
+                                ngbTooltip="Xem">
+                                <i class="fa fa-eye" aria-hidden="true"></i>
+                            </button>
+                            <button *ngIf="isAdmin" class="btn btn-primary btn-sm btn-custom"
+                                (click)="openExtendProposalModal(proposal)" ngbTooltip="Sửa">
+                                <i class="fa fa-wrench" aria-hidden="true"></i>
+                            </button>
+                            <button *ngIf="isAdmin" class="btn btn-danger btn-sm btn-custom"
+                                (click)="openDeleteProposalModal(proposal)" ngbTooltip="Xóa">
+                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<footer>
+    <small>Copyright ©2020. Phòng Khoa Học Quân Sự. Bệnh Viện Trung Ương Quân Đội 108</small>
+</footer>

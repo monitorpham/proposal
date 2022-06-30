@@ -16,6 +16,11 @@ export class ProposalService {
     return this.httpClient.get<any>(url);
   }
 
+  getAllProposalsAlert(number){
+    const url =`${environment.apiUrl}/proposals-data-table-alert/${number}`
+    return this.httpClient.get<any>(url);
+  }
+
   getAllProposalsStatus(status){
     const url =`${environment.apiUrl}/get-All-Data-By-Status/{status}?status=${status}`
     return this.httpClient.get<any>(url);
