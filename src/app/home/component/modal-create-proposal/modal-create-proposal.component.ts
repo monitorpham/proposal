@@ -4,7 +4,7 @@ import { HospitalDepartmentService } from 'src/app/_services/hospital-department
 import { ThrowStmt } from '@angular/compiler';
 import { HospitalDepartment } from 'src/app/_models/hospital-department';
 import { ProposalService } from 'src/app/_services/proposal.service';
-import { FormBuilder, Validators} from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { SCommonService } from 'src/app/_services/s-common.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
@@ -37,42 +37,42 @@ export class ModalCreateProposalComponent implements OnInit {
     private hospitalDepartmentService: HospitalDepartmentService,
     private proposalService: ProposalService,
     private commonService: SCommonService,
-    private toastr : ToastrService,
+    private toastr: ToastrService,
     private router: Router,
     private userService: UserService,
-    private formBuilder: FormBuilder){ 
-      
-    }
+    private formBuilder: FormBuilder) {
+
+  }
 
 
   ngOnInit(): void {
     // let currentDate = new Date()
-      this.startDate =  moment().format("DD-MM-YYYY");
-      // console.log(currentDate.toISOString())
+    this.startDate = moment().format("DD-MM-YYYY");
+    // console.log(currentDate.toISOString())
 
     // let currentDate = new Date()
     //   this.proposalForm.startDate = currentDate.toISOString().toString().split('T')[0]
     //   console.log(this.proposalForm)
-    this.userService.getAllUsers().subscribe(res =>{
-      this.users = res.map(item =>{
+    this.userService.getAllUsers().subscribe(res => {
+      this.users = res.map(item => {
         return {
-          id : item.id,
+          id: item.id,
           name: item.id + ' - ' + item.firstName
         }
       })
     })
 
-    this.hospitalDepartmentService.getAllDepartment().subscribe(res=>{
-      this.departments = res.map(item =>{
+    this.hospitalDepartmentService.getAllDepartment().subscribe(res => {
+      this.departments = res.map(item => {
         let hospitalDepartment = item as HospitalDepartment;
         return hospitalDepartment
       })
-    }, err =>{
+    }, err => {
       console.log(err)
     })
   }
 
-  onSave(){
+  onSave() {
     let dateString = this.commonService.DDMMYYYYtoIsoString(this.startDate)
     let dId = this.selectedDepartment.id
     let uId = this.selectedUser.id
@@ -81,18 +81,23 @@ export class ModalCreateProposalComponent implements OnInit {
     this.proposalForm.userExtraId = uId
     // console.log(this.proposalForm)
     // debugger;
-
-    if(!this.validateForm()){
+    if (this.proposalForm.demo == 'demo') {
+      this.proposalForm.contentProposal = "Demo: " + this.proposalForm.contentProposal
+    }
+    if (this.proposalForm.muonmay == 'muonmay') {
+      this.proposalForm.contentProposal = "Mượn máy: " + this.proposalForm.contentProposal
+    }
+    if (!this.validateForm()) {
       this.toastr.warning("please fill all required field!")
-      return 
-    }else{
-      this.proposalService.createProposal(this.proposalForm).subscribe(res =>{
+      return
+    } else {
+      this.proposalService.createProposal(this.proposalForm).subscribe(res => {
         console.log(res)
         this.toastr.success("Create proposal successfully!");
         this.refresh();
-      }, err=>{
+      }, err => {
         console.log(err)
-        this.toastr.error(err.message? err.message:  "Create proposal failed!")
+        this.toastr.error(err.message ? err.message : "Create proposal failed!")
       })
 
       this.bsModalRef.hide()
@@ -101,27 +106,27 @@ export class ModalCreateProposalComponent implements OnInit {
 
     // console.log(this.proposalForm)
     // debugger;
-    
 
-    
 
-    
-    
+
+
+
+
   }
 
-  onCancel(){
+  onCancel() {
     this.bsModalRef.hide()
   }
 
-  validateForm(){
-    if(this.proposalForm.contentProposal == null || this.proposalForm.hospitalDepartmentId == null ||
-      this.proposalForm.startDate == null || this.proposalForm.additionalDate == null|| this.proposalForm.userExtraId == null){
-        return false
-      }
-      return true
+  validateForm() {
+    if (this.proposalForm.contentProposal == null || this.proposalForm.hospitalDepartmentId == null ||
+      this.proposalForm.startDate == null || this.proposalForm.additionalDate == null || this.proposalForm.userExtraId == null) {
+      return false
+    }
+    return true
   }
 
-  refresh(){
+  refresh() {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
     this.router.navigate(['/home']);

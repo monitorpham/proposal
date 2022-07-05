@@ -1,27 +1,27 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { Proposal } from '../../_models/proposal';
-import { AccountService } from '../../_services/account.service';
-import { ProposalService } from '../../_services/proposal.service';
+import { Proposal } from '../../../_models/proposal';
+import { AccountService } from '../../../_services/account.service';
+import { ProposalService } from '../../../_services/proposal.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { ModalCreateProposalComponent } from '../component/modal-create-proposal/modal-create-proposal.component';
-import { ModalUpdateProgressComponent } from '../component/modal-update-progress/modal-update-progress.component';
+import { ModalCreateProposalComponent } from './../../component/modal-create-proposal/modal-create-proposal.component';
+import { ModalUpdateProgressComponent } from './../../component/modal-update-progress/modal-update-progress.component';
 import { Subject } from 'rxjs';
-import { ModalDeleteProposalComponent } from '../component/modal-delete-proposal/modal-delete-proposal.component';
-import { ModalViewProgressComponent } from '../component/modal-view-progress/modal-view-progress.component';
+import { ModalDeleteProposalComponent } from './../../component/modal-delete-proposal/modal-delete-proposal.component';
+import { ModalViewProgressComponent } from './../../component/modal-view-progress/modal-view-progress.component';
 import { Router } from '@angular/router';
-import { User } from '../../_models/user';
-import { ModalExtendComponent } from '../component/modal-extend/modal-extend.component';
-import { ProgressService } from '../../_services/progress.service';
-import { FormBuilder, Validators } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
+import { User } from '../../../_models/user';
+import { ModalExtendComponent } from './../../component/modal-extend/modal-extend.component';
+import { ProgressService } from '../../../_services/progress.service';
+
 declare var $: JQueryStatic;
 
+
 @Component({
-  selector: 'app-alert',
-  templateUrl: './alert.component.html',
-  styleUrls: ['./alert.component.scss'],
+  selector: 'app-all',
+  templateUrl: './all.component.html',
+  styleUrls: ['./all.component.scss'],
 })
-export class AlertComponent implements OnInit {
+export class AllComponent implements OnInit {
 
   proposals: Proposal[] = [];
   currentUser: User;
@@ -32,8 +32,19 @@ export class AlertComponent implements OnInit {
   dtTrigger = new Subject();
   progresses: any
   scrollHeight: string;
-  private toastr : ToastrService
   // onlyActive: boolean = false;
+
+  currentTutorial = null;
+  currentIndex = -1;
+  page = 1;
+  count = 0;
+  pageSize = 25;
+  pageSizes = [25, 50, 100];
+  pageNum: any
+  
+  title = '';
+  key:string='id';
+  direction: string = 'ASC'
 
   constructor(
     private accountService: AccountService,
@@ -42,40 +53,34 @@ export class AlertComponent implements OnInit {
     private proposalService: ProposalService,
     private progressService: ProgressService,
     private router: Router,
-    private fb: FormBuilder,
   ) {
   }
-
-  numberForm = this.fb.group({
-    number: ['',[Validators.required]],
-  });
-
   ngOnInit() {
     this.progressService.getAllProgresses().subscribe(res => {
       this.progresses = res
     })
+    
 
-    this.dtOptions = {
-      pagingType: 'full_numbers',
-      pageLength: 500,
-      columnDefs: [
-        { width: "25%", targets: 7 },
-        { width: "25%", targets: 8 },
-      ],
-      processing: true,
-      // Configure the buttons
-      dom: 'Bfrtip',
-      buttons: [
-        'copy', 'excel'
-      ]
-    };
-    this.loadData();
+    // this.dtOptions = {
+    //   pagingType: 'full_numbers',
+    //   pageLength: 500,
+    //   columnDefs: [
+    //     { width: "25%", targets: 7 },
+    //     { width: "25%", targets: 8 },
+    //   ],
+    //   processing: true,
+    //   // Configure the buttons
+    //   dom: 'Bfrtip',
+    //   buttons: [
+    //     'copy', 'excel'
+    // ]
+    // };
+    this.loadData()
     // document.getElementById("notee").style.height = document.getElementById("notee").scrollHeight.toString() + 'px'
   }
 
 
   loadData() {
-    // const number = this.numberForm.get(['number']).value;
     this.accountService.fetch().subscribe(res => {
       this.currentUser = res
       // console.log(this.currentUser)
@@ -87,9 +92,9 @@ export class AlertComponent implements OnInit {
       }
       // console.log(this.isAdmin)
     })
-    this.proposalService.getAllProposalsAlert(15).subscribe(res => {
-      this.proposals = res.map(item => {
-        //console.log(res)
+    this.proposalService.getAllProposals(this.page-1, this.pageSize,  this.key,this.direction).subscribe(res => {
+      this.proposals = res.content.map(item => {
+        //  console.log(res)
         // debugger;
         let proposal = new Proposal()
         proposal.id = item.proposal.id
@@ -115,14 +120,31 @@ export class AlertComponent implements OnInit {
           proposal.status = "Đang xử lý"
         )
 
-
+       
 
         return proposal
       }, err => {
         console.log(err)
       })
-      this.dtTrigger.next();
+      // this.dtTrigger.next();
+
+      this.count = res.totalElements;  
+      // console.log(this.totalCompaniesCount)
+      // this.totalNoOfPages();  
     })
+  }
+  handlePageChange(event) {
+    this.page = event;
+    this.loadData();
+  }
+  handlePageSizeChange(event) {
+    this.pageSize = event.target.value;
+    this.page = 1;
+    this.loadData();
+  }
+  setActiveTutorial(tutorial, index) {
+    this.currentTutorial = tutorial;
+    this.currentIndex = index;
   }
 
   // reloadData(){
@@ -213,70 +235,39 @@ export class AlertComponent implements OnInit {
   // getHeight(){
   //   return  document.getElementById("notee").scrollHeight.toString() + 'px'
   // }
-  // isDisable = false;
-  onSave() {
-    const number = this.numberForm.get(['number']).value;
-    if(number=='' || number==null){
-        this.toastr.success("Create proposal successfully!");
-    }
-    const table = $("#example").DataTable();
-      // table.destroy();
-
-      // console.log(table)
-      table.clear().draw();
-    this.accountService.fetch().subscribe(res => {
-      this.currentUser = res
-      // console.log(this.currentUser)
-      if (this.currentUser.authorities.includes("ROLE_USER")) {
-        this.isUser = true
-      }
-      if (this.currentUser.authorities.includes("ROLE_ADMIN")) {
-        this.isAdmin = true
-      }
-      // console.log(this.isAdmin)
-    })
-    this.proposalService.getAllProposalsAlert(number).subscribe(res => {
-      this.proposals = res.map(item => {
-        //console.log(res)
-        // debugger;
-        let proposal = new Proposal()
-        proposal.id = item.proposal.id
-        proposal.note = item.proposal.note
-        proposal.contentProposal = item.proposal.contentProposal
-        proposal.startDate = proposal.convertDate(item.proposal.startDate)
-        proposal.endDate = proposal.convertDate(item.proposal.endDate)
-        proposal.currentProgressName = item.currentProgressName
-        proposal.hospitalDepartmentId = item.proposal.hospitalDepartment.id
-        proposal.hospitalDepartment = item.proposal.hospitalDepartment.hospitalDepartmentName
-        proposal.Group = item.proposal.userExtra.equiqmentGroup.nameGroup
-        proposal.remainingDate = item.remainingDate
-        proposal.additionalDate = item.proposal.additionalDate
-        proposal.deadLine = proposal.convertDate(item.deadLine)
-        proposal.status = item.proposal.status
-        proposal.asignee = item.proposal.userExtra.user.firstName
-        proposal.asigneeId = item.proposal.userExtra.user.id
-
-        if (proposal.status == true) {
-          proposal.status = "Hoàn thành"
-        }
-        else if (proposal.status == false) (
-          proposal.status = "Đang xử lý"
-        )
 
 
-
-        return proposal
-      }, err => {
-        console.log(err)
-      })
-      this.dtTrigger.next();
-    })
-  }
-  //   clearData() {
-
-  //     const table = $("#example").DataTable();
-  //     console.log(table)
-  //     table.clear().draw();
-
+  // Search(){
+  //   if(this.id==""){
+  //     this.ngOnInit();
+  //   }
+  //   else{
+  //     this.proposalService.getAllProposals(this.page-1, this.pageSize,'remainingDate').subscribe(res => {
+  //       this.proposals = res.content.map(item => {
+  //         return item.proposal.id.toLocaleLowerCase().match(this.id.toLocaleLowerCase());
+  //       }
+  //     )})
+  //   }
   // }
+
+
+  reverse:boolean=false;
+  sort(key){
+    // console.log(this.key)
+    this.key = key;
+    if(this.direction=='ASC'){
+      this
+      this.direction = 'DESC'
+    }
+    else {
+      this.direction = 'ASC'
+    }
+    // this.reverse = !this.reverse
+    this.loadData();
+  }
+  searchTitle(): void {
+    this.page = 1;
+    this.loadData();
+  }
 }
+

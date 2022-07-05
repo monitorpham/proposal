@@ -11,8 +11,13 @@ export class ProposalService {
     private httpClient: HttpClient
   ) { }
 
-  getAllProposals(){
-    const url =`${environment.apiUrl}/proposals-data-table`
+  getAllProposals(pageNum,pageSize,sortBy,direction){
+    const url =`${environment.apiUrl}/proposals-data-table?pageNum=${pageNum}&pageSize=${pageSize}&sortBy=${sortBy}&direction=${direction}`
+    return this.httpClient.get<any>(url);
+  }
+
+  getAllProposal(){
+    const url =`${environment.apiUrl}/proposals-data-table-all`
     return this.httpClient.get<any>(url);
   }
 

@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
+import { AllComponent } from './home/proposal/all/all.component';
 import { ChartComponent } from './home/chart/chart.component';
 import { AlertComponent } from './home/alert/alert.component';
 import { CompletedComponent } from './home/proposal/completed/completed.component';
@@ -40,11 +41,14 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ModalExtendComponent } from './home/component/modal-extend/modal-extend.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent,
+    AllComponent,
     ChartComponent,
     AlertComponent,
     LoadingComponent,
@@ -78,7 +82,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     FormsModule,
     NgSelectModule,
     HttpClientModule,
-    AppRoutingModule, 
+    AppRoutingModule,
     TooltipModule.forRoot(),
     NgChartsModule,
     NgxPaginationModule
@@ -86,6 +90,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
     BsModalRef
   ],
   entryComponents: [
@@ -95,7 +100,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     ModalCompleteProgressComponent,
     ModalViewProgressComponent,
     ModalExtendComponent],
-    
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

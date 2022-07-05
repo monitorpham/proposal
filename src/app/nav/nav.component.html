@@ -26,6 +26,11 @@
             Đề nghị
           </button>
           <div class="dropdown-menu dropdown-menu-right">
+            <button *ngIf="isAdmin" class="dropdown-item" type="button" routerLink="/all">
+              <i class="fa fa-check"></i>
+              &nbsp;Tất cả <span class="sr-only">(current)</span>
+            </button>
+            <div *ngIf="isAdmin" class="dropdown-divider"></div>
             <button class="dropdown-item" type="button" routerLink="/completed">
               <i class="fa fa-check"></i>
               &nbsp;Đã hoàn thành

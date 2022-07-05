@@ -40,6 +40,24 @@
       <label class="item-label">Note <span class="text-danger">*</span></label>
       <textarea class="form-control" [(ngModel)]="proposalForm.note"></textarea>
     </div> -->
+
+
+    <div class="row row-item" >
+      <div class="col-md-4">
+        <input type="radio" style="margin-bottom: 0.5rem;" name="chon" value="demo" [(ngModel)]="proposalForm.demo"> &nbsp;&nbsp;
+        <label class="item-label" >Demo</label>
+      </div>
+      <div class="col-md-4">
+        <input type="radio" style="margin-bottom: 0.5rem;" name="chon" value="muonmay" [(ngModel)]="proposalForm.muonmay"> &nbsp;&nbsp;
+        <label class="item-label" >Mượn máy</label>
+      </div>
+      <div class="col-md-4">
+        <input type="radio" style="margin-bottom: 0.5rem;" name="chon" value="" [(ngModel)]="proposalForm.muonmay"> &nbsp;&nbsp;
+        <label class="item-label" >Bỏ trống</label>
+      </div>
+    </div>
+
+
   </div>
 </div>
 <div class="modal-footer">

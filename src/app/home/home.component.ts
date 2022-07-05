@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 import { User } from '../_models/user';
 import { ModalExtendComponent } from './component/modal-extend/modal-extend.component';
 import { ProgressService } from '../_services/progress.service';
+
 declare var $: JQueryStatic;
 
 @Component({
@@ -77,7 +78,7 @@ export class HomeComponent implements OnInit {
       }
       // console.log(this.isAdmin)
     })
-    this.proposalService.getAllProposals().subscribe(res => {
+    this.proposalService.getAllProposal().subscribe(res => {
       this.proposals = res.map(item => {
          //console.log(res)
         // debugger;
