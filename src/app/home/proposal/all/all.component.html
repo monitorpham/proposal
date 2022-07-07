@@ -33,8 +33,8 @@
                     <th class="contenttr proposal-content-th" (click)="sort('contentProposal')">Nội dung đề nghị <i class="fa fa-sort"></i></th>
                     <!-- <th>Ngày kết thúc</th>
                     <th>Deadline</th> -->
-                    <th class="contenttr">Tổ</th>
-                    <th class="contenttr proposal-person-th">Người thực hiện</th>
+                    <th class="contenttr" (click)="sort('userExtra.equiqmentGroup.nameGroup')">Tổ <i class="fa fa-sort"></i></th>
+                    <th class="contenttr proposal-person-th" (click)="sort('userExtra.user.firstName')">Người thực hiện <i class="fa fa-sort"></i></th>
                     <!-- <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Note&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th> -->
                     <th class="contenttr proposal-progress-th">Tiến trình hiện tại</th>
                     <th class="contenttr proposal-update-th" (click)="sort('endDate')">Ngày cập nhật <i class="fa fa-sort"></i></th>
