@@ -54,9 +54,10 @@
   </div>
 </form>
 
-  <div class="chart-container">
+<div class="row">
+  <div class="chart-container" style="width: 50%;">
     <div class="chart">
-      <canvas baseChart height="100vh" 
+      <canvas baseChart height="170vh" 
       [datasets]="chartData" 
       [options]="options" 
       [labels]="labels"
@@ -65,11 +66,22 @@
       [plugins]="barChartPlugins">
       </canvas>
     </div>
-
-    
-
   </div>
 
+  <div class="chart-container" style="width: 50%;">
+    <div class="chart">
+      <canvas baseChart height="170vh" 
+      [datasets]="chartData1" 
+      [options]="options1" 
+      [labels]="labels1"
+
+      [legend]="barChartLegend1" 
+      [plugins]="barChartPlugins1">
+      </canvas>
+    </div>
+  </div>
+
+</div>
   <footer>
     <small>Copyright ©2020. Phòng Khoa Học Quân Sự. Bệnh Viện Trung Ương Quân Đội 108</small>
   </footer>

@@ -127,9 +127,10 @@ export class ModalCreateProposalComponent implements OnInit {
   }
 
   refresh() {
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    this.router.onSameUrlNavigation = 'reload';
-    this.router.navigate(['/home']);
+    // this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    // this.router.onSameUrlNavigation = 'reload';
+    // this.router.navigate(['/home']);
+    window.location.reload();
   }
 
 }

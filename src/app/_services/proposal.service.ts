@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,16 @@ export class ProposalService {
     return this.httpClient.get<any>(url);
   }
 
+  getProposals(pageNum,pageSize,sortBy,direction,search){
+    const url =`${environment.apiUrl}/proposals-data?pageNum=${pageNum}&pageSize=${pageSize}&sortBy=${sortBy}&direction=${direction}&search=${search}`
+    return this.httpClient.get<any>(url);
+  }
+
+  getExcel(){
+    const url =`${environment.apiUrl}/proposal/export/excel`
+    return this.httpClient.get(url,{observe:'response',responseType:'blob'});
+  }
+
   getAllProposal(){
     const url =`${environment.apiUrl}/proposals-data-table-all`
     return this.httpClient.get<any>(url);
@@ -26,13 +37,13 @@ export class ProposalService {
     return this.httpClient.get<any>(url);
   }
 
-  getAllProposalsStatus(status){
-    const url =`${environment.apiUrl}/get-All-Data-By-Status/{status}?status=${status}`
+  getAllProposalsStatus(pageNum,pageSize,sortBy,direction,search,status){
+    const url =`${environment.apiUrl}/get-All-Data-By-Status/{status}?pageNum=${pageNum}&pageSize=${pageSize}&sortBy=${sortBy}&direction=${direction}&search=${search}&status=${status}`
     return this.httpClient.get<any>(url);
   }
 
-  getAllProposalsStatusBetweenDate(status,dateOne,dateTwo){
-    const url =`${environment.apiUrl}/proposals/{status}&${dateOne}/${dateTwo}?status=${status}`
+  getAllProposalsStatusBetweenDate(statusChart,dateOne,dateTwo){
+    const url =`${environment.apiUrl}/proposals/{statusChart}&${dateOne}/${dateTwo}?statusChart=${statusChart}`
     return this.httpClient.get<any>(url);
   }
 
@@ -56,5 +67,5 @@ export class ProposalService {
     return this.httpClient.get<any>(url)
   }
 
-  
+
 }

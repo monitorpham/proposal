@@ -68,7 +68,7 @@ Chart.register(
   selector: 'app-home',
   templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.scss'],
-  
+
 })
 
 export class ChartComponent implements OnInit {
@@ -79,8 +79,7 @@ export class ChartComponent implements OnInit {
   @ViewChild(BaseChartDirective) chart: BaseChartDirective;
 
   public chartData: ChartDataset[] = [
-    { data: [], label: 'Đã hoàn thành', backgroundColor: 'rgba(61, 255, 36, 0.84)', borderColor: 'rgba(14, 117, 0, 1)', hoverBackgroundColor: '#2af517', hoverBorderColor: 'rgba(20,200,10,0.4)' },
-    { data: [], label: 'Chưa hoàn thành' }
+    { data: [], label: 'Đã hoàn thành', backgroundColor: 'rgba(61, 255, 36, 0.84)', borderColor: 'rgba(14, 117, 0, 1)', hoverBackgroundColor: '#2af517', hoverBorderColor: 'rgba(20,200,10,0.4)' }
   ];
   public labels: string[] = [];
   public options: ChartOptions = {
@@ -90,11 +89,23 @@ export class ChartComponent implements OnInit {
   // public barChartType: string;
   public barChartLegend = true;
 
+
+  public chartData1: ChartDataset[] = [
+    { data: [], label: 'Chưa hoàn thành', backgroundColor: '#88cfff', borderColor: '#004C99', hoverBackgroundColor: '#1E90FF', hoverBorderColor: "#1E90FF"  }
+  ];
+  public labels1: string[] = [];
+  public options1: ChartOptions = {
+    responsive: true,
+  }
+  public barChartPlugins1 = [pluginDataLabels];
+  // public barChartType: string;
+  public barChartLegend1 = true;
+
+
   constructor(
     private proposalService: ProposalService,
     private fb: FormBuilder,
-    private commonService: SCommonService,
-    
+    private commonService: SCommonService
   ) {
   }
 
@@ -123,7 +134,7 @@ export class ChartComponent implements OnInit {
 
     //   //Method 2
     //   // var result2 = Object.keys(reduced).map(x =>  {
-    //   //         return {user : x, countStatus : reduced[x]}})           
+    //   //         return {user : x, countStatus : reduced[x]}})
     //   // console.log(result2)
 
     //   for (const row of result1) {
@@ -160,8 +171,7 @@ export class ChartComponent implements OnInit {
     //     this.chartData[1].data.push(row['countStatus'])
     //     this.chart.update();
     //   }
-    // })
-
+    // }
 
   }
 
@@ -179,20 +189,20 @@ export class ChartComponent implements OnInit {
     let date1 = this.commonService.DDMMYYYYtoIsoString(dateOne)
 
     const dateTwo = this.dateForm.get(['dateTwo']).value;
-    // let momentVariable2 = moment(dateTwo, 'MM-DD-YYYY');  
-    // let dateOne2 = momentVariable2.format('DD-MM-YYYY');   
+    // let momentVariable2 = moment(dateTwo, 'MM-DD-YYYY');
+    // let dateOne2 = momentVariable2.format('DD-MM-YYYY');
     let date2 = this.commonService.DDMMYYYYtoIsoString(dateTwo)
-    // console.log(date2)
+    // console.log(this.isStatus)
 
-    this.proposalService.getAllProposalsStatusBetweenDate(this.isStatus, date1, date2).subscribe((dataTrue: any) => {
-      // console.log(dataTrue)
+    this.proposalService.getAllProposalsStatusBetweenDate(true, date1, date2).subscribe((dataTrue: any) => {
+      console.log(dataTrue)
       this.userStatus = [];
       if (this.userStatus = null) {
         for (const row of dataTrue) {
           const dataT = {
             iduser: row.userExtra.id,
             user: row.userExtra.user.firstName,
-            status: row.status
+            status: row.statusChart
           }
           this.userStatus.push(dataT)
         }
@@ -204,7 +214,7 @@ export class ChartComponent implements OnInit {
           const dataT = {
             iduser: row.userExtra.id,
             user: row.userExtra.user.firstName,
-            status: row.status
+            status: row.statusChart
           }
           this.userStatus.push(dataT)
         }
@@ -212,7 +222,7 @@ export class ChartComponent implements OnInit {
       // console.log(this.userStatus)
 
       var reduced = this.userStatus.reduce((acc, o) => (acc[o.user] = (acc[o.user] || 0) + 1, acc), {});
-      //console.log(reduced)
+      // console.log('reduced',reduced)
 
       //Method 1
       let result1 = [];
@@ -222,8 +232,8 @@ export class ChartComponent implements OnInit {
 
       //Method 2
       // var result2 = Object.keys(reduced).map(x =>  {
-      //         return {user : x, countStatus : reduced[x]}})           
-      // console.log(result2)
+      //         return {user : x, countStatus : reduced[x]}})
+      // console.log('result1',result1)
       if (this.labels = null) {
         for (const row of result1) {
           this.labels.push(row['user'])
@@ -240,6 +250,7 @@ export class ChartComponent implements OnInit {
           this.chart.update();
         }
       }
+      // console.log( this.chartData)
     })
 
 
@@ -250,7 +261,7 @@ export class ChartComponent implements OnInit {
           const dataT = {
             iduser: row.userExtra.id,
             user: row.userExtra.user.firstName,
-            status: row.status
+            status: row.statusChart
           }
           this.userStatus.push(dataT)
         }
@@ -261,7 +272,7 @@ export class ChartComponent implements OnInit {
           const dataT = {
             iduser: row.userExtra.id,
             user: row.userExtra.user.firstName,
-            status: row.status
+            status: row.statusChart
           }
           this.userStatus.push(dataT)
         }
@@ -274,23 +285,25 @@ export class ChartComponent implements OnInit {
         result1.push({ user: prop, countStatus: reduced[prop] });
       }
 
-      if (this.labels = null) {
+      if (this.labels1 = null) {
         for (const row of result1) {
-          this.labels.push(row['user'])
-          this.chartData[0].data.push(row['countStatus'])
+          this.labels1.push(row['user'])
+          this.chartData1[0].data.push(row['countStatus'])
           this.chart.update();
         }
       }
       else {
-        this.labels = []
-        this.chartData[1].data = []
+        this.labels1 = []
+        this.chartData1[0].data = []
         for (const row of result1) {
-          this.labels.push(row['user'])
-          this.chartData[1].data.push(row['countStatus'])
+          this.labels1.push(row['user'])
+          this.chartData1[0].data.push(row['countStatus'])
           this.chart.update();
         }
       }
     })
+
+
     // }
     // else {
     //   console.log("oks")

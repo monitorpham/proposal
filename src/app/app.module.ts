@@ -7,7 +7,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
-import { AllComponent } from './home/proposal/all/all.component';
 import { ChartComponent } from './home/chart/chart.component';
 import { AlertComponent } from './home/alert/alert.component';
 import { CompletedComponent } from './home/proposal/completed/completed.component';
@@ -48,7 +47,6 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
     AppComponent,
     LoginComponent,
     HomeComponent,
-    AllComponent,
     ChartComponent,
     AlertComponent,
     LoadingComponent,
