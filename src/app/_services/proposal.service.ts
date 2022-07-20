@@ -12,10 +12,10 @@ export class ProposalService {
     private httpClient: HttpClient
   ) { }
 
-  getAllProposals(pageNum,pageSize,sortBy,direction){
-    const url =`${environment.apiUrl}/proposals-data-table?pageNum=${pageNum}&pageSize=${pageSize}&sortBy=${sortBy}&direction=${direction}`
-    return this.httpClient.get<any>(url);
-  }
+  // getAllProposals(pageNum,pageSize,sortBy,direction){
+  //   const url =`${environment.apiUrl}/proposals-data-table?pageNum=${pageNum}&pageSize=${pageSize}&sortBy=${sortBy}&direction=${direction}`
+  //   return this.httpClient.get<any>(url);
+  // }
 
   getProposals(pageNum,pageSize,sortBy,direction,search){
     const url =`${environment.apiUrl}/proposals-data?pageNum=${pageNum}&pageSize=${pageSize}&sortBy=${sortBy}&direction=${direction}&search=${search}`
@@ -27,10 +27,10 @@ export class ProposalService {
     return this.httpClient.get(url,{observe:'response',responseType:'blob'});
   }
 
-  getAllProposal(){
-    const url =`${environment.apiUrl}/proposals-data-table-all`
-    return this.httpClient.get<any>(url);
-  }
+  // getAllProposal(){
+  //   const url =`${environment.apiUrl}/proposals-data-table-all`
+  //   return this.httpClient.get<any>(url);
+  // }
 
   getAllProposalsAlert(number){
     const url =`${environment.apiUrl}/proposals-data-table-alert/${number}`
