@@ -33,6 +33,7 @@ export class AlertComponent implements OnInit {
   progresses: any
   scrollHeight: string;
   private toastr : ToastrService
+  number: any = 15
   // onlyActive: boolean = false;
 
   constructor(
@@ -87,7 +88,7 @@ export class AlertComponent implements OnInit {
       }
       // console.log(this.isAdmin)
     })
-    this.proposalService.getAllProposalsAlert(15).subscribe(res => {
+    this.proposalService.getAllProposalsAlert(this.number).subscribe(res => {
       this.proposals = res.map(item => {
         //console.log(res)
         // debugger;
@@ -215,62 +216,16 @@ export class AlertComponent implements OnInit {
   // }
   // isDisable = false;
   onSave() {
-    const number = this.numberForm.get(['number']).value;
-    if(number=='' || number==null){
-        this.toastr.success("Create proposal successfully!");
+    this.number = this.numberForm.get(['number']).value;
+    if(this.number=='' || this.number==null){
+        return;
     }
     const table = $("#example").DataTable();
-      // table.destroy();
+    // table.clear().draw();
+    table.destroy();
+    // console.log(this.number)
 
-      // console.log(table)
-      table.clear().draw();
-    this.accountService.fetch().subscribe(res => {
-      this.currentUser = res
-      // console.log(this.currentUser)
-      if (this.currentUser.authorities.includes("ROLE_USER")) {
-        this.isUser = true
-      }
-      if (this.currentUser.authorities.includes("ROLE_ADMIN")) {
-        this.isAdmin = true
-      }
-      // console.log(this.isAdmin)
-    })
-    this.proposalService.getAllProposalsAlert(number).subscribe(res => {
-      this.proposals = res.map(item => {
-        //console.log(res)
-        // debugger;
-        let proposal = new Proposal()
-        proposal.id = item.proposal.id
-        proposal.note = item.proposal.note
-        proposal.contentProposal = item.proposal.contentProposal
-        proposal.startDate = proposal.convertDate(item.proposal.startDate)
-        proposal.endDate = proposal.convertDate(item.proposal.endDate)
-        proposal.currentProgressName = item.currentProgressName
-        proposal.hospitalDepartmentId = item.proposal.hospitalDepartment.id
-        proposal.hospitalDepartment = item.proposal.hospitalDepartment.hospitalDepartmentName
-        proposal.Group = item.proposal.userExtra.equiqmentGroup.nameGroup
-        proposal.remainingDate = item.remainingDate
-        proposal.additionalDate = item.proposal.additionalDate
-        proposal.deadLine = proposal.convertDate(item.deadLine)
-        proposal.status = item.proposal.status
-        proposal.asignee = item.proposal.userExtra.user.firstName
-        proposal.asigneeId = item.proposal.userExtra.user.id
-
-        if (proposal.status == true) {
-          proposal.status = "Hoàn thành"
-        }
-        else if (proposal.status == false) (
-          proposal.status = "Đang xử lý"
-        )
-
-
-
-        return proposal
-      }, err => {
-        console.log(err)
-      })
-      this.dtTrigger.next();
-    })
+    this.loadData();
   }
   //   clearData() {
 
