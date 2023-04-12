@@ -41,6 +41,8 @@ import { ModalExtendComponent } from './home/component/modal-extend/modal-extend
 import { NgxPaginationModule } from 'ngx-pagination';
 
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { DemoComponent } from './home/proposal/demo/demo.component';
+import { MuonmayComponent } from './home/proposal/muonmay/muonmay.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +53,8 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
     AlertComponent,
     LoadingComponent,
     CompletedComponent,
+    DemoComponent,
+    MuonmayComponent,
     UserManagementComponent,
     NavComponent,
     ModalCreateProposalComponent,
@@ -83,13 +87,13 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
     AppRoutingModule,
     TooltipModule.forRoot(),
     NgChartsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: LocationStrategy, useClass: HashLocationStrategy },
-    BsModalRef
+    BsModalRef,
   ],
   entryComponents: [
     ModalCreateProposalComponent,
@@ -97,8 +101,9 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
     ModalDeleteProposalComponent,
     ModalCompleteProgressComponent,
     ModalViewProgressComponent,
-    ModalExtendComponent],
+    ModalExtendComponent,
+  ],
 
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

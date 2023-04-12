@@ -1,85 +1,95 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand " style="font-weight : bold" routerLink="/home" >Khoa Trang bị - Bệnh viện TWQĐ 108</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse " id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto">
-        &nbsp;
-        <button type="button" class="btn btn-dark" routerLink="/home" style="text-align: left; width: fit-content;">
-          <i class="fa fa-home"></i>
-          Trang chủ <span class="sr-only">(current)</span>
-        </button>
-        &nbsp;
+  <a class="navbar-brand " style="font-weight : bold" routerLink="/home">Khoa Trang bị - Bệnh viện TWQĐ 108</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse " id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+      &nbsp;
+      <button type="button" class="btn btn-dark" routerLink="/home" style="text-align: left; width: fit-content;">
+        <i class="fa fa-home"></i>
+        Trang chủ <span class="sr-only">(current)</span>
+      </button>
+      &nbsp;
 
-        <button type="button" class="btn btn-dark" routerLink="/chart" style="text-align: left; width: fit-content;">
-          <i class="fa fa-bar-chart"></i>
-          Biểu đồ <span class="sr-only">(current)</span>
-        </button>
-        &nbsp;
+      <button type="button" class="btn btn-dark" routerLink="/chart" style="text-align: left; width: fit-content;">
+        <i class="fa fa-bar-chart"></i>
+        Biểu đồ <span class="sr-only">(current)</span>
+      </button>
+      &nbsp;
 
-        <div class="btn-group" style="text-align: left; width: fit-content;">
-          <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-            aria-expanded="false">
-            <i class="fa fa-list-alt"></i>
-            Đề nghị
+      <div class="btn-group" style="text-align: left; width: fit-content;">
+        <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false">
+          <i class="fa fa-list-alt"></i>
+          Đề nghị
+        </button>
+        <div class="dropdown-menu dropdown-menu-right">
+          <button class="dropdown-item" type="button" routerLink="/completed">
+            <i class="fa fa-check"></i>
+            &nbsp;Đã hoàn thành
           </button>
-          <div class="dropdown-menu dropdown-menu-right">
-            <button class="dropdown-item" type="button" routerLink="/completed">
-              <i class="fa fa-check"></i>
-              &nbsp;Đã hoàn thành
-            </button>
-            <div class="dropdown-divider"></div>
-            <button class="dropdown-item" type="button" routerLink="/loading">
-              <i class="fa fa-exclamation"></i>
-              &nbsp;Chưa hoàn thành
-            </button>
-          </div>
-        </div>
-        &nbsp;
-
-        <button type="button" class="btn btn-dark" routerLink="/alert" style="text-align: left; width: fit-content;">
-          <i class="fa fa-bell"></i>
-          Cảnh báo
-          <!-- <span class="sr-only">(current)</span> -->
-        </button>
-        &nbsp;
-
-
-        <button *ngIf="isAdmin" type="button" class="btn btn-dark" routerLink="/user-management"
-          style="text-align: left; width: fit-content;">
-          <i class="fa fa-user-plus"></i>
-          Quản lý tài khoản
-        </button>
-        &nbsp;
-        <div class="btn-group" style="text-align: left; width: fit-content;">
-          <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-            aria-expanded="false">
-            <i class="fa fa-user"></i>
-            Tài khoản
+          <div class="dropdown-divider"></div>
+          <button class="dropdown-item" type="button" routerLink="/loading">
+            <i class="fa fa-exclamation"></i>
+            &nbsp;Chưa hoàn thành
           </button>
-          <div class="dropdown-menu dropdown-menu-right">
-            <button class="dropdown-item" type="button" routerLink="/settings">
-              <i class="fa fa-wrench"></i>
-              Settings
-            </button>
-            <button class="dropdown-item" type="button" routerLink="/password">
-              <i class="fa fa-lock"></i>
-              &nbsp;Mật khẩu
-            </button>
-            <div class="dropdown-divider"></div>
-            <button class="dropdown-item" type="button" (click)="logout()" >
-              <i class="fa fa-sign-out"></i>
-              Đăng xuất
-            </button>
-          </div>
+          <div class="dropdown-divider"></div>
+          <button class="dropdown-item" type="button" routerLink="/demo">
+            <i class="fa fa-gamepad"></i>
+            &nbsp;Demo
+          </button>
+          <div class="dropdown-divider"></div>
+          <button class="dropdown-item" type="button" routerLink="/muonmay">
+            <i class="fa fa-reddit" aria-hidden="true"></i>
+            &nbsp;Mượn máy
+          </button>
         </div>
-        &nbsp;
+      </div>
+      &nbsp;
+
+      <button type="button" class="btn btn-dark" routerLink="/alert" style="text-align: left; width: fit-content;">
+        <i class="fa fa-bell"></i>
+        Cảnh báo
+        <!-- <span class="sr-only">(current)</span> -->
+      </button>
+      &nbsp;
+
+
+      <button *ngIf="isAdmin" type="button" class="btn btn-dark" routerLink="/user-management"
+        style="text-align: left; width: fit-content;">
+        <i class="fa fa-user-plus"></i>
+        Quản lý tài khoản
+      </button>
+      &nbsp;
+      <div class="btn-group" style="text-align: left; width: fit-content;">
+        <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false">
+          <i class="fa fa-user"></i>
+          Tài khoản
+        </button>
+        <div class="dropdown-menu dropdown-menu-right">
+          <button class="dropdown-item" type="button" routerLink="/settings">
+            <i class="fa fa-wrench"></i>
+            Settings
+          </button>
+          <button class="dropdown-item" type="button" routerLink="/password">
+            <i class="fa fa-lock"></i>
+            &nbsp;Mật khẩu
+          </button>
+          <div class="dropdown-divider"></div>
+          <button class="dropdown-item" type="button" (click)="logout()">
+            <i class="fa fa-sign-out"></i>
+            Đăng xuất
+          </button>
+        </div>
+      </div>
+      &nbsp;
 
 
 
-        <!-- <div class="btn-group" style="text-align: left; width: fit-content;">
+      <!-- <div class="btn-group" style="text-align: left; width: fit-content;">
           <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false">
             <i class="fa fa-bell"></i>
@@ -96,6 +106,6 @@
         </div> -->
 
 
-      </ul>
-    </div>
-  </nav>
+    </ul>
+  </div>
+</nav>
