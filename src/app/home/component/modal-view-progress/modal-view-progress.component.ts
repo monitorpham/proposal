@@ -8,11 +8,10 @@ import { Proposal } from 'src/app/_models/proposal';
 @Component({
   selector: 'app-modal-view-progress',
   templateUrl: './modal-view-progress.component.html',
-  styleUrls: ['./modal-view-progress.component.scss']
+  styleUrls: ['./modal-view-progress.component.scss'],
 })
 export class ModalViewProgressComponent implements OnInit {
-
-  proposal: Proposal
+  proposal: Proposal;
 
   alternate: boolean = true;
   toggle: boolean = true;
@@ -22,29 +21,40 @@ export class ModalViewProgressComponent implements OnInit {
   contentAnimation: boolean = true;
   dotAnimation: boolean = true;
   side = 'left';
-  entries : Progress[] = []
+  entries: Progress[] = [];
   constructor(
     private bsModalRef: BsModalRef,
     private bsModalRef2: BsModalRef,
     private modalService: BsModalService,
     private proposalService: ProposalService
-    ){ }
+  ) {}
 
   ngOnInit(): void {
-    this.proposalService.getProgressesByProposalId(this.proposal.id).subscribe(res => {
-      // this.entries = res.map(item =>{
-      //   let progress = new Progress(item.id, item.progress.contentTask, item.timeStart ,item.timeEnd, item.performBy, item.note)
-      //   return progress
-      // })
-      for(let i=0; i < res.length; i++){
-        if(res[i]['timeEnd']){
-          let progress = new Progress( res[i].id, res[i].progress.contentTask, res[i].timeStart ,res[i].timeEnd, res[i].performBy, res[i].note)
-          this.entries.push(progress)
+    this.proposalService.getProgressesByProposalId(this.proposal.id).subscribe(
+      (res) => {
+        // this.entries = res.map(item =>{
+        //   let progress = new Progress(item.id, item.progress.contentTask, item.timeStart ,item.timeEnd, item.performBy, item.note)
+        //   return progress
+        // })
+        for (let i = 0; i < res.length; i++) {
+          if (res[i]['timeEnd']) {
+            let progress = new Progress(
+              res[i].id,
+              res[i].progress.contentTask,
+              res[i].timeStart,
+              res[i].timeEnd,
+              res[i].performBy,
+              res[i].note,
+              res[i].noteAdmin
+            );
+            this.entries.push(progress);
+          }
         }
-      }
-    //   console.log("entries: ")
-    // console.log(this.entries)
-    }, err => err)
+        //   console.log("entries: ")
+        // console.log(this.entries)
+      },
+      (err) => err
+    );
   }
 
   onExpandEntry(expanded, index) {
@@ -67,12 +77,12 @@ export class ModalViewProgressComponent implements OnInit {
     this.side = this.side === 'left' ? 'right' : 'left';
   }
 
-  onSave(){
-    this.bsModalRef.hide()
+  onSave() {
+    this.bsModalRef.hide();
   }
 
-  onCancel(){
-    this.bsModalRef.hide()
+  onCancel() {
+    this.bsModalRef.hide();
   }
 
   // isCurrentProgress(i){
@@ -86,5 +96,4 @@ export class ModalViewProgressComponent implements OnInit {
   //   }
   //   return false
   // }
-
 }

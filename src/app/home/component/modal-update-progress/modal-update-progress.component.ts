@@ -11,14 +11,20 @@ import { SCommonService } from 'src/app/_services/s-common.service';
 import { ToastrService } from 'ngx-toastr';
 import { FormsModule } from '@angular/forms';
 import { ProgressService } from 'src/app/_services/progress.service';
+import { AccountService } from 'src/app/_services/account.service';
+import { User } from 'src/app/_models/user';
 
 @Component({
   selector: 'app-modal-update-progress',
   templateUrl: './modal-update-progress.component.html',
-  styleUrls: ['./modal-update-progress.component.css']
+  styleUrls: ['./modal-update-progress.component.css'],
 })
 export class ModalUpdateProgressComponent implements OnInit {
-  proposal: Proposal
+  proposal: Proposal;
+
+  isAdmin: Boolean = false;
+  currentUser: User;
+  isUser: Boolean = false;
 
   alternate: boolean = true;
   toggle: boolean = true;
@@ -28,7 +34,7 @@ export class ModalUpdateProgressComponent implements OnInit {
   contentAnimation: boolean = true;
   dotAnimation: boolean = true;
   side = 'left';
-  entries: Progress[] = []
+  entries: Progress[] = [];
   tempEntries: Progress[] = [];
   constructor(
     private bsModalRef: BsModalRef,
@@ -38,26 +44,39 @@ export class ModalUpdateProgressComponent implements OnInit {
     private proposalService: ProposalService,
     private commonService: SCommonService,
     private toastr: ToastrService,
-    private progressService: ProgressService
-
-  ) { }
+    private progressService: ProgressService,
+    private accountService: AccountService
+  ) {}
 
   ngOnInit(): void {
-    this.initData()
+    this.initData();
   }
 
   initData() {
-    this.proposalService.getProgressesByProposalId(this.proposal.id).subscribe(res => {
-      this.tempEntries = res.map(item => {
-        let output = item
-        output.timeEnd = this.commonService.toDDMMYYYY(output.timeEnd)
-        return output
-      })
-      for (let i = 1; i < this.tempEntries.length; i++) {
-        this.entries.push(this.tempEntries[i])
+    this.accountService.fetch().subscribe((res) => {
+      this.currentUser = res;
+      // console.log(this.currentUser)
+      if (this.currentUser.authorities.includes('ROLE_USER')) {
+        this.isUser = true;
       }
-      // debugger;
-    })
+      if (this.currentUser.authorities.includes('ROLE_ADMIN')) {
+        this.isAdmin = true;
+      }
+      // console.log(this.isAdmin)
+    });
+    this.proposalService
+      .getProgressesByProposalId(this.proposal.id)
+      .subscribe((res) => {
+        this.tempEntries = res.map((item) => {
+          let output = item;
+          output.timeEnd = this.commonService.toDDMMYYYY(output.timeEnd);
+          return output;
+        });
+        for (let i = 1; i < this.tempEntries.length; i++) {
+          this.entries.push(this.tempEntries[i]);
+        }
+        // debugger;
+      });
   }
 
   onExpandEntry(expanded, index) {
@@ -82,44 +101,49 @@ export class ModalUpdateProgressComponent implements OnInit {
     this.side = this.side === 'left' ? 'right' : 'left';
   }
 
-
   onCancel() {
-    this.bsModalRef.hide()
+    this.bsModalRef.hide();
   }
 
-
   saveProgress(index) {
-    let formData: any[] = []
-    formData.push(this.tempEntries[0])
+    let formData: any[] = [];
+    formData.push(this.tempEntries[0]);
     for (let temp = 0; temp < this.entries.length; temp++) {
-      formData.push(this.entries[temp])
+      formData.push(this.entries[temp]);
     }
 
-    // console.log(formData)
+    // console.log(formData);
     // debugger;
 
     for (let i = 0; i < formData.length; i++) {
-      formData[i].timeEnd = this.commonService.DDMMYYYYtoIsoString(formData[i].timeEnd)
+      formData[i].timeEnd = this.commonService.DDMMYYYYtoIsoString(
+        formData[i].timeEnd
+      );
     }
     // console.log(formData)
 
     if (!this.validateForm(formData, index)) {
       // this.toastr.warning("Invalid date input. Make sure the approval date of a stage is not sooner than the previous stage.")
-      this.toastr.warning("Ngày nhập không hợp lệ. Đảm bảo ngày phê duyệt của một giai đoạn không sớm hơn giai đoạn trước.")
+      this.toastr.warning(
+        'Ngày nhập không hợp lệ. Đảm bảo ngày phê duyệt của một giai đoạn không sớm hơn giai đoạn trước.'
+      );
       // this.initData()
       // this.expandEnabled = false
       // this.refresh();
       // this.bsModalRef.hide()
-      // window.location.reload() 
+      // window.location.reload()
     } else {
-      this.progressService.updateProgress(formData, this.proposal.id).subscribe(res => {
-        this.toastr.success("Update progress successfully!")
-
-        this.bsModalRef.hide()
-        this.refresh();
-      }, err => {
-        this.toastr.error("Update progress failed!")
-      })
+      this.progressService.updateProgress(formData, this.proposal.id).subscribe(
+        (res) => {
+          this.toastr.success('Update progress successfully!');
+          console.log(res);
+          this.bsModalRef.hide();
+          this.refresh();
+        },
+        (err) => {
+          this.toastr.error('Update progress failed!');
+        }
+      );
     }
   }
 
@@ -128,7 +152,10 @@ export class ModalUpdateProgressComponent implements OnInit {
     for (let i = 1; i < formData.length; i++) {
       for (let j = 0; j < i; j++) {
         if (formData[i].timeEnd && formData[j].timeEnd) {
-          if (this.commonService.dateStringToTime(formData[i].timeEnd) < this.commonService.dateStringToTime(formData[j].timeEnd)) {
+          if (
+            this.commonService.dateStringToTime(formData[i].timeEnd) <
+            this.commonService.dateStringToTime(formData[j].timeEnd)
+          ) {
             result = false;
             break;
           }
@@ -143,6 +170,4 @@ export class ModalUpdateProgressComponent implements OnInit {
     // this.router.navigate(['/home']);
     window.location.reload();
   }
-
-
 }
